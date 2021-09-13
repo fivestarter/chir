@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import ru.fivestarter.chir.model.Car;
 
 public class GameScreen implements Screen {
+    public static float DELTA_CFF;
 
     private Texture carTexture;
     private SpriteBatch batch;
@@ -28,6 +29,8 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        DELTA_CFF = delta;
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
