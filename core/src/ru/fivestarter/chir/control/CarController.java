@@ -8,13 +8,13 @@ import ru.fivestarter.chir.view.GameScreen;
 
 public class CarController {
 
-    private Polygon carBounds;
+    private final Polygon carBounds;
 
     float carSpeed;
     final float speedVelocity = 10f;
     final float speedMax = 10f;
 
-    private float rotationSpeed = 30f;
+    final private float rotationSpeed = 30f;
 
     public CarController(Polygon carBounds) {
         this.carBounds = carBounds;
