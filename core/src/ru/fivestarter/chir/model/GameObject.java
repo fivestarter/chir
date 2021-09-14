@@ -1,16 +1,16 @@
 package ru.fivestarter.chir.model;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Polygon;
 
 public abstract class GameObject {
     protected Polygon bounds;
     private Sprite object;
 
-    public GameObject(Texture texture, float x, float y, float with, float height) {
-        object = new Sprite(texture);
+    public GameObject(TextureRegion textureRegion, float x, float y, float with, float height) {
+        object = new Sprite(textureRegion);
         object.setSize(with, height);
         object.setOrigin(with / 2, height / 2);
         object.setPosition(x, y);

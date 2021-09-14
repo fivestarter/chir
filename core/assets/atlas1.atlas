@@ -1,0 +1,13 @@
+
+atlas1.png
+size: 512, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+car
+  rotate: false
+  xy: 2, 2
+  size: 453, 800
+  orig: 453, 800
+  offset: 0, 0
+  index: -1

@@ -2,17 +2,16 @@ package ru.fivestarter.chir.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import ru.fivestarter.chir.model.Car;
 
 public class GameScreen implements Screen {
     public static float DELTA_CFF;
 
-    private Texture carTexture;
+    private TextureAtlas textureAtlas;
     private SpriteBatch batch;
     private Car car;
     private OrthographicCamera camera;
@@ -20,9 +19,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         batch = new SpriteBatch();
-        carTexture = new Texture(Gdx.files.internal("car.png"));
-        carTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        car = new Car(carTexture, 0, 0,  1f, 1f * 1.77f) ;
+        car = new Car(textureAtlas.findRegion("car"), 0, 0,  1f, 1f * 1.77f) ;
     }
 
     @Override
@@ -62,7 +59,10 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        carTexture.dispose();
         batch.dispose();
+    }
+
+    public void setTextureAtlas(TextureAtlas textureAtlas) {
+        this.textureAtlas = textureAtlas;
     }
 }
