@@ -12,12 +12,12 @@ import java.util.stream.StreamSupport;
 import static ru.fivestarter.chir.view.GameScreen.UNIT_SCALE;
 
 public class World {
-    private Car car;
-    private TiledMap map;
+    private final Car car;
+    private final TiledMap map;
 
     public World(TextureAtlas textureAtlas) {
         this.map = new TmxMapLoader().load("map/chir.tmx");
-        this.car = new Mercedes(textureAtlas.findRegion("car"), map, 10, 10);
+        this.car = new Mercedes(textureAtlas.findRegion("car"), this, 10, 10);
     }
 
     public boolean isBorderOverlapped(Rectangle rectangle) {
@@ -33,13 +33,8 @@ public class World {
         rectangle.setHeight(rectangle.getHeight()/ UNIT_SCALE);
     }
 
-
     public void draw(SpriteBatch batch) {
         car.draw(batch);
-    }
-
-    public void dispose() {
-        map.dispose();
     }
 
     public TiledMap getMap() {
@@ -52,5 +47,9 @@ public class World {
 
     public float getCameraPositionY() {
         return car.getBounds().getY();
+    }
+
+    public void dispose() {
+        map.dispose();
     }
 }

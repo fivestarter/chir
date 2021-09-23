@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
+import ru.fivestarter.chir.model.World;
 import ru.fivestarter.chir.view.GameScreen;
 
 import java.util.stream.StreamSupport;
@@ -16,7 +17,7 @@ import static ru.fivestarter.chir.view.GameScreen.UNIT_SCALE;
 public class CarController {
 
     private final Polygon carBounds;
-    private final TiledMap map;
+    private final World world;
 
     float carSpeed;
     final float speedVelocity = 5f;
@@ -24,9 +25,9 @@ public class CarController {
 
     final private float rotationSpeed = 30f;
 
-    public CarController(Polygon carBounds, TiledMap map) {
+    public CarController(Polygon carBounds, World world) {
         this.carBounds = carBounds;
-        this.map = map;
+        this.world = world;
     }
 
     public void handle() {
@@ -41,23 +42,10 @@ public class CarController {
         float x = carBounds.getX() + MathUtils.cosDeg(carBounds.getRotation() + 90) * carSpeed * GameScreen.DELTA_CFF;
         float y = carBounds.getY() + MathUtils.sinDeg(carBounds.getRotation() + 90) * carSpeed * GameScreen.DELTA_CFF;
         carBounds.setPosition(x, y);
-        if (isBorderOverlapped(carBounds.getBoundingRectangle())) {
+        if (world.isBorderOverlapped(carBounds.getBoundingRectangle())) {
             carBounds.setPosition(previousX, previousY);
             carSpeed = 0;
         }
-    }
-
-    private boolean isBorderOverlapped(Rectangle rectangle) {
-        unscaleCoordinates(rectangle);
-        return StreamSupport.stream(map.getLayers().get("Слой объектов 1").getObjects().spliterator(), true)
-                .anyMatch(mapObject -> ((RectangleMapObject) mapObject).getRectangle().overlaps(rectangle));
-    }
-
-    private void unscaleCoordinates(Rectangle rectangle) {
-        rectangle.setX(rectangle.getX()/ UNIT_SCALE);
-        rectangle.setY(rectangle.getY()/ UNIT_SCALE);
-        rectangle.setWidth(rectangle.getWidth()/ UNIT_SCALE);
-        rectangle.setHeight(rectangle.getHeight()/ UNIT_SCALE);
     }
 
     private void handleSpeed() {

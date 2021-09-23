@@ -9,9 +9,9 @@ public class Car extends GameObject {
 
     private CarController carController;
 
-    public Car(TextureRegion textureRegion, TiledMap map, float x, float y, float with, float height) {
+    public Car(TextureRegion textureRegion, World world, float x, float y, float with, float height) {
         super(textureRegion, x, y, with, height);
-        carController = new CarController(bounds, map);
+        carController = new CarController(bounds, world);
     }
 
     @Override
