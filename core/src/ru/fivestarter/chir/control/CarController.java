@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Rectangle;
 import ru.fivestarter.chir.view.GameScreen;
 
 import java.util.stream.StreamSupport;
@@ -35,18 +36,28 @@ public class CarController {
     }
 
     private void handlePosition() {
+        float previousX = carBounds.getX();
+        float previousY = carBounds.getY();
         float x = carBounds.getX() + MathUtils.cosDeg(carBounds.getRotation() + 90) * carSpeed * GameScreen.DELTA_CFF;
         float y = carBounds.getY() + MathUtils.sinDeg(carBounds.getRotation() + 90) * carSpeed * GameScreen.DELTA_CFF;
-        if (!isBorderTouched(x, y)) {
-            carBounds.setPosition(x, y);
-        } else {
+        carBounds.setPosition(x, y);
+        if (isBorderOverlapped(carBounds.getBoundingRectangle())) {
+            carBounds.setPosition(previousX, previousY);
             carSpeed = 0;
         }
     }
 
-    private boolean isBorderTouched(float x, float y) {
+    private boolean isBorderOverlapped(Rectangle rectangle) {
+        unscaleCoordinates(rectangle);
         return StreamSupport.stream(map.getLayers().get("Слой объектов 1").getObjects().spliterator(), true)
-                .anyMatch(mapObject -> ((RectangleMapObject) mapObject).getRectangle().contains(x / UNIT_SCALE, y / UNIT_SCALE));
+                .anyMatch(mapObject -> ((RectangleMapObject) mapObject).getRectangle().overlaps(rectangle));
+    }
+
+    private void unscaleCoordinates(Rectangle rectangle) {
+        rectangle.setX(rectangle.getX()/ UNIT_SCALE);
+        rectangle.setY(rectangle.getY()/ UNIT_SCALE);
+        rectangle.setWidth(rectangle.getWidth()/ UNIT_SCALE);
+        rectangle.setHeight(rectangle.getHeight()/ UNIT_SCALE);
     }
 
     private void handleSpeed() {
