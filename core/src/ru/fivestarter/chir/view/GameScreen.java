@@ -26,8 +26,8 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         batch = new SpriteBatch();
-        car = new Mercedes(textureAtlas.findRegion("car"), 0, 0);
         map = new TmxMapLoader().load("map/chir.tmx");
+        car = new Mercedes(textureAtlas.findRegion("car"), map, 10, 10);
         renderer = new OrthogonalTiledMapRenderer(map, UNIT_SCALE);
     }
 
