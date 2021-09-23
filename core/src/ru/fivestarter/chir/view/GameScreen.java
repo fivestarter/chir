@@ -6,11 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import ru.fivestarter.chir.model.Car;
-import ru.fivestarter.chir.model.Mercedes;
+import ru.fivestarter.chir.model.World;
 
 public class GameScreen implements Screen {
     public static float DELTA_CFF;
@@ -18,17 +15,15 @@ public class GameScreen implements Screen {
 
     private TextureAtlas textureAtlas;
     private SpriteBatch batch;
-    private Car car;
-    private TiledMap map;
+    private World world;
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer renderer;
 
     @Override
     public void show() {
         batch = new SpriteBatch();
-        map = new TmxMapLoader().load("map/chir.tmx");
-        car = new Mercedes(textureAtlas.findRegion("car"), map, 10, 10);
-        renderer = new OrthogonalTiledMapRenderer(map, UNIT_SCALE);
+        world = new World(textureAtlas);
+        renderer = new OrthogonalTiledMapRenderer(world.getMap(), UNIT_SCALE);
     }
 
     @Override
@@ -42,14 +37,14 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        car.draw(batch);
+        world.draw(batch);
         batch.end();
     }
 
     private void renderCamera() {
         camera.translate(0.0f, 0.02f);
-        camera.position.x = car.getBounds().getX();
-        camera.position.y = car.getBounds().getY();
+        camera.position.x = world.getCameraPositionX();
+        camera.position.y = world.getCameraPositionY();
         camera.update();
         renderer.setView(camera);
         renderer.render();
@@ -80,7 +75,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
-        map.dispose();
+        world.dispose();
         renderer.dispose();
     }
 
