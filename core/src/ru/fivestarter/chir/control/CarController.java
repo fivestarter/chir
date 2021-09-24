@@ -2,17 +2,10 @@ package ru.fivestarter.chir.control;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Rectangle;
 import ru.fivestarter.chir.model.World;
 import ru.fivestarter.chir.view.GameScreen;
-
-import java.util.stream.StreamSupport;
-
-import static ru.fivestarter.chir.view.GameScreen.UNIT_SCALE;
 
 public class CarController {
 
@@ -43,8 +36,9 @@ public class CarController {
         float y = carBounds.getY() + MathUtils.sinDeg(carBounds.getRotation() + 90) * carSpeed * GameScreen.DELTA_CFF;
         carBounds.setPosition(x, y);
         if (world.isBorderOverlapped(carBounds.getBoundingRectangle())) {
-            carBounds.setPosition(previousX, previousY);
-            carSpeed = 0;
+            carBounds.setPosition(previousX - MathUtils.cosDeg(carBounds.getRotation() + 90) * carSpeed * GameScreen.DELTA_CFF,
+                    previousY - MathUtils.sinDeg(carBounds.getRotation() + 90) * carSpeed * GameScreen.DELTA_CFF);
+            carSpeed /= -3;
         }
     }
 
