@@ -16,7 +16,7 @@ public class World {
     private final TiledMap map;
 
     public World(TextureAtlas textureAtlas) {
-        this.map = new TmxMapLoader().load("map/chir.tmx");
+        this.map = new TmxMapLoader().load("map/world.tmx");
         this.car = new Mercedes(textureAtlas.findRegion("car"), this, 10, 10);
     }
 

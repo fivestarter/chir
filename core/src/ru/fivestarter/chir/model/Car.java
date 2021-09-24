@@ -2,7 +2,6 @@ package ru.fivestarter.chir.model;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import ru.fivestarter.chir.control.CarController;
 
 public class Car extends GameObject {
