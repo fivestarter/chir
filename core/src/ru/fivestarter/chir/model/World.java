@@ -17,7 +17,7 @@ public class World {
 
     public World(TextureAtlas textureAtlas) {
         this.map = new TmxMapLoader().load("map/world.tmx");
-        this.car = new Mercedes(textureAtlas.findRegion("car"), this, 10, 10);
+        this.car = new Mercedes(textureAtlas.findRegion("car"), this, 40, 49);
     }
 
     public boolean isBorderOverlapped(Rectangle rectangle) {
