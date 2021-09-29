@@ -1,9 +1,8 @@
 package ru.fivestarter.chir.model;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 
-import static ru.fivestarter.chir.view.GameScreen.UNIT_SCALE;
+import static ru.fivestarter.chir.view.WorldScreen.UNIT_SCALE;
 
 public class Mercedes extends Car{
 

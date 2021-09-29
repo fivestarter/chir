@@ -4,7 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import ru.fivestarter.chir.utils.Assets;
-import ru.fivestarter.chir.view.GameScreen;
+import ru.fivestarter.chir.view.BattleScreen;
+import ru.fivestarter.chir.view.WorldScreen;
 
 public class ChirGame extends Game {
 
@@ -14,8 +15,8 @@ public class ChirGame extends Game {
     @Override
     public void create() {
         assets = new Assets();
-        gameScreen = new GameScreen();
-        ((GameScreen) gameScreen).setTextureAtlas(getTextureAtlas());
+        gameScreen = new WorldScreen(this);
+        ((WorldScreen) gameScreen).setTextureAtlas(getTextureAtlas());
         setScreen(gameScreen);
     }
 
@@ -28,5 +29,9 @@ public class ChirGame extends Game {
 
     private TextureAtlas getTextureAtlas() {
         return assets.getManager().get("atlas1.atlas", TextureAtlas.class);
+    }
+
+    public void changeOnBattleScreen() {
+        setScreen(new BattleScreen());
     }
 }

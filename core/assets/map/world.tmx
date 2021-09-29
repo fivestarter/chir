@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="17">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="18">
  <tileset firstgid="1" source="tiles/tileset-pokemon_dawn.tsx"/>
+ <objectgroup id="5" name="Порталы" locked="1">
+  <object id="17" x="264.463" y="800.964" width="59.9174" height="28.2369"/>
+ </objectgroup>
  <objectgroup id="3" name="Слой объектов 1" locked="1">
   <object id="1" x="254.77" y="1.1029" width="639.682" height="188.596"/>
   <object id="2" x="255.873" y="290.614" width="639.682" height="252.564"/>
@@ -85,7 +88,7 @@
 754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754,754
 </data>
  </layer>
- <layer id="4" name="Слой тайлов 3" width="64" height="64">
+ <layer id="4" name="Слой тайлов 3" width="64" height="64" locked="1">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2684,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2684,0,0,0,0,2684,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

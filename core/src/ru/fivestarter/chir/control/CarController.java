@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
 import ru.fivestarter.chir.model.World;
-import ru.fivestarter.chir.view.GameScreen;
+import ru.fivestarter.chir.view.WorldScreen;
 
 public class CarController {
 
@@ -32,21 +32,21 @@ public class CarController {
     private void handlePosition() {
         float previousX = carBounds.getX();
         float previousY = carBounds.getY();
-        float x = carBounds.getX() + MathUtils.cosDeg(carBounds.getRotation() + 90) * carSpeed * GameScreen.DELTA_CFF;
-        float y = carBounds.getY() + MathUtils.sinDeg(carBounds.getRotation() + 90) * carSpeed * GameScreen.DELTA_CFF;
+        float x = carBounds.getX() + MathUtils.cosDeg(carBounds.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF;
+        float y = carBounds.getY() + MathUtils.sinDeg(carBounds.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF;
         carBounds.setPosition(x, y);
         if (world.isBorderOverlapped(carBounds.getBoundingRectangle())) {
-            carBounds.setPosition(previousX - MathUtils.cosDeg(carBounds.getRotation() + 90) * carSpeed * GameScreen.DELTA_CFF,
-                    previousY - MathUtils.sinDeg(carBounds.getRotation() + 90) * carSpeed * GameScreen.DELTA_CFF);
+            carBounds.setPosition(previousX - MathUtils.cosDeg(carBounds.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF,
+                    previousY - MathUtils.sinDeg(carBounds.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF);
             carSpeed /= -3;
         }
     }
 
     private void handleSpeed() {
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            carSpeed += speedVelocity * GameScreen.DELTA_CFF;
+            carSpeed += speedVelocity * WorldScreen.DELTA_CFF;
         } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            carSpeed -= speedVelocity * GameScreen.DELTA_CFF;
+            carSpeed -= speedVelocity * WorldScreen.DELTA_CFF;
         } else {
             downSpeed();
         }
@@ -54,10 +54,10 @@ public class CarController {
     }
 
     private void downSpeed() {
-        if (carSpeed > speedVelocity * GameScreen.DELTA_CFF)
-            carSpeed -= speedVelocity * GameScreen.DELTA_CFF;
-        else if (carSpeed < -speedVelocity * GameScreen.DELTA_CFF)
-            carSpeed += speedVelocity * GameScreen.DELTA_CFF;
+        if (carSpeed > speedVelocity * WorldScreen.DELTA_CFF)
+            carSpeed -= speedVelocity * WorldScreen.DELTA_CFF;
+        else if (carSpeed < -speedVelocity * WorldScreen.DELTA_CFF)
+            carSpeed += speedVelocity * WorldScreen.DELTA_CFF;
         else
             carSpeed = 0f;
     }
@@ -71,9 +71,9 @@ public class CarController {
 
     private void handleRotation() {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            carBounds.rotate(rotationSpeed * carSpeed * GameScreen.DELTA_CFF);
+            carBounds.rotate(rotationSpeed * carSpeed * WorldScreen.DELTA_CFF);
         } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            carBounds.rotate(-rotationSpeed * carSpeed * GameScreen.DELTA_CFF);
+            carBounds.rotate(-rotationSpeed * carSpeed * WorldScreen.DELTA_CFF);
         }
     }
 }

@@ -9,13 +9,15 @@ import com.badlogic.gdx.math.Rectangle;
 
 import java.util.stream.StreamSupport;
 
-import static ru.fivestarter.chir.view.GameScreen.UNIT_SCALE;
+import static ru.fivestarter.chir.view.WorldScreen.UNIT_SCALE;
 
 public class World {
     private final Car car;
     private final TiledMap map;
+    private final Runnable portalConsumer;
 
-    public World(TextureAtlas textureAtlas) {
+    public World(TextureAtlas textureAtlas, Runnable portalConsumer) {
+        this.portalConsumer = portalConsumer;
         this.map = new TmxMapLoader().load("map/world.tmx");
         this.car = new Mercedes(textureAtlas.findRegion("car"), this, 40, 49);
     }
@@ -23,6 +25,12 @@ public class World {
     public boolean isBorderOverlapped(Rectangle rectangle) {
         unscaleCoordinates(rectangle);
         return StreamSupport.stream(map.getLayers().get("Слой объектов 1").getObjects().spliterator(), true)
+                .anyMatch(mapObject -> ((RectangleMapObject) mapObject).getRectangle().overlaps(rectangle));
+    }
+
+    public boolean isPortalOverlapped(Rectangle rectangle) {
+        unscaleCoordinates(rectangle);
+        return StreamSupport.stream(map.getLayers().get("Порталы").getObjects().spliterator(), true)
                 .anyMatch(mapObject -> ((RectangleMapObject) mapObject).getRectangle().overlaps(rectangle));
     }
 
@@ -35,6 +43,14 @@ public class World {
 
     public void draw(SpriteBatch batch) {
         car.draw(batch);
+        handlePortal(car.getBounds().getBoundingRectangle());
+    }
+
+    private void handlePortal(Rectangle rectangle) {
+        if(isPortalOverlapped(rectangle)) {
+            portalConsumer.run();
+            dispose();
+        }
     }
 
     public TiledMap getMap() {

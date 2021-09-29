@@ -7,11 +7,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import ru.fivestarter.chir.ChirGame;
 import ru.fivestarter.chir.model.World;
 
-public class GameScreen implements Screen {
+public class WorldScreen implements Screen {
     public static float DELTA_CFF;
     public static final float UNIT_SCALE = 1f / 16f;
+
+    private final ChirGame game;
 
     private TextureAtlas textureAtlas;
     private SpriteBatch batch;
@@ -19,10 +22,14 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer renderer;
 
+    public WorldScreen(ChirGame game) {
+        this.game = game;
+    }
+
     @Override
     public void show() {
         batch = new SpriteBatch();
-        world = new World(textureAtlas);
+        world = new World(textureAtlas, game::changeOnBattleScreen);
         renderer = new OrthogonalTiledMapRenderer(world.getMap(), UNIT_SCALE);
     }
 
