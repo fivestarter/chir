@@ -1,4 +1,4 @@
-package ru.fivestarter.chir.utils;
+package ru.fivestarter.dichlofos.utils;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;

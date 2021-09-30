@@ -1,13 +1,13 @@
-package ru.fivestarter.chir;
+package ru.fivestarter.dichlofos;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import ru.fivestarter.chir.utils.Assets;
-import ru.fivestarter.chir.view.BattleScreen;
-import ru.fivestarter.chir.view.WorldScreen;
+import ru.fivestarter.dichlofos.utils.Assets;
+import ru.fivestarter.dichlofos.view.BattleScreen;
+import ru.fivestarter.dichlofos.view.WorldScreen;
 
-public class ChirGame extends Game {
+public class DichlofosGame extends Game {
 
     private Screen gameScreen;
     private Assets assets;

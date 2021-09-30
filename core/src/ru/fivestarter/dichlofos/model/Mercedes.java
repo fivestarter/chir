@@ -1,8 +1,8 @@
-package ru.fivestarter.chir.model;
+package ru.fivestarter.dichlofos.model;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import static ru.fivestarter.chir.view.WorldScreen.UNIT_SCALE;
+import static ru.fivestarter.dichlofos.view.WorldScreen.UNIT_SCALE;
 
 public class Mercedes extends Car{
 

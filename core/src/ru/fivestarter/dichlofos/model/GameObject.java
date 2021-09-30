@@ -1,4 +1,4 @@
-package ru.fivestarter.chir.model;
+package ru.fivestarter.dichlofos.model;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

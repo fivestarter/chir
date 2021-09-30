@@ -1,4 +1,4 @@
-package ru.fivestarter.chir.view;
+package ru.fivestarter.dichlofos.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;

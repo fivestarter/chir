@@ -1,4 +1,4 @@
-package ru.fivestarter.chir.model;
+package ru.fivestarter.dichlofos.model;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 import java.util.stream.StreamSupport;
 
-import static ru.fivestarter.chir.view.WorldScreen.UNIT_SCALE;
+import static ru.fivestarter.dichlofos.view.WorldScreen.UNIT_SCALE;
 
 public class World {
     private final Car car;

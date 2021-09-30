@@ -1,4 +1,4 @@
-package ru.fivestarter.chir.view;
+package ru.fivestarter.dichlofos.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import ru.fivestarter.chir.ChirGame;
-import ru.fivestarter.chir.model.World;
+import ru.fivestarter.dichlofos.DichlofosGame;
+import ru.fivestarter.dichlofos.model.World;
 
 public class WorldScreen implements Screen {
     public static float DELTA_CFF;
     public static final float UNIT_SCALE = 1f / 16f;
 
-    private final ChirGame game;
+    private final DichlofosGame game;
 
     private TextureAtlas textureAtlas;
     private SpriteBatch batch;
@@ -22,7 +22,7 @@ public class WorldScreen implements Screen {
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer renderer;
 
-    public WorldScreen(ChirGame game) {
+    public WorldScreen(DichlofosGame game) {
         this.game = game;
     }
 
