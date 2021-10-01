@@ -26,7 +26,7 @@ public class BattleScreen implements Screen {
         batch = new SpriteBatch();
         font = new BitmapFont();
         background = textureAtlas.findRegion("pun");
-        mainHero = new Guile(textureAtlas, 160, 60, 212, 340);
+        mainHero = new Guile(textureAtlas, 160, 60);
     }
 
     @Override

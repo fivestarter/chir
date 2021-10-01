@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 public class Guile implements Character {
 
     public static final float FRAME_DURATION = 0.25f;
+    private static final int UNIT_SCALE = 4;
     private final Animation<TextureRegion> idleAnimation;
     private final Animation<TextureRegion> punchAnimation;
 
@@ -18,13 +19,13 @@ public class Guile implements Character {
     private float idleTime = 0f;
     private float punchDuration = 0f;
     private float punchTime = 0f;
+
     private GuileController guileController;
 
-    public Guile(TextureAtlas textureAtlas, int x, int y, int with, int height) {
+    public Guile(TextureAtlas textureAtlas, int x, int y) {
         this.idleAnimation = createWalkAnimation(textureAtlas);
         this.punchAnimation = createPunchAnimation(textureAtlas);
-        this.sprite = new Sprite(idleAnimation.getKeyFrame(idleTime, true), x, y, with, height);
-        this.sprite.setSize(with, height);
+        this.sprite = new Sprite();
         this.sprite.setPosition(x, y);
         this.guileController = new GuileController(this);
     }
@@ -56,12 +57,16 @@ public class Guile implements Character {
 
     private void animateIdle() {
         idleTime += Gdx.graphics.getDeltaTime();
-        sprite.setRegion(idleAnimation.getKeyFrame(idleTime));
+        TextureRegion keyFrame = idleAnimation.getKeyFrame(idleTime);
+        sprite.setRegion(keyFrame);
+        sprite.setSize(keyFrame.getRegionWidth() * UNIT_SCALE, keyFrame.getRegionHeight() * UNIT_SCALE);
     }
 
     private void animatePunch() {
         punchTime += Gdx.graphics.getDeltaTime();
-        sprite.setRegion(punchAnimation.getKeyFrame(punchTime));
+        TextureRegion keyFrame = punchAnimation.getKeyFrame(punchTime);
+        sprite.setRegion(keyFrame);
+        sprite.setSize(keyFrame.getRegionWidth() * UNIT_SCALE, keyFrame.getRegionHeight() * UNIT_SCALE);
     }
 
     private Animation<TextureRegion> createWalkAnimation(TextureAtlas textureAtlas) {
@@ -74,9 +79,11 @@ public class Guile implements Character {
 
     private Animation<TextureRegion> createPunchAnimation(TextureAtlas textureAtlas) {
         TextureAtlas.AtlasRegion punchRegion = textureAtlas.findRegion("guilePunch");
-        TextureRegion[] punchFrames = Arrays.stream(punchRegion.split(punchRegion.getRegionWidth() / 3, punchRegion.getRegionHeight()))
-                .flatMap(Stream::of)
-                .toArray(TextureRegion[]::new);
+        TextureRegion[] punchFrames = new TextureRegion[3];
+        punchFrames[0] = new TextureRegion(punchRegion, 0, 0, 56, punchRegion.getRegionHeight());
+        punchFrames[1] = new TextureRegion(punchRegion, 60, 0, 70, punchRegion.getRegionHeight());
+        punchFrames[2] = new TextureRegion(punchRegion, 132, 0, punchRegion.getRegionWidth() - 132, punchRegion.getRegionHeight());
+
         return new Animation<>(FRAME_DURATION, new Array<>(punchFrames), Animation.PlayMode.LOOP_PINGPONG);
     }
 }
