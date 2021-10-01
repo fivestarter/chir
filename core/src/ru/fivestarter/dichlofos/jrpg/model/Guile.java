@@ -1,10 +1,7 @@
 package ru.fivestarter.dichlofos.jrpg.model;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.Array;
 import ru.fivestarter.dichlofos.jrpg.control.GuileController;
 
@@ -14,16 +11,17 @@ import java.util.stream.Stream;
 public class Guile implements Character {
 
     private final Animation<TextureRegion> walkAnimation;
-    private final TextureRegion[] walkFrames;
+    private final Animation<TextureRegion> punchAnimation;
+    private Animation<TextureRegion> currentAnimation;
+
     private final Sprite sprite;
     private float stateTime = 0f;
     private GuileController guileController;
 
-    public Guile(TextureRegion textureRegion, int x, int y, int with, int height) {
-        this.walkFrames = Arrays.stream(textureRegion.split(textureRegion.getRegionWidth() / 3, textureRegion.getRegionHeight()))
-                .flatMap(Stream::of)
-                .toArray(TextureRegion[]::new);
-        walkAnimation = new Animation<>(0.25f, new Array<>(walkFrames), Animation.PlayMode.LOOP_PINGPONG);
+    public Guile(TextureAtlas textureAtlas, int x, int y, int with, int height) {
+        this.walkAnimation = createWalkAnimation(textureAtlas);
+        this.punchAnimation = createPunchAnimation(textureAtlas);
+        this.currentAnimation = walkAnimation;
         this.sprite = new Sprite(walkAnimation.getKeyFrame(stateTime, true), x, y, with, height);
         this.sprite.setSize(with, height);
         this.sprite.setPosition(x, y);
@@ -32,12 +30,29 @@ public class Guile implements Character {
 
     public void draw(SpriteBatch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
-        sprite.setRegion(walkAnimation.getKeyFrame(stateTime));
+        sprite.setRegion(currentAnimation.getKeyFrame(stateTime));
         sprite.draw(batch);
+        guileController.handle();
     }
 
     @Override
     public void punch() {
-        //
+        currentAnimation = punchAnimation;
+    }
+
+    private Animation<TextureRegion> createWalkAnimation(TextureAtlas textureAtlas) {
+        TextureAtlas.AtlasRegion idleRegion = textureAtlas.findRegion("guileIdle");
+        TextureRegion[] walkFrames = Arrays.stream(idleRegion.split(idleRegion.getRegionWidth() / 3, idleRegion.getRegionHeight()))
+                .flatMap(Stream::of)
+                .toArray(TextureRegion[]::new);
+        return new Animation<>(0.25f, new Array<>(walkFrames), Animation.PlayMode.LOOP_PINGPONG);
+    }
+
+    private Animation<TextureRegion> createPunchAnimation(TextureAtlas textureAtlas) {
+        TextureAtlas.AtlasRegion punchRegion = textureAtlas.findRegion("guilePunch");
+        TextureRegion[] punchFrames = Arrays.stream(punchRegion.split(punchRegion.getRegionWidth() / 3, punchRegion.getRegionHeight()))
+                .flatMap(Stream::of)
+                .toArray(TextureRegion[]::new);
+        return new Animation<>(0.25f, new Array<>(punchFrames), Animation.PlayMode.LOOP_PINGPONG);
     }
 }
