@@ -1,4 +1,4 @@
-package ru.fivestarter.dichlofos.view;
+package ru.fivestarter.dichlofos.gta.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import ru.fivestarter.dichlofos.DichlofosGame;
-import ru.fivestarter.dichlofos.model.World;
+import ru.fivestarter.dichlofos.gta.model.World;
 
 public class WorldScreen implements Screen {
     public static float DELTA_CFF;

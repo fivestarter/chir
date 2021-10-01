@@ -1,11 +1,11 @@
-package ru.fivestarter.dichlofos.control;
+package ru.fivestarter.dichlofos.gta.control;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
-import ru.fivestarter.dichlofos.model.World;
-import ru.fivestarter.dichlofos.view.WorldScreen;
+import ru.fivestarter.dichlofos.gta.model.World;
+import ru.fivestarter.dichlofos.gta.view.WorldScreen;
 
 public class CarController {
 

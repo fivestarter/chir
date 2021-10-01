@@ -1,4 +1,4 @@
-package ru.fivestarter.dichlofos.view;
+package ru.fivestarter.dichlofos.jrpg.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import ru.fivestarter.dichlofos.model.Guile;
+import ru.fivestarter.dichlofos.jrpg.model.Guile;
 
 public class BattleScreen implements Screen {
 

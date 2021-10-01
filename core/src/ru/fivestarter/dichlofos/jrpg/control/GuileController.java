@@ -1,8 +1,8 @@
-package ru.fivestarter.dichlofos.control;
+package ru.fivestarter.dichlofos.jrpg.control;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import ru.fivestarter.dichlofos.model.Character;
+import ru.fivestarter.dichlofos.jrpg.model.Character;
 
 public class GuileController {
 

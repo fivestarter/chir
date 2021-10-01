@@ -1,4 +1,4 @@
-package ru.fivestarter.dichlofos.model;
+package ru.fivestarter.dichlofos.jrpg.model;
 
 public interface Character {
     void punch();

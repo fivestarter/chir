@@ -1,8 +1,8 @@
-package ru.fivestarter.dichlofos.model;
+package ru.fivestarter.dichlofos.gta.model;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import ru.fivestarter.dichlofos.control.CarController;
+import ru.fivestarter.dichlofos.gta.control.CarController;
 
 public class Car extends GameObject {
 

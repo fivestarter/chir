@@ -1,4 +1,4 @@
-package ru.fivestarter.dichlofos.model;
+package ru.fivestarter.dichlofos.jrpg.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-import ru.fivestarter.dichlofos.control.GuileController;
+import ru.fivestarter.dichlofos.jrpg.control.GuileController;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
