@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -20,7 +21,7 @@ public class Guile {
         walkFrames = Arrays.stream(textureRegion.split(textureRegion.getRegionWidth()/3, textureRegion.getRegionHeight()))
                 .flatMap(Stream::of)
                 .toArray(TextureRegion[]::new);
-        walkAnimation = new Animation<>(0.25f, walkFrames);
+        walkAnimation = new Animation<>(0.25f, new Array<>(walkFrames), Animation.PlayMode.LOOP_PINGPONG);
         sprite = new Sprite(walkAnimation.getKeyFrame(stateTime, true), x, y, with, height);
         sprite.setSize(with, height);
         sprite.setPosition(x, y);
@@ -28,7 +29,7 @@ public class Guile {
 
     public void draw(SpriteBatch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
-        sprite.setRegion(walkAnimation.getKeyFrame(stateTime, true));
+        sprite.setRegion(walkAnimation.getKeyFrame(stateTime));
         sprite.draw(batch);
     }
 }
