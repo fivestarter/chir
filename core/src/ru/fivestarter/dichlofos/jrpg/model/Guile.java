@@ -10,19 +10,21 @@ import java.util.stream.Stream;
 
 public class Guile implements Character {
 
-    private final Animation<TextureRegion> walkAnimation;
+    public static final float FRAME_DURATION = 0.25f;
+    private final Animation<TextureRegion> idleAnimation;
     private final Animation<TextureRegion> punchAnimation;
     private Animation<TextureRegion> currentAnimation;
 
     private final Sprite sprite;
     private float stateTime = 0f;
+    private float activeStateTime = 0f;
     private GuileController guileController;
 
     public Guile(TextureAtlas textureAtlas, int x, int y, int with, int height) {
-        this.walkAnimation = createWalkAnimation(textureAtlas);
+        this.idleAnimation = createWalkAnimation(textureAtlas);
         this.punchAnimation = createPunchAnimation(textureAtlas);
-        this.currentAnimation = walkAnimation;
-        this.sprite = new Sprite(walkAnimation.getKeyFrame(stateTime, true), x, y, with, height);
+        this.currentAnimation = idleAnimation;
+        this.sprite = new Sprite(idleAnimation.getKeyFrame(stateTime, true), x, y, with, height);
         this.sprite.setSize(with, height);
         this.sprite.setPosition(x, y);
         this.guileController = new GuileController(this);
@@ -33,11 +35,21 @@ public class Guile implements Character {
         sprite.setRegion(currentAnimation.getKeyFrame(stateTime));
         sprite.draw(batch);
         guileController.handle();
+
+        if (isActiveState()) {
+            activeStateTime -= Gdx.graphics.getDeltaTime();
+            if (!isActiveState()) {
+                currentAnimation = idleAnimation;
+            }
+        }
     }
 
     @Override
     public void punch() {
-        currentAnimation = punchAnimation;
+        if (!isActiveState()) {
+            currentAnimation = punchAnimation;
+            activeStateTime = FRAME_DURATION;
+        }
     }
 
     private Animation<TextureRegion> createWalkAnimation(TextureAtlas textureAtlas) {
@@ -45,7 +57,7 @@ public class Guile implements Character {
         TextureRegion[] walkFrames = Arrays.stream(idleRegion.split(idleRegion.getRegionWidth() / 3, idleRegion.getRegionHeight()))
                 .flatMap(Stream::of)
                 .toArray(TextureRegion[]::new);
-        return new Animation<>(0.25f, new Array<>(walkFrames), Animation.PlayMode.LOOP_PINGPONG);
+        return new Animation<>(FRAME_DURATION, new Array<>(walkFrames), Animation.PlayMode.LOOP_PINGPONG);
     }
 
     private Animation<TextureRegion> createPunchAnimation(TextureAtlas textureAtlas) {
@@ -53,6 +65,10 @@ public class Guile implements Character {
         TextureRegion[] punchFrames = Arrays.stream(punchRegion.split(punchRegion.getRegionWidth() / 3, punchRegion.getRegionHeight()))
                 .flatMap(Stream::of)
                 .toArray(TextureRegion[]::new);
-        return new Animation<>(0.25f, new Array<>(punchFrames), Animation.PlayMode.LOOP_PINGPONG);
+        return new Animation<>(FRAME_DURATION, new Array<>(punchFrames), Animation.PlayMode.LOOP_PINGPONG);
+    }
+
+    private boolean isActiveState() {
+        return activeStateTime > 0;
     }
 }
