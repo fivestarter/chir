@@ -11,7 +11,7 @@ car
   orig: 453, 800
   offset: 0, 0
   index: -1
-guile
+guileIdle
   rotate: false
   xy: 2, 235
   size: 159, 85
