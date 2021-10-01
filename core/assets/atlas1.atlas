@@ -1,20 +1,27 @@
 
 atlas1.png
-size: 512, 1024
+size: 2048, 1024
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 car
   rotate: false
-  xy: 2, 89
+  xy: 804, 2
   size: 453, 800
   orig: 453, 800
   offset: 0, 0
   index: -1
 guile
   rotate: false
-  xy: 2, 2
+  xy: 2, 235
   size: 159, 85
   orig: 159, 85
+  offset: 0, 0
+  index: -1
+pun
+  rotate: false
+  xy: 2, 322
+  size: 800, 480
+  orig: 800, 480
   offset: 0, 0
   index: -1

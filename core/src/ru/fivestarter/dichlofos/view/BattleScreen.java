@@ -3,10 +3,10 @@ package ru.fivestarter.dichlofos.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import ru.fivestarter.dichlofos.model.Guile;
 
 public class BattleScreen implements Screen {
@@ -14,7 +14,7 @@ public class BattleScreen implements Screen {
     private final TextureAtlas textureAtlas;
     private SpriteBatch batch;
     private BitmapFont font;
-    private Texture background;
+    private TextureRegion background;
     private Guile mainHero;
 
     public BattleScreen(TextureAtlas textureAtlas) {
@@ -25,7 +25,7 @@ public class BattleScreen implements Screen {
     public void show() {
         batch = new SpriteBatch();
         font = new BitmapFont();
-        background = new Texture(Gdx.files.internal("scene/pun.png"));
+        background = textureAtlas.findRegion("pun");
         mainHero = new Guile(textureAtlas.findRegion("guile"), 160, 60, 212, 340);
     }
 
