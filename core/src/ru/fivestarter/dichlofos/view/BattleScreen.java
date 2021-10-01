@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import ru.fivestarter.dichlofos.model.GameObject;
 import ru.fivestarter.dichlofos.model.Guile;
 
 public class BattleScreen implements Screen {
@@ -16,7 +15,7 @@ public class BattleScreen implements Screen {
     private SpriteBatch batch;
     private BitmapFont font;
     private Texture background;
-    private GameObject mainHero;
+    private Guile mainHero;
 
     public BattleScreen(TextureAtlas textureAtlas) {
         this.textureAtlas = textureAtlas;
@@ -27,8 +26,7 @@ public class BattleScreen implements Screen {
         batch = new SpriteBatch();
         font = new BitmapFont();
         background = new Texture(Gdx.files.internal("scene/pun.png"));
-        TextureAtlas.AtlasRegion guileRegion = textureAtlas.findRegion("guile");
-        mainHero = new Guile(guileRegion.split(guileRegion.getRegionWidth()/3, guileRegion.getRegionHeight())[0][2], 160, 60, 212, 340);
+        mainHero = new Guile(textureAtlas.findRegion("guile"), 160, 60, 212, 340);
     }
 
     @Override
