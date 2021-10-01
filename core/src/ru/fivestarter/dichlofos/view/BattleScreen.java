@@ -28,7 +28,7 @@ public class BattleScreen implements Screen {
         font = new BitmapFont();
         background = new Texture(Gdx.files.internal("scene/pun.png"));
         TextureAtlas.AtlasRegion guileRegion = textureAtlas.findRegion("guile");
-        mainHero = new Guile(guileRegion.split(guileRegion.getRegionWidth()/25, 107)[0][0], 200, 100, 170, 400);
+        mainHero = new Guile(guileRegion.split(guileRegion.getRegionWidth()/3, guileRegion.getRegionHeight())[0][2], 160, 60, 212, 340);
     }
 
     @Override
