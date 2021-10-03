@@ -39,10 +39,10 @@ public class Guile implements Character {
     public void draw(SpriteBatch batch) {
         guileController.handle();
 
-        if (isPunching()) {
+        if (isPunch()) {
             punchDuration -= Gdx.graphics.getDeltaTime();
             animatePunch();
-        } else if (isHighKicking()){
+        } else if (isHighKick()){
             highKickDuration -= Gdx.graphics.getDeltaTime();
             animateHighKick();
         } else {
@@ -54,7 +54,7 @@ public class Guile implements Character {
 
     @Override
     public void punch() {
-        if (!isAction()) {
+        if (isIdle()) {
             punchTime = 0;
             punchDuration = PUNCH_DURATION * 2; // не понятно почему так
         }
@@ -62,21 +62,21 @@ public class Guile implements Character {
 
     @Override
     public void highKick() {
-        if (!isAction()) {
+        if (isIdle()) {
             highKickTime = 0;
             highKickDuration = HIGH_KICK_DURATION * 2; // не понятно почему так
         }
     }
 
-    private boolean isAction() {
-        return isPunching() || isHighKicking();
+    private boolean isIdle() {
+        return !isPunch() && !isHighKick();
     }
 
-    private boolean isPunching() {
+    private boolean isPunch() {
         return punchDuration > 0;
     }
 
-    private boolean isHighKicking() {
+    private boolean isHighKick() {
         return highKickDuration > 0;
     }
 
