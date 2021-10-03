@@ -10,7 +10,8 @@ import java.util.stream.Stream;
 
 public class Guile implements Character {
 
-    public static final float FRAME_DURATION = 0.25f;
+    public static final float IDLE_DURATION = 0.25f;
+    public static final float PUNCH_DURATION = 0.15f;
     private static final int UNIT_SCALE = 4;
     private final Animation<TextureRegion> idleAnimation;
     private final Animation<TextureRegion> punchAnimation;
@@ -47,7 +48,7 @@ public class Guile implements Character {
     public void punch() {
         if (!isPunching()) {
             punchTime = 0;
-            punchDuration = FRAME_DURATION * 2; // не понятно почему так
+            punchDuration = PUNCH_DURATION * 2; // не понятно почему так
         }
     }
 
@@ -74,7 +75,7 @@ public class Guile implements Character {
         TextureRegion[] walkFrames = Arrays.stream(idleRegion.split(idleRegion.getRegionWidth() / 3, idleRegion.getRegionHeight()))
                 .flatMap(Stream::of)
                 .toArray(TextureRegion[]::new);
-        return new Animation<>(FRAME_DURATION, new Array<>(walkFrames), Animation.PlayMode.LOOP_PINGPONG);
+        return new Animation<>(IDLE_DURATION, new Array<>(walkFrames), Animation.PlayMode.LOOP_PINGPONG);
     }
 
     private Animation<TextureRegion> createPunchAnimation(TextureAtlas textureAtlas) {
@@ -84,6 +85,6 @@ public class Guile implements Character {
         punchFrames[1] = new TextureRegion(punchRegion, 60, 0, 70, punchRegion.getRegionHeight());
         punchFrames[2] = new TextureRegion(punchRegion, 132, 0, punchRegion.getRegionWidth() - 132, punchRegion.getRegionHeight());
 
-        return new Animation<>(FRAME_DURATION, new Array<>(punchFrames), Animation.PlayMode.LOOP_PINGPONG);
+        return new Animation<>(PUNCH_DURATION, new Array<>(punchFrames), Animation.PlayMode.LOOP_PINGPONG);
     }
 }
