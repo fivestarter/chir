@@ -12,7 +12,7 @@ public class Guile implements Character {
 
     public static final float IDLE_DURATION = 0.25f;
     public static final float PUNCH_DURATION = 0.15f;
-    public static final float HIGH_KICK_DURATION = 0.3f;
+    public static final float HIGH_KICK_DURATION = 0.35f;
     private static final int UNIT_SCALE = 4;
     private final Animation<TextureRegion> idleAnimation;
     private final Animation<TextureRegion> punchAnimation;
