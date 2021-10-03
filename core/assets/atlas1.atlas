@@ -11,16 +11,23 @@ car
   orig: 453, 800
   offset: 0, 0
   index: -1
+guileHighKick
+  rotate: false
+  xy: 2, 225
+  size: 297, 95
+  orig: 297, 95
+  offset: 0, 0
+  index: -1
 guileIdle
   rotate: false
-  xy: 1259, 717
+  xy: 2, 138
   size: 159, 85
   orig: 159, 85
   offset: 0, 0
   index: -1
 guilePunch
   rotate: false
-  xy: 2, 235
+  xy: 1259, 717
   size: 189, 85
   orig: 189, 85
   offset: 0, 0

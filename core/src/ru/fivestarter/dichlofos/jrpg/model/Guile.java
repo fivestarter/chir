@@ -12,20 +12,25 @@ public class Guile implements Character {
 
     public static final float IDLE_DURATION = 0.25f;
     public static final float PUNCH_DURATION = 0.15f;
+    public static final float HIGH_KICK_DURATION = 0.3f;
     private static final int UNIT_SCALE = 4;
     private final Animation<TextureRegion> idleAnimation;
     private final Animation<TextureRegion> punchAnimation;
+    private final Animation<TextureRegion> highKickAnimation;
 
     private final Sprite sprite;
     private float idleTime = 0f;
     private float punchDuration = 0f;
     private float punchTime = 0f;
+    private float highKickDuration = 0f;
+    private float highKickTime = 0f;
 
     private GuileController guileController;
 
     public Guile(TextureAtlas textureAtlas, int x, int y) {
         this.idleAnimation = createWalkAnimation(textureAtlas);
         this.punchAnimation = createPunchAnimation(textureAtlas);
+        this.highKickAnimation = createHighKickAnimation(textureAtlas);
         this.sprite = new Sprite();
         this.sprite.setPosition(x, y);
         this.guileController = new GuileController(this);
@@ -37,6 +42,9 @@ public class Guile implements Character {
         if (isPunching()) {
             punchDuration -= Gdx.graphics.getDeltaTime();
             animatePunch();
+        } else if (isHighKicking()){
+            highKickDuration -= Gdx.graphics.getDeltaTime();
+            animateHighKick();
         } else {
             animateIdle();
         }
@@ -46,14 +54,30 @@ public class Guile implements Character {
 
     @Override
     public void punch() {
-        if (!isPunching()) {
+        if (!isAction()) {
             punchTime = 0;
             punchDuration = PUNCH_DURATION * 2; // не понятно почему так
         }
     }
 
+    @Override
+    public void highKick() {
+        if (!isAction()) {
+            highKickTime = 0;
+            highKickDuration = HIGH_KICK_DURATION * 2; // не понятно почему так
+        }
+    }
+
+    private boolean isAction() {
+        return isPunching() || isHighKicking();
+    }
+
     private boolean isPunching() {
         return punchDuration > 0;
+    }
+
+    private boolean isHighKicking() {
+        return highKickDuration > 0;
     }
 
     private void animateIdle() {
@@ -66,6 +90,13 @@ public class Guile implements Character {
     private void animatePunch() {
         punchTime += Gdx.graphics.getDeltaTime();
         TextureRegion keyFrame = punchAnimation.getKeyFrame(punchTime);
+        sprite.setRegion(keyFrame);
+        sprite.setSize(keyFrame.getRegionWidth() * UNIT_SCALE, keyFrame.getRegionHeight() * UNIT_SCALE);
+    }
+
+    private void animateHighKick() {
+        highKickTime += Gdx.graphics.getDeltaTime();
+        TextureRegion keyFrame = highKickAnimation.getKeyFrame(highKickTime);
         sprite.setRegion(keyFrame);
         sprite.setSize(keyFrame.getRegionWidth() * UNIT_SCALE, keyFrame.getRegionHeight() * UNIT_SCALE);
     }
@@ -84,6 +115,17 @@ public class Guile implements Character {
         punchFrames[0] = new TextureRegion(punchRegion, 0, 0, 56, punchRegion.getRegionHeight());
         punchFrames[1] = new TextureRegion(punchRegion, 60, 0, 70, punchRegion.getRegionHeight());
         punchFrames[2] = new TextureRegion(punchRegion, 132, 0, punchRegion.getRegionWidth() - 132, punchRegion.getRegionHeight());
+
+        return new Animation<>(PUNCH_DURATION, new Array<>(punchFrames), Animation.PlayMode.LOOP_PINGPONG);
+    }
+    private Animation<TextureRegion> createHighKickAnimation(TextureAtlas textureAtlas) {
+        TextureAtlas.AtlasRegion highKickRegion = textureAtlas.findRegion("guileHighKick");
+        TextureRegion[] punchFrames = new TextureRegion[5];
+        punchFrames[0] = new TextureRegion(highKickRegion, 0, 0, 54, highKickRegion.getRegionHeight());
+        punchFrames[1] = new TextureRegion(highKickRegion, 53, 0, 57, highKickRegion.getRegionHeight());
+        punchFrames[2] = new TextureRegion(highKickRegion, 111, 0, 75, highKickRegion.getRegionHeight());
+        punchFrames[3] = new TextureRegion(highKickRegion, 189, 0, 56, highKickRegion.getRegionHeight());
+        punchFrames[4] = new TextureRegion(highKickRegion, 248, 0, highKickRegion.getRegionWidth() - 248, highKickRegion.getRegionHeight());
 
         return new Animation<>(PUNCH_DURATION, new Array<>(punchFrames), Animation.PlayMode.LOOP_PINGPONG);
     }

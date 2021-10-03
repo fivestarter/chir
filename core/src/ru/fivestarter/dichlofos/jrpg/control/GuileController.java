@@ -15,6 +15,10 @@ public class GuileController {
     public void handle(){
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             character.punch();
+            return;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.E)) {
+            character.highKick();
         }
     }
 }
