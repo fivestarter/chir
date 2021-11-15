@@ -20,16 +20,23 @@ guileHighKick
   index: -1
 guileIdle
   rotate: false
-  xy: 2, 138
+  xy: 301, 235
   size: 159, 85
   orig: 159, 85
   offset: 0, 0
   index: -1
 guilePunch
   rotate: false
-  xy: 1259, 717
+  xy: 2, 138
   size: 189, 85
   orig: 189, 85
+  offset: 0, 0
+  index: -1
+hondaIdle
+  rotate: false
+  xy: 1259, 736
+  size: 232, 66
+  orig: 232, 66
   offset: 0, 0
   index: -1
 pun

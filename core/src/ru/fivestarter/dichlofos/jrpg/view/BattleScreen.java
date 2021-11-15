@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import ru.fivestarter.dichlofos.jrpg.model.Guile;
+import ru.fivestarter.dichlofos.jrpg.model.Honda;
 
 public class BattleScreen implements Screen {
 
@@ -16,6 +17,7 @@ public class BattleScreen implements Screen {
     private BitmapFont font;
     private TextureRegion background;
     private Guile mainHero;
+    private Honda enemy;
 
     public BattleScreen(TextureAtlas textureAtlas) {
         this.textureAtlas = textureAtlas;
@@ -27,6 +29,7 @@ public class BattleScreen implements Screen {
         font = new BitmapFont();
         background = textureAtlas.findRegion("pun");
         mainHero = new Guile(textureAtlas, 160, 60);
+        enemy = new Honda(textureAtlas, 460, 60);
     }
 
     @Override
@@ -36,6 +39,7 @@ public class BattleScreen implements Screen {
         batch.begin();
         batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         mainHero.draw(batch);
+        enemy.draw(batch);
         batch.end();
     }
 
