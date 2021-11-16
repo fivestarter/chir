@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class Honda {
     public static final float IDLE_DURATION = 0.25f;
-    private static final int UNIT_SCALE = 6;
+    private static final int UNIT_SCALE = 5;
 
     private final Animation<TextureRegion> idleAnimation;
 
