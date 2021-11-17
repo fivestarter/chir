@@ -1,6 +1,5 @@
 package ru.fivestarter.dichlofos.jrpg.model.guile.animation;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -13,19 +12,13 @@ public class HighKickAnimation extends CharacterAnimation {
     private static final float FRAME_DURATION = 0.15f;
     private static final float HIGH_KICK_DURATION = 0.7f;
 
-    private final Animation<TextureRegion> animation;
-
     public HighKickAnimation(AnimationState animationState, TextureAtlas textureAtlas, float unitScale) {
-        super(animationState, unitScale);
-        this.animation = createAnimation(textureAtlas);
+        super(animationState, createAnimation(textureAtlas), unitScale);
     }
 
     @Override
     public void animate(Sprite sprite) {
-        animationTime += Gdx.graphics.getDeltaTime();
-        TextureRegion keyFrame = animation.getKeyFrame(animationTime);
-        sprite.setRegion(keyFrame);
-        sprite.setSize(keyFrame.getRegionWidth() * unitScale, keyFrame.getRegionHeight() * unitScale);
+        super.animate(sprite);
 
         if (isFinish()) {
             idle();
@@ -37,7 +30,7 @@ public class HighKickAnimation extends CharacterAnimation {
         return animationTime > HIGH_KICK_DURATION;
     }
 
-    private Animation<TextureRegion> createAnimation(TextureAtlas textureAtlas) {
+    private static Animation<TextureRegion> createAnimation(TextureAtlas textureAtlas) {
         TextureAtlas.AtlasRegion highKickRegion = textureAtlas.findRegion("guileHighKick");
         TextureRegion[] punchFrames = new TextureRegion[5];
         punchFrames[0] = new TextureRegion(highKickRegion, 0, 0, 54, highKickRegion.getRegionHeight());

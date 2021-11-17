@@ -1,20 +1,19 @@
 package ru.fivestarter.dichlofos.jrpg.model.guile;
 
-import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.utils.Array;
-import ru.fivestarter.dichlofos.jrpg.animation.*;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import ru.fivestarter.dichlofos.jrpg.animation.AnimationState;
+import ru.fivestarter.dichlofos.jrpg.animation.CharacterAnimation;
 import ru.fivestarter.dichlofos.jrpg.control.GuileController;
 import ru.fivestarter.dichlofos.jrpg.model.Character;
 import ru.fivestarter.dichlofos.jrpg.model.guile.animation.HighKickAnimation;
 import ru.fivestarter.dichlofos.jrpg.model.guile.animation.IdleAnimation;
 import ru.fivestarter.dichlofos.jrpg.model.guile.animation.PunchAnimation;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
-
 public class Guile implements Character, AnimationState {
 
-    public static final float WALK_DURATION = 0.25f;
+
     private static final float UNIT_SCALE = 3.5f;
 
     private CharacterAnimation currentAnimation;
@@ -57,13 +56,7 @@ public class Guile implements Character, AnimationState {
     }
 
 
-    private Animation<TextureRegion> createWalkAnimation(TextureAtlas textureAtlas) {
-        TextureAtlas.AtlasRegion walkRegion = textureAtlas.findRegion("guileWalk");
-        TextureRegion[] walkFrames = Arrays.stream(walkRegion.split(walkRegion.getRegionWidth() / 5, walkRegion.getRegionHeight()))
-                .flatMap(Stream::of)
-                .toArray(TextureRegion[]::new);
-        return new Animation<>(WALK_DURATION, new Array<>(walkFrames), Animation.PlayMode.LOOP);
-    }
+
 
     @Override
     public void setPunchState() {
