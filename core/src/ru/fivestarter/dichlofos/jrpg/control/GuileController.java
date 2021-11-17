@@ -20,5 +20,8 @@ public class GuileController {
         if (Gdx.input.isKeyPressed(Input.Keys.E)) {
             character.highKick();
         }
+        if (Gdx.input.isKeyPressed(Input.Keys.R)) {
+            character.move();
+        }
     }
 }

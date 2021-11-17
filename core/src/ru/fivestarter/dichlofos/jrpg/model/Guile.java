@@ -13,10 +13,12 @@ public class Guile implements Character {
     public static final float IDLE_DURATION = 0.25f;
     public static final float PUNCH_DURATION = 0.15f;
     public static final float HIGH_KICK_DURATION = 0.35f;
+    public static final float WALK_DURATION = 0.25f;
     private static final float UNIT_SCALE = 3.5f;
     private final Animation<TextureRegion> idleAnimation;
     private final Animation<TextureRegion> punchAnimation;
     private final Animation<TextureRegion> highKickAnimation;
+    private final Animation<TextureRegion> walkAnimation;
 
     private final Sprite sprite;
     private float idleTime = 0f;
@@ -28,9 +30,10 @@ public class Guile implements Character {
     private GuileController guileController;
 
     public Guile(TextureAtlas textureAtlas, int x, int y) {
-        this.idleAnimation = createWalkAnimation(textureAtlas);
+        this.idleAnimation = createIdleAnimation(textureAtlas);
         this.punchAnimation = createPunchAnimation(textureAtlas);
         this.highKickAnimation = createHighKickAnimation(textureAtlas);
+        this.walkAnimation = createWalkAnimation(textureAtlas);
         this.sprite = new Sprite();
         this.sprite.setPosition(x, y);
         this.guileController = new GuileController(this);
@@ -68,6 +71,10 @@ public class Guile implements Character {
         }
     }
 
+    @Override
+    public void move() {
+    }
+
     private boolean isIdle() {
         return !isPunch() && !isHighKick();
     }
@@ -101,7 +108,7 @@ public class Guile implements Character {
         sprite.setSize(keyFrame.getRegionWidth() * UNIT_SCALE, keyFrame.getRegionHeight() * UNIT_SCALE);
     }
 
-    private Animation<TextureRegion> createWalkAnimation(TextureAtlas textureAtlas) {
+    private Animation<TextureRegion> createIdleAnimation(TextureAtlas textureAtlas) {
         TextureAtlas.AtlasRegion idleRegion = textureAtlas.findRegion("guileIdle");
         TextureRegion[] walkFrames = Arrays.stream(idleRegion.split(idleRegion.getRegionWidth() / 3, idleRegion.getRegionHeight()))
                 .flatMap(Stream::of)
@@ -128,5 +135,13 @@ public class Guile implements Character {
         punchFrames[4] = new TextureRegion(highKickRegion, 248, 0, highKickRegion.getRegionWidth() - 248, highKickRegion.getRegionHeight());
 
         return new Animation<>(PUNCH_DURATION, new Array<>(punchFrames), Animation.PlayMode.LOOP_PINGPONG);
+    }
+
+    private Animation<TextureRegion> createWalkAnimation(TextureAtlas textureAtlas) {
+        TextureAtlas.AtlasRegion walkRegion = textureAtlas.findRegion("guileWalk");
+        TextureRegion[] walkFrames = Arrays.stream(walkRegion.split(walkRegion.getRegionWidth() / 5, walkRegion.getRegionHeight()))
+                .flatMap(Stream::of)
+                .toArray(TextureRegion[]::new);
+        return new Animation<>(WALK_DURATION, new Array<>(walkFrames), Animation.PlayMode.LOOP);
     }
 }
