@@ -47,6 +47,14 @@ public abstract class CharacterAnimation {
         }
     }
 
+    public void walk() {
+        if (isFinish()) {
+            reset();
+            animationState.setWalkState();
+        }
+    }
+
+
     protected void reset() {
         animationTime = 0f;
     }

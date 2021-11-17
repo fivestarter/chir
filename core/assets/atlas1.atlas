@@ -20,7 +20,7 @@ guileHighKick
   index: -1
 guileIdle
   rotate: false
-  xy: 1259, 624
+  xy: 1259, 627
   size: 159, 85
   orig: 159, 85
   offset: 0, 0
@@ -34,9 +34,9 @@ guilePunch
   index: -1
 guileWalk
   rotate: false
-  xy: 1259, 711
-  size: 276, 91
-  orig: 276, 91
+  xy: 1259, 714
+  size: 274, 88
+  orig: 274, 88
   offset: 0, 0
   index: -1
 hondaIdle

@@ -4,4 +4,5 @@ public interface AnimationState {
     void setPunchState();
     void setHighKickState();
     void setIdleState();
+    void setWalkState();
 }

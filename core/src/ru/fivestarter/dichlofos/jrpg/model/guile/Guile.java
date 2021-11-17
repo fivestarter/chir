@@ -10,9 +10,9 @@ import ru.fivestarter.dichlofos.jrpg.model.Character;
 import ru.fivestarter.dichlofos.jrpg.model.guile.animation.HighKickAnimation;
 import ru.fivestarter.dichlofos.jrpg.model.guile.animation.IdleAnimation;
 import ru.fivestarter.dichlofos.jrpg.model.guile.animation.PunchAnimation;
+import ru.fivestarter.dichlofos.jrpg.model.guile.animation.WalkAnimation;
 
 public class Guile implements Character, AnimationState {
-
 
     private static final float UNIT_SCALE = 3.5f;
 
@@ -20,14 +20,16 @@ public class Guile implements Character, AnimationState {
     private final IdleAnimation idleAnimation;
     private final PunchAnimation punchAnimation;
     private final HighKickAnimation highKickAnimation;
+    private final WalkAnimation walkAnimation;
 
     private final Sprite sprite;
     private GuileController guileController;
 
-    public Guile(TextureAtlas textureAtlas, int x, int y) {
+    public Guile(TextureAtlas textureAtlas, int x, int y, int border) {
         this.idleAnimation = new IdleAnimation(this, textureAtlas, UNIT_SCALE);
         this.punchAnimation = new PunchAnimation(this, textureAtlas, UNIT_SCALE);
         this.highKickAnimation = new HighKickAnimation(this, textureAtlas, UNIT_SCALE);
+        this.walkAnimation = new WalkAnimation(this, textureAtlas, UNIT_SCALE, border);
         currentAnimation = idleAnimation;
         this.sprite = new Sprite();
         this.sprite.setPosition(x, y);
@@ -52,11 +54,8 @@ public class Guile implements Character, AnimationState {
 
     @Override
     public void move() {
-
+        currentAnimation.walk();
     }
-
-
-
 
     @Override
     public void setPunchState() {
@@ -71,5 +70,10 @@ public class Guile implements Character, AnimationState {
     @Override
     public void setIdleState() {
         currentAnimation = idleAnimation;
+    }
+
+    @Override
+    public void setWalkState() {
+        currentAnimation = walkAnimation;
     }
 }
