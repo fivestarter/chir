@@ -1,5 +1,7 @@
-package ru.fivestarter.dichlofos.jrpg.animation;
+package ru.fivestarter.dichlofos.jrpg.model.guile.animation;
 
+import ru.fivestarter.dichlofos.jrpg.animation.AnimationState;
+import ru.fivestarter.dichlofos.jrpg.animation.CharacterAnimation;
 import ru.fivestarter.dichlofos.jrpg.model.Character;
 
 import com.badlogic.gdx.Gdx;

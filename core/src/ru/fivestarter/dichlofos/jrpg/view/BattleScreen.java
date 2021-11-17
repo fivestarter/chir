@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import ru.fivestarter.dichlofos.jrpg.model.Guile;
-import ru.fivestarter.dichlofos.jrpg.model.Honda;
+import ru.fivestarter.dichlofos.jrpg.model.guile.Guile;
+import ru.fivestarter.dichlofos.jrpg.model.honda.Honda;
 
 public class BattleScreen implements Screen {
 

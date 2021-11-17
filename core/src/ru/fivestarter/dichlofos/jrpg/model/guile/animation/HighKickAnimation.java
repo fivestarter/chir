@@ -1,4 +1,4 @@
-package ru.fivestarter.dichlofos.jrpg.animation;
+package ru.fivestarter.dichlofos.jrpg.model.guile.animation;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import ru.fivestarter.dichlofos.jrpg.animation.AnimationState;
+import ru.fivestarter.dichlofos.jrpg.animation.CharacterAnimation;
 
 public class HighKickAnimation extends CharacterAnimation {
     private static final float FRAME_DURATION = 0.15f;

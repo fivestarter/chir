@@ -1,9 +1,13 @@
-package ru.fivestarter.dichlofos.jrpg.model;
+package ru.fivestarter.dichlofos.jrpg.model.guile;
 
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.Array;
 import ru.fivestarter.dichlofos.jrpg.animation.*;
 import ru.fivestarter.dichlofos.jrpg.control.GuileController;
+import ru.fivestarter.dichlofos.jrpg.model.Character;
+import ru.fivestarter.dichlofos.jrpg.model.guile.animation.HighKickAnimation;
+import ru.fivestarter.dichlofos.jrpg.model.guile.animation.IdleAnimation;
+import ru.fivestarter.dichlofos.jrpg.model.guile.animation.PunchAnimation;
 
 import java.util.Arrays;
 import java.util.stream.Stream;

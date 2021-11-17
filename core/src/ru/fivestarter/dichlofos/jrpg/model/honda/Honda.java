@@ -1,4 +1,4 @@
-package ru.fivestarter.dichlofos.jrpg.model;
+package ru.fivestarter.dichlofos.jrpg.model.honda;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.*;
