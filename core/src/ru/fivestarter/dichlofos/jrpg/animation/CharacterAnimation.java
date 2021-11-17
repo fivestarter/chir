@@ -1,17 +1,14 @@
 package ru.fivestarter.dichlofos.jrpg.animation;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import ru.fivestarter.dichlofos.jrpg.model.Character;
 
 public abstract class CharacterAnimation {
-    protected Character character;
+    protected AnimationState animationState;
     protected float animationTime = 0f;
     protected final float unitScale;
 
-    protected CharacterAnimation(Character character, float unitScale) {
-        this.character = character;
+    protected CharacterAnimation(AnimationState animationState, float unitScale) {
+        this.animationState = animationState;
         this.unitScale = unitScale;
     }
 
@@ -20,19 +17,29 @@ public abstract class CharacterAnimation {
     abstract protected void reset();
 
     public void idle() {
+        if (isFinish()) {
+            resetState();
+            animationState.setIdleState();
+        }
+    }
 
+    public void highKick() {
+        if (isFinish()) {
+            resetState();
+            animationState.setHighKickState();
+        }
     }
 
     public void punch() {
-        resetState();
-        character.punch();
+        if (isFinish()) {
+            resetState();
+            animationState.setPunchState();
+        }
     }
 
-    public void walk() {
-
-    }
 
     private void resetState() {
+        animationTime = 0f;
         reset();
     }
 }

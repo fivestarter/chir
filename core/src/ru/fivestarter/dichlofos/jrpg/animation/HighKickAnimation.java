@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-import ru.fivestarter.dichlofos.jrpg.model.Character;
 
 public class HighKickAnimation extends CharacterAnimation {
     private static final float FRAME_DURATION = 0.15f;
@@ -15,8 +14,8 @@ public class HighKickAnimation extends CharacterAnimation {
 
     private float highKickDuration = 0.7f;
 
-    protected HighKickAnimation(Character character, TextureAtlas textureAtlas, float unitScale) {
-        super(character, unitScale);
+    public HighKickAnimation(AnimationState animationState, TextureAtlas textureAtlas, float unitScale) {
+        super(animationState, unitScale);
         this.animation = createHighKickAnimation(textureAtlas);
     }
 
@@ -27,6 +26,10 @@ public class HighKickAnimation extends CharacterAnimation {
         TextureRegion keyFrame = animation.getKeyFrame(animationTime);
         sprite.setRegion(keyFrame);
         sprite.setSize(keyFrame.getRegionWidth() * unitScale, keyFrame.getRegionHeight() * unitScale);
+
+        if (isFinish()) {
+            idle();
+        }
     }
 
     @Override

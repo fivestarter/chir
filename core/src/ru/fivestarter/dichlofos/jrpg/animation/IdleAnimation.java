@@ -16,8 +16,8 @@ public class IdleAnimation extends CharacterAnimation {
     public static final float IDLE_DURATION = 0.25f;
     private final Animation<TextureRegion> animation;
 
-    protected IdleAnimation(Character character, TextureAtlas textureAtlas, float unitScale) {
-        super(character, unitScale);
+    public IdleAnimation(AnimationState animationState, TextureAtlas textureAtlas, float unitScale) {
+        super(animationState, unitScale);
         this.animation = createIdleAnimation(textureAtlas);
     }
 
