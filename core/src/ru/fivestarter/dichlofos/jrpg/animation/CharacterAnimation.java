@@ -14,32 +14,30 @@ public abstract class CharacterAnimation {
 
     abstract public void animate(Sprite sprite);
     abstract protected boolean isFinish();
-    abstract protected void reset();
 
     public void idle() {
         if (isFinish()) {
-            resetState();
+            reset();
             animationState.setIdleState();
         }
     }
 
     public void highKick() {
         if (isFinish()) {
-            resetState();
+            reset();
             animationState.setHighKickState();
         }
     }
 
     public void punch() {
         if (isFinish()) {
-            resetState();
+            reset();
             animationState.setPunchState();
         }
     }
 
 
-    private void resetState() {
+    protected void reset() {
         animationTime = 0f;
-        reset();
     }
 }

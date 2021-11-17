@@ -22,9 +22,7 @@ public class Guile implements Character, AnimationState {
     private final PunchAnimation punchAnimation;
     private final HighKickAnimation highKickAnimation;
 
-
     private final Sprite sprite;
-
     private GuileController guileController;
 
     public Guile(TextureAtlas textureAtlas, int x, int y) {

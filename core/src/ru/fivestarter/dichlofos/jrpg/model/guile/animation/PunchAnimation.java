@@ -11,19 +11,17 @@ import ru.fivestarter.dichlofos.jrpg.animation.CharacterAnimation;
 
 public class PunchAnimation extends CharacterAnimation {
     private static final float FRAME_DURATION = 0.15f;
+    private static final float PUNCH_DURATION = FRAME_DURATION * 2;
 
     private final Animation<TextureRegion> animation;
 
-    private float punchDuration = FRAME_DURATION * 2;
-
     public PunchAnimation(AnimationState animationState, TextureAtlas textureAtlas, float unitScale) {
         super(animationState, unitScale);
-        this.animation = createPunchAnimation(textureAtlas);
+        this.animation = createAnimation(textureAtlas);
     }
 
     @Override
     public void animate(Sprite sprite) {
-        punchDuration -= Gdx.graphics.getDeltaTime();
         animationTime += Gdx.graphics.getDeltaTime();
         TextureRegion keyFrame = animation.getKeyFrame(animationTime);
         sprite.setRegion(keyFrame);
@@ -33,15 +31,10 @@ public class PunchAnimation extends CharacterAnimation {
 
     @Override
     protected boolean isFinish() {
-        return punchDuration <= 0;
+        return animationTime > PUNCH_DURATION;
     }
 
-    @Override
-    protected void reset() {
-        punchDuration = FRAME_DURATION * 2;
-    }
-
-    private Animation<TextureRegion> createPunchAnimation(TextureAtlas textureAtlas) {
+    private Animation<TextureRegion> createAnimation(TextureAtlas textureAtlas) {
         TextureAtlas.AtlasRegion punchRegion = textureAtlas.findRegion("guilePunch");
         TextureRegion[] punchFrames = new TextureRegion[3];
         punchFrames[0] = new TextureRegion(punchRegion, 0, 0, 56, punchRegion.getRegionHeight());

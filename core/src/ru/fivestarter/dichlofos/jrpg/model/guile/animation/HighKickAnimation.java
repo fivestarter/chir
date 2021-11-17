@@ -11,19 +11,17 @@ import ru.fivestarter.dichlofos.jrpg.animation.CharacterAnimation;
 
 public class HighKickAnimation extends CharacterAnimation {
     private static final float FRAME_DURATION = 0.15f;
+    private static final float HIGH_KICK_DURATION = 0.7f;
 
     private final Animation<TextureRegion> animation;
 
-    private float highKickDuration = 0.7f;
-
     public HighKickAnimation(AnimationState animationState, TextureAtlas textureAtlas, float unitScale) {
         super(animationState, unitScale);
-        this.animation = createHighKickAnimation(textureAtlas);
+        this.animation = createAnimation(textureAtlas);
     }
 
     @Override
     public void animate(Sprite sprite) {
-        highKickDuration -= Gdx.graphics.getDeltaTime();
         animationTime += Gdx.graphics.getDeltaTime();
         TextureRegion keyFrame = animation.getKeyFrame(animationTime);
         sprite.setRegion(keyFrame);
@@ -36,15 +34,10 @@ public class HighKickAnimation extends CharacterAnimation {
 
     @Override
     protected boolean isFinish() {
-        return highKickDuration <= 0;
+        return animationTime > HIGH_KICK_DURATION;
     }
 
-    @Override
-    protected void reset() {
-        highKickDuration = 0.7f;
-    }
-
-    private Animation<TextureRegion> createHighKickAnimation(TextureAtlas textureAtlas) {
+    private Animation<TextureRegion> createAnimation(TextureAtlas textureAtlas) {
         TextureAtlas.AtlasRegion highKickRegion = textureAtlas.findRegion("guileHighKick");
         TextureRegion[] punchFrames = new TextureRegion[5];
         punchFrames[0] = new TextureRegion(highKickRegion, 0, 0, 54, highKickRegion.getRegionHeight());
