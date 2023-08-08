@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 import java.util.stream.StreamSupport;
 
+import static ru.fivestarter.dichlofos.gta.model.Mercedes.SPRITE_NAME;
 import static ru.fivestarter.dichlofos.gta.view.WorldScreen.UNIT_SCALE;
 
 public class World {
@@ -19,7 +20,7 @@ public class World {
     public World(TextureAtlas textureAtlas, Runnable portalConsumer) {
         this.portalConsumer = portalConsumer;
         this.map = new TmxMapLoader().load("map/world.tmx");
-        this.car = new Mercedes(textureAtlas.findRegion("car"), this, 40, 49);
+        this.car = new Mercedes(textureAtlas.findRegion(SPRITE_NAME), this, 40, 49);
     }
 
     public boolean isBorderOverlapped(Rectangle rectangle) {
@@ -35,10 +36,10 @@ public class World {
     }
 
     private void unscaleCoordinates(Rectangle rectangle) {
-        rectangle.setX(rectangle.getX()/ UNIT_SCALE);
-        rectangle.setY(rectangle.getY()/ UNIT_SCALE);
-        rectangle.setWidth(rectangle.getWidth()/ UNIT_SCALE);
-        rectangle.setHeight(rectangle.getHeight()/ UNIT_SCALE);
+        rectangle.setX(rectangle.getX() / UNIT_SCALE);
+        rectangle.setY(rectangle.getY() / UNIT_SCALE);
+        rectangle.setWidth(rectangle.getWidth() / UNIT_SCALE);
+        rectangle.setHeight(rectangle.getHeight() / UNIT_SCALE);
     }
 
     public void draw(SpriteBatch batch) {
@@ -47,7 +48,7 @@ public class World {
     }
 
     private void handlePortal(Rectangle rectangle) {
-        if(isPortalOverlapped(rectangle)) {
+        if (isPortalOverlapped(rectangle)) {
             portalConsumer.run();
             dispose();
         }

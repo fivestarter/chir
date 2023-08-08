@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Polygon;
 
 public abstract class GameObject {
     protected Polygon bounds;
-    private Sprite object;
+    private final Sprite object;
 
     public GameObject(TextureRegion textureRegion, float x, float y, float with, float height) {
         object = new Sprite(textureRegion);

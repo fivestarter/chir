@@ -6,7 +6,7 @@ import ru.fivestarter.dichlofos.gta.control.CarController;
 
 public class Car extends GameObject {
 
-    private CarController carController;
+    private final CarController carController;
 
     public Car(TextureRegion textureRegion, World world, float x, float y, float with, float height) {
         super(textureRegion, x, y, with, height);

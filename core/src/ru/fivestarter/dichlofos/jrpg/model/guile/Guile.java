@@ -23,7 +23,7 @@ public class Guile implements Character, AnimationState {
     private final WalkAnimation walkAnimation;
 
     private final Sprite sprite;
-    private GuileController guileController;
+    private final GuileController guileController;
 
     public Guile(TextureAtlas textureAtlas, int x, int y, int border) {
         this.idleAnimation = new IdleAnimation(this, textureAtlas, UNIT_SCALE);
