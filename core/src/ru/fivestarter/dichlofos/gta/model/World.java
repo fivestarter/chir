@@ -13,6 +13,8 @@ import ru.fivestarter.dichlofos.gta.model.character.Car;
 import ru.fivestarter.dichlofos.gta.model.character.Mercedes;
 import ru.fivestarter.dichlofos.gta.model.map.TailSprite;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
@@ -22,11 +24,14 @@ import static ru.fivestarter.dichlofos.gta.view.WorldScreen.UNIT_SCALE;
 public class World {
     private final Car car;
     private final TiledMap map;
+    private final List<TiledMapTileLayer> zIndexLayers = new ArrayList<>();
     private final Runnable portalConsumer;
 
     public World(TextureAtlas textureAtlas, Runnable portalConsumer) {
         this.portalConsumer = portalConsumer;
         this.map = new TmxMapLoader().load("map/world.tmx");
+        this.zIndexLayers.add(((TiledMapTileLayer) map.getLayers().get("Layer z-index 1")));
+        this.zIndexLayers.add(((TiledMapTileLayer) map.getLayers().get("Layer z-index 2")));
         this.car = new Mercedes(textureAtlas.findRegion(SPRITE_NAME), this, 40, 49);
     }
 
@@ -56,19 +61,20 @@ public class World {
     }
 
     private void drawTopZIndexTileLayer(Batch batch) {
-        TiledMapTileLayer tiledMapTileLayer = ((TiledMapTileLayer) getMap().getLayers().get("Слой тайлов 1"));
-        for (int x = 0; x < tiledMapTileLayer.getWidth(); x++) {
-            for (int y = 0; y < tiledMapTileLayer.getHeight(); y++) {
-                int finalX = x;
-                int finalY = y;
-                Optional.ofNullable(tiledMapTileLayer.getCell(x, y))
-                        .ifPresent(cell -> {
-                            TextureRegion textureRegion = cell.getTile().getTextureRegion();
-                            Sprite sprite = new TailSprite(textureRegion, finalX, finalY);
-                            sprite.draw(batch);
-                        });
+        zIndexLayers.forEach(tiledMapTileLayer -> {
+            for (int x = 0; x < tiledMapTileLayer.getWidth(); x++) {
+                for (int y = 0; y < tiledMapTileLayer.getHeight(); y++) {
+                    int finalX = x;
+                    int finalY = y;
+                    Optional.ofNullable(tiledMapTileLayer.getCell(x, y))
+                            .ifPresent(cell -> {
+                                TextureRegion textureRegion = cell.getTile().getTextureRegion();
+                                Sprite sprite = new TailSprite(textureRegion, finalX, finalY);
+                                sprite.draw(batch);
+                            });
+                }
             }
-        }
+        });
     }
 
     private void handlePortal(Rectangle rectangle) {
