@@ -10,7 +10,7 @@ public class Car extends GameObject {
 
     public Car(TextureRegion textureRegion, World world, float x, float y, float with, float height) {
         super(textureRegion, x, y, with, height);
-        carController = new CarController(bounds, world);
+        carController = new CarController(getSprite(), world);
     }
 
     @Override

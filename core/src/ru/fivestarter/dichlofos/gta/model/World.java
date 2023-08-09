@@ -44,7 +44,7 @@ public class World {
 
     public void draw(SpriteBatch batch) {
         car.draw(batch);
-        handlePortal(car.getBounds().getBoundingRectangle());
+        handlePortal(car.getSprite().getBoundingRectangle());
     }
 
     private void handlePortal(Rectangle rectangle) {
@@ -59,11 +59,11 @@ public class World {
     }
 
     public float getCameraPositionX() {
-        return car.getBounds().getX();
+        return car.getSprite().getX();
     }
 
     public float getCameraPositionY() {
-        return car.getBounds().getY();
+        return car.getSprite().getY();
     }
 
     public void dispose() {

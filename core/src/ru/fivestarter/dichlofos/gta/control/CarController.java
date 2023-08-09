@@ -2,23 +2,21 @@ package ru.fivestarter.dichlofos.gta.control;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Polygon;
 import ru.fivestarter.dichlofos.gta.model.World;
 import ru.fivestarter.dichlofos.gta.view.WorldScreen;
 
 public class CarController {
 
-    private final Polygon carBounds;
+    private final Sprite carBounds;
     private final World world;
 
     float carSpeed;
     final float speedVelocity = 5f;
     final float speedMax = 20f;
 
-    final private float rotationSpeed = 30f;
-
-    public CarController(Polygon carBounds, World world) {
+    public CarController(Sprite carBounds, World world) {
         this.carBounds = carBounds;
         this.world = world;
     }
@@ -70,6 +68,7 @@ public class CarController {
     }
 
     private void handleRotation() {
+        float rotationSpeed = 30f;
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             carBounds.rotate(rotationSpeed * carSpeed * WorldScreen.DELTA_CFF);
         } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {

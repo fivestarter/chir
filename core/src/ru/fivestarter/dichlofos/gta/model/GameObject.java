@@ -3,30 +3,22 @@ package ru.fivestarter.dichlofos.gta.model;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Polygon;
 
 public abstract class GameObject {
-    protected Polygon bounds;
-    private final Sprite object;
+    protected final Sprite sprite;
 
     public GameObject(TextureRegion textureRegion, float x, float y, float with, float height) {
-        object = new Sprite(textureRegion);
-        object.setSize(with, height);
-        object.setOrigin(with / 2, height / 2);
-        object.setPosition(x, y);
-
-        bounds = new Polygon(new float[]{0, 0, with, 0, with, height, 0, height});
-        bounds.setPosition(x, y);
-        bounds.setOrigin(with / 2, height / 2);
+        sprite = new Sprite(textureRegion);
+        sprite.setSize(with, height);
+        sprite.setOrigin(with / 2, height / 2);
+        sprite.setPosition(x, y);
     }
 
     public void draw(SpriteBatch batch) {
-        object.setPosition(bounds.getX(), bounds.getY());
-        object.setRotation(bounds.getRotation());
-        object.draw(batch);
+        sprite.draw(batch);
     }
 
-    public Polygon getBounds() {
-        return bounds;
+    public Sprite getSprite() {
+        return sprite;
     }
 }
