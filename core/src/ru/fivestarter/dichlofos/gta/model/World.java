@@ -24,15 +24,36 @@ import static ru.fivestarter.dichlofos.gta.view.WorldScreen.UNIT_SCALE;
 public class World {
     private final Car car;
     private final TiledMap map;
-    private final List<TiledMapTileLayer> zIndexLayers = new ArrayList<>();
+    private final List<List<Sprite>> zIndexSpriteLayers = new ArrayList<>();
     private final Runnable portalConsumer;
 
     public World(TextureAtlas textureAtlas, Runnable portalConsumer) {
         this.portalConsumer = portalConsumer;
         this.map = new TmxMapLoader().load("map/world.tmx");
-        this.zIndexLayers.add(((TiledMapTileLayer) map.getLayers().get("Layer z-index 1")));
-        this.zIndexLayers.add(((TiledMapTileLayer) map.getLayers().get("Layer z-index 2")));
         this.car = new Mercedes(textureAtlas.findRegion(SPRITE_NAME), this, 40, 49);
+        initZIndexSpriteLayers(map);
+    }
+
+    private void initZIndexSpriteLayers(TiledMap map) {
+        zIndexSpriteLayers.add(getSprites(((TiledMapTileLayer) map.getLayers().get("Layer z-index 1"))));
+        zIndexSpriteLayers.add(getSprites(((TiledMapTileLayer) map.getLayers().get("Layer z-index 2"))));
+    }
+
+    private List<Sprite> getSprites(TiledMapTileLayer tiledMapTileLayer) {
+        List<Sprite> sprites = new ArrayList<>();
+        for (int x = 0; x < tiledMapTileLayer.getWidth(); x++) {
+            for (int y = 0; y < tiledMapTileLayer.getHeight(); y++) {
+                int finalX = x;
+                int finalY = y;
+                Optional.ofNullable(tiledMapTileLayer.getCell(x, y))
+                        .ifPresent(cell -> {
+                            TextureRegion textureRegion = cell.getTile().getTextureRegion();
+                            Sprite sprite = new TailSprite(textureRegion, finalX, finalY);
+                            sprites.add(sprite);
+                        });
+            }
+        }
+        return sprites;
     }
 
     public boolean isBorderOverlapped(Rectangle rectangle) {
@@ -61,21 +82,11 @@ public class World {
     }
 
     private void drawTopZIndexTileLayer(Batch batch) {
-        zIndexLayers.forEach(tiledMapTileLayer -> {
-            for (int x = 0; x < tiledMapTileLayer.getWidth(); x++) {
-                for (int y = 0; y < tiledMapTileLayer.getHeight(); y++) {
-                    int finalX = x;
-                    int finalY = y;
-                    Optional.ofNullable(tiledMapTileLayer.getCell(x, y))
-                            .ifPresent(cell -> {
-                                TextureRegion textureRegion = cell.getTile().getTextureRegion();
-                                Sprite sprite = new TailSprite(textureRegion, finalX, finalY);
-                                sprite.draw(batch);
-                            });
-                }
-            }
-        });
+        zIndexSpriteLayers.stream()
+                .flatMap(List::stream)
+                .forEach(sprite -> sprite.draw(batch));
     }
+
 
     private void handlePortal(Rectangle rectangle) {
         if (isPortalOverlapped(rectangle)) {
