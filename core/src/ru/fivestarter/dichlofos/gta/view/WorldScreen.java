@@ -7,29 +7,30 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import ru.fivestarter.dichlofos.DichlofosGame;
+import ru.fivestarter.dichlofos.ScreenChanger;
 import ru.fivestarter.dichlofos.gta.model.World;
 
 public class WorldScreen implements Screen {
     public static float DELTA_CFF;
     public static final float UNIT_SCALE = 1f / 16f;
 
-    private final DichlofosGame game;
+    private final ScreenChanger screenChanger;
 
-    private TextureAtlas textureAtlas;
+    private final TextureAtlas textureAtlas;
     private SpriteBatch batch;
     private World world;
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer renderer;
 
-    public WorldScreen(DichlofosGame game) {
-        this.game = game;
+    public WorldScreen(ScreenChanger screenChanger, TextureAtlas textureAtlas) {
+        this.screenChanger = screenChanger;
+        this.textureAtlas = textureAtlas;
     }
 
     @Override
     public void show() {
         batch = new SpriteBatch();
-        world = new World(textureAtlas, game::changeOnBattleScreen);
+        world = new World(textureAtlas, screenChanger::changeOnBattleScreen);
         renderer = new OrthogonalTiledMapRenderer(world.getMap(), UNIT_SCALE);
     }
 
@@ -84,9 +85,5 @@ public class WorldScreen implements Screen {
         batch.dispose();
         world.dispose();
         renderer.dispose();
-    }
-
-    public void setTextureAtlas(TextureAtlas textureAtlas) {
-        this.textureAtlas = textureAtlas;
     }
 }

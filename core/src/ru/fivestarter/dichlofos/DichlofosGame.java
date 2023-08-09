@@ -7,7 +7,7 @@ import ru.fivestarter.dichlofos.gta.view.WorldScreen;
 import ru.fivestarter.dichlofos.jrpg.view.BattleScreen;
 import ru.fivestarter.dichlofos.utils.Assets;
 
-public class DichlofosGame extends Game {
+public class DichlofosGame extends Game implements ScreenChanger {
 
     private Screen gameScreen;
     private Assets assets;
@@ -15,8 +15,7 @@ public class DichlofosGame extends Game {
     @Override
     public void create() {
         assets = new Assets();
-        gameScreen = new WorldScreen(this);
-        ((WorldScreen) gameScreen).setTextureAtlas(getTextureAtlas());
+        gameScreen = new WorldScreen(this, getTextureAtlas());
         setScreen(gameScreen);
         //setScreen(new BattleScreen(getTextureAtlas()));
     }
@@ -32,6 +31,7 @@ public class DichlofosGame extends Game {
         return assets.getManager().get("atlas1.atlas", TextureAtlas.class);
     }
 
+    @Override
     public void changeOnBattleScreen() {
         setScreen(new BattleScreen(getTextureAtlas()));
     }
