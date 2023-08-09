@@ -32,7 +32,7 @@ public class WorldScreen implements Screen {
     public void show() {
         batch = new SpriteBatch();
         world = new World(textureAtlas, screenChanger::changeOnBattleScreen);
-        renderer = new OrthogonalTiledMapRenderer(world.getMap(), UNIT_SCALE);
+        renderer = new OrthogonalTiledMapRenderer(world.getTiledMap(), UNIT_SCALE);
     }
 
     @Override

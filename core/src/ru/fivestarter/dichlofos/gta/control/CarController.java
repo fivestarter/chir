@@ -33,7 +33,7 @@ public class CarController {
         float x = car.getX() + MathUtils.cosDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF;
         float y = car.getY() + MathUtils.sinDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF;
         car.setPosition(x, y);
-        if (world.isBorderOverlapped(car.getBoundingRectangle())) {
+        if (world.isObstacle(car.getBoundingRectangle())) {
             car.setPosition(previousX - MathUtils.cosDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF,
                     previousY - MathUtils.sinDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF);
             carSpeed /= -3;
