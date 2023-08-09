@@ -9,15 +9,15 @@ import ru.fivestarter.dichlofos.gta.view.WorldScreen;
 
 public class CarController {
 
-    private final Sprite carBounds;
+    private final Sprite car;
     private final World world;
 
     float carSpeed;
     final float speedVelocity = 5f;
     final float speedMax = 20f;
 
-    public CarController(Sprite carBounds, World world) {
-        this.carBounds = carBounds;
+    public CarController(Sprite car, World world) {
+        this.car = car;
         this.world = world;
     }
 
@@ -28,14 +28,14 @@ public class CarController {
     }
 
     private void handlePosition() {
-        float previousX = carBounds.getX();
-        float previousY = carBounds.getY();
-        float x = carBounds.getX() + MathUtils.cosDeg(carBounds.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF;
-        float y = carBounds.getY() + MathUtils.sinDeg(carBounds.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF;
-        carBounds.setPosition(x, y);
-        if (world.isBorderOverlapped(carBounds.getBoundingRectangle())) {
-            carBounds.setPosition(previousX - MathUtils.cosDeg(carBounds.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF,
-                    previousY - MathUtils.sinDeg(carBounds.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF);
+        float previousX = car.getX();
+        float previousY = car.getY();
+        float x = car.getX() + MathUtils.cosDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF;
+        float y = car.getY() + MathUtils.sinDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF;
+        car.setPosition(x, y);
+        if (world.isBorderOverlapped(car.getBoundingRectangle())) {
+            car.setPosition(previousX - MathUtils.cosDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF,
+                    previousY - MathUtils.sinDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF);
             carSpeed /= -3;
         }
     }
@@ -70,9 +70,9 @@ public class CarController {
     private void handleRotation() {
         float rotationSpeed = 30f;
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            carBounds.rotate(rotationSpeed * carSpeed * WorldScreen.DELTA_CFF);
+            car.rotate(rotationSpeed * carSpeed * WorldScreen.DELTA_CFF);
         } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            carBounds.rotate(-rotationSpeed * carSpeed * WorldScreen.DELTA_CFF);
+            car.rotate(-rotationSpeed * carSpeed * WorldScreen.DELTA_CFF);
         }
     }
 }
