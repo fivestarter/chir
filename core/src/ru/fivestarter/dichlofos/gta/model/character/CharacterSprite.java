@@ -1,10 +1,10 @@
-package ru.fivestarter.dichlofos.gta.model;
+package ru.fivestarter.dichlofos.gta.model.character;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class CentralSprite extends Sprite {
-    public CentralSprite(TextureRegion textureRegion, float x, float y, float with, float height) {
+public class CharacterSprite extends Sprite {
+    public CharacterSprite(TextureRegion textureRegion, float x, float y, float with, float height) {
         super(textureRegion);
         setSize(with, height);
         setOrigin(with / 2, height / 2);

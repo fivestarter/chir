@@ -1,15 +1,22 @@
 package ru.fivestarter.dichlofos.gta.model;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
+import ru.fivestarter.dichlofos.gta.model.character.Car;
+import ru.fivestarter.dichlofos.gta.model.character.Mercedes;
+import ru.fivestarter.dichlofos.gta.model.map.TailSprite;
 
+import java.util.Optional;
 import java.util.stream.StreamSupport;
 
-import static ru.fivestarter.dichlofos.gta.model.Mercedes.SPRITE_NAME;
+import static ru.fivestarter.dichlofos.gta.model.character.Mercedes.SPRITE_NAME;
 import static ru.fivestarter.dichlofos.gta.view.WorldScreen.UNIT_SCALE;
 
 public class World {
@@ -42,9 +49,26 @@ public class World {
         rectangle.setHeight(rectangle.getHeight() / UNIT_SCALE);
     }
 
-    public void draw(SpriteBatch batch) {
+    public void draw(Batch batch) {
         car.draw(batch);
+        drawTopZIndexTileLayer(batch);
         handlePortal(car.getBoundingRectangle());
+    }
+
+    private void drawTopZIndexTileLayer(Batch batch) {
+        TiledMapTileLayer tiledMapTileLayer = ((TiledMapTileLayer) getMap().getLayers().get("Слой тайлов 1"));
+        for (int x = 0; x < tiledMapTileLayer.getWidth(); x++) {
+            for (int y = 0; y < tiledMapTileLayer.getHeight(); y++) {
+                int finalX = x;
+                int finalY = y;
+                Optional.ofNullable(tiledMapTileLayer.getCell(x, y))
+                        .ifPresent(cell -> {
+                            TextureRegion textureRegion = cell.getTile().getTextureRegion();
+                            Sprite sprite = new TailSprite(textureRegion, finalX, finalY);
+                            sprite.draw(batch);
+                        });
+            }
+        }
     }
 
     private void handlePortal(Rectangle rectangle) {

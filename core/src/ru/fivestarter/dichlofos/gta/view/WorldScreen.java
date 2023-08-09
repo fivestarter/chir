@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -17,7 +18,7 @@ public class WorldScreen implements Screen {
     private final ScreenChanger screenChanger;
 
     private final TextureAtlas textureAtlas;
-    private SpriteBatch batch;
+    private Batch batch;
     private World world;
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer renderer;

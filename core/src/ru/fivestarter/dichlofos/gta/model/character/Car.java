@@ -1,10 +1,11 @@
-package ru.fivestarter.dichlofos.gta.model;
+package ru.fivestarter.dichlofos.gta.model.character;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import ru.fivestarter.dichlofos.gta.control.CarController;
+import ru.fivestarter.dichlofos.gta.model.World;
 
-public class Car extends CentralSprite {
+public class Car extends CharacterSprite {
 
     private final CarController carController;
 

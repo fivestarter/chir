@@ -1,6 +1,7 @@
-package ru.fivestarter.dichlofos.gta.model;
+package ru.fivestarter.dichlofos.gta.model.character;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import ru.fivestarter.dichlofos.gta.model.World;
 
 import static ru.fivestarter.dichlofos.gta.view.WorldScreen.UNIT_SCALE;
 
