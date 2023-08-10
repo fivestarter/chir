@@ -3,29 +3,40 @@ package ru.fivestarter.dichlofos.gta.model.map;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
+import org.apache.commons.lang3.StringUtils;
 import ru.fivestarter.dichlofos.utils.IntersectorUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.StreamSupport;
 
 import static ru.fivestarter.dichlofos.gta.view.WorldScreen.UNIT_SCALE;
 
 public class Map {
+    private static final String Z_INDEX_LAYER_PREFIX = "Layer z-index";
+    public static final String PORTAL_LAYER = "Порталы";
+    public static final String OBJECT_LAYER_1 = "Слой объектов 1";
+    public static final String WORLD_MAP_FILE_NAME = "map/world.tmx";
     private final TiledMap tiledMap;
-    private final List<List<Sprite>> zIndexSpriteLayers = new ArrayList<>();
+    private final List<List<Sprite>> zIndexSpriteLayers;
 
     public Map() {
-        this.tiledMap = new TmxMapLoader().load("map/world.tmx");
-        zIndexSpriteLayers.add(getSprites(((TiledMapTileLayer) tiledMap.getLayers().get("Layer z-index 1"))));
-        zIndexSpriteLayers.add(getSprites(((TiledMapTileLayer) tiledMap.getLayers().get("Layer z-index 2"))));
+        this.tiledMap = new TmxMapLoader().load(WORLD_MAP_FILE_NAME);
+        zIndexSpriteLayers = getSpritesFromZIndexedLayers(tiledMap);
+    }
+
+    private List<List<Sprite>> getSpritesFromZIndexedLayers(TiledMap tiledMap) {
+        return Arrays.stream(tiledMap.getLayers().getByType(TiledMapTileLayer.class).toArray(TiledMapTileLayer.class))
+                .filter(layer -> StringUtils.startsWith(layer.getName(), Z_INDEX_LAYER_PREFIX))
+                .sorted(Comparator.comparing(MapLayer::getName))
+                .map(this::getSprites)
+                .toList();
     }
 
     private List<Sprite> getSprites(TiledMapTileLayer tiledMapTileLayer) {
@@ -52,7 +63,7 @@ public class Map {
     }
 
     public boolean isBorderOverlapped(Polygon polygon) {
-        return StreamSupport.stream(tiledMap.getLayers().get("Слой объектов 1").getObjects().spliterator(), true)
+        return StreamSupport.stream(tiledMap.getLayers().get(OBJECT_LAYER_1).getObjects().spliterator(), true)
                 .anyMatch(mapObject -> {
                     Rectangle borederRectangle = ((RectangleMapObject) mapObject).getRectangle();
                     return IntersectorUtil.overlapConvexPolygons(polygon, borederRectangle);
@@ -61,7 +72,7 @@ public class Map {
 
     public boolean isPortalOverlapped(Rectangle rectangle) {
         unscaleCoordinates(rectangle);
-        return StreamSupport.stream(tiledMap.getLayers().get("Порталы").getObjects().spliterator(), true)
+        return StreamSupport.stream(tiledMap.getLayers().get(PORTAL_LAYER).getObjects().spliterator(), true)
                 .anyMatch(mapObject -> ((RectangleMapObject) mapObject).getRectangle().overlaps(rectangle));
     }
 

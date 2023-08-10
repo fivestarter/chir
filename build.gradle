@@ -57,6 +57,7 @@ project(":core") {
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "org.apache.commons:commons-lang3:3.13.0"
 
     }
 }
