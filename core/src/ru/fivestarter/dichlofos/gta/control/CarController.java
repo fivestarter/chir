@@ -2,21 +2,21 @@ package ru.fivestarter.dichlofos.gta.control;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import ru.fivestarter.dichlofos.gta.model.World;
+import ru.fivestarter.dichlofos.gta.model.character.Car;
 import ru.fivestarter.dichlofos.gta.view.WorldScreen;
 
 public class CarController {
 
-    private final Sprite car;
+    private final Car car;
     private final World world;
 
     float carSpeed;
     final float speedVelocity = 5f;
     final float speedMax = 20f;
 
-    public CarController(Sprite car, World world) {
+    public CarController(Car car, World world) {
         this.car = car;
         this.world = world;
     }
@@ -33,7 +33,7 @@ public class CarController {
         float x = car.getX() + MathUtils.cosDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF;
         float y = car.getY() + MathUtils.sinDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF;
         car.setPosition(x, y);
-        if (world.isObstacle(car.getBoundingRectangle())) {
+        if (world.isObstacle(car.getPolygon())) {
             car.setPosition(previousX - MathUtils.cosDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF,
                     previousY - MathUtils.sinDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF);
             carSpeed /= -3;

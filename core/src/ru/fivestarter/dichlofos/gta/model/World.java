@@ -3,6 +3,7 @@ package ru.fivestarter.dichlofos.gta.model;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import ru.fivestarter.dichlofos.gta.model.character.Car;
 import ru.fivestarter.dichlofos.gta.model.character.Mercedes;
@@ -21,8 +22,8 @@ public class World {
         this.portalConsumer = portalConsumer;
     }
 
-    public boolean isObstacle(Rectangle rectangle) {
-        return map.isBorderOverlapped(rectangle);
+    public boolean isObstacle(Polygon polygon) {
+        return map.isBorderOverlapped(polygon);
     }
 
     public void draw(Batch batch) {
