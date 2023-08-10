@@ -7,7 +7,9 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
+import ru.fivestarter.dichlofos.utils.IntersectorUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +51,12 @@ public class Map {
                 .forEach(sprite -> sprite.draw(batch));
     }
 
-    public boolean isBorderOverlapped(Rectangle rectangle) {
-        unscaleCoordinates(rectangle);
+    public boolean isBorderOverlapped(Polygon polygon) {
         return StreamSupport.stream(tiledMap.getLayers().get("Слой объектов 1").getObjects().spliterator(), true)
-                .anyMatch(mapObject -> ((RectangleMapObject) mapObject).getRectangle().overlaps(rectangle));
+                .anyMatch(mapObject -> {
+                    Rectangle borederRectangle = ((RectangleMapObject) mapObject).getRectangle();
+                    return IntersectorUtil.overlapConvexPolygons(polygon, borederRectangle);
+                });
     }
 
     public boolean isPortalOverlapped(Rectangle rectangle) {
