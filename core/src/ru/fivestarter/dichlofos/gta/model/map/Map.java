@@ -22,6 +22,7 @@ import static ru.fivestarter.dichlofos.gta.view.WorldScreen.UNIT_SCALE;
 public class Map {
     private static final String Z_INDEX_LAYER_PREFIX = "Layer z-index";
     public static final String PORTAL_LAYER = "Порталы";
+    public static final String GARAGE_LAYER = "Гараж";
     public static final String OBJECT_LAYER_1 = "Слой объектов 1";
     public static final String WORLD_MAP_FILE_NAME = "map/world.tmx";
     private final TiledMap tiledMap;
@@ -99,5 +100,11 @@ public class Map {
 
     public void dispose() {
         tiledMap.dispose();
+    }
+
+    public boolean isGarageOverlapped(Rectangle rectangle) {
+        unscaleCoordinates(rectangle);
+        return StreamSupport.stream(tiledMap.getLayers().get(GARAGE_LAYER).getObjects().spliterator(), true)
+                .anyMatch(mapObject -> ((RectangleMapObject) mapObject).getRectangle().overlaps(rectangle));
     }
 }
