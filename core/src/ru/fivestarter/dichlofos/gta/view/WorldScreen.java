@@ -22,6 +22,8 @@ public class WorldScreen implements Screen {
     private World world;
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer renderer;
+    private int viewportWidth = 10;
+    private int viewportHeight = 6;
 
     public WorldScreen(ScreenChanger screenChanger, AssetManager assetManager) {
         this.screenChanger = screenChanger;
@@ -31,7 +33,7 @@ public class WorldScreen implements Screen {
     @Override
     public void show() {
         batch = new SpriteBatch();
-        world = new World(assetManager, screenChanger::changeOnBattleScreen);
+        world = new World(assetManager, screenChanger::changeOnBattleScreen, this);
         renderer = new OrthogonalTiledMapRenderer(world.getTiledMap(), UNIT_SCALE);
     }
 
@@ -70,7 +72,13 @@ public class WorldScreen implements Screen {
     public void resize(int width, int height) {
         float aspectRatio = (float) height / width;
         camera = new OrthographicCamera(20f, 20f * aspectRatio);
-        camera.setToOrtho(false, 10, 6);
+        camera.setToOrtho(false, viewportWidth, viewportHeight);
+    }
+
+    public void setBigCamera() {
+        viewportWidth = 40;
+        viewportHeight = 24;
+        camera.setToOrtho(false, viewportWidth, viewportHeight);
     }
 
     @Override
