@@ -4,11 +4,12 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Assets {
-    private AssetManager manager;
+    public static final String COMMON_ATLAS_FILE_NAME = "atlas/common/atlas1.atlas";
+    private final AssetManager manager;
 
     public Assets() {
         this.manager = new AssetManager();
-        manager.load("atlas1.atlas", TextureAtlas.class);
+        manager.load(COMMON_ATLAS_FILE_NAME, TextureAtlas.class);
         manager.finishLoading();
     }
 
