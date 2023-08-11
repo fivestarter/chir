@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
-import ru.fivestarter.dichlofos.gta.model.character.Mercedes;
+import ru.fivestarter.dichlofos.gta.model.character.car.Mercedes;
 import ru.fivestarter.dichlofos.gta.model.map.Map;
 
-import static ru.fivestarter.dichlofos.gta.model.character.Mercedes.SPRITE_NAME;
+import static ru.fivestarter.dichlofos.gta.model.character.car.Mercedes.SPRITE_NAME;
 
 public class World {
     private final Map map;

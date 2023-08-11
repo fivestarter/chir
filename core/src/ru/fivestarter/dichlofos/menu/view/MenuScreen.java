@@ -26,7 +26,7 @@ public class MenuScreen implements Screen {
         batch = new SpriteBatch();
 
         textFont = new BitmapFont();
-        textFont.setColor(Color.CORAL); //Красный
+        textFont.setColor(Color.CORAL);
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.MathUtils;
 import ru.fivestarter.dichlofos.gta.model.World;
-import ru.fivestarter.dichlofos.gta.model.character.Car;
+import ru.fivestarter.dichlofos.gta.model.character.car.Car;
 import ru.fivestarter.dichlofos.gta.view.WorldScreen;
 
 public class CarController {

@@ -1,10 +1,11 @@
-package ru.fivestarter.dichlofos.gta.model.character;
+package ru.fivestarter.dichlofos.gta.model.character.car;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Polygon;
 import ru.fivestarter.dichlofos.gta.control.CarController;
 import ru.fivestarter.dichlofos.gta.model.World;
+import ru.fivestarter.dichlofos.gta.model.character.CharacterSprite;
 
 import static com.badlogic.gdx.graphics.g2d.Batch.*;
 import static ru.fivestarter.dichlofos.gta.view.WorldScreen.UNIT_SCALE;

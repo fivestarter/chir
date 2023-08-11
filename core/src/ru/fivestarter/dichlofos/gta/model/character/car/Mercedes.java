@@ -1,4 +1,4 @@
-package ru.fivestarter.dichlofos.gta.model.character;
+package ru.fivestarter.dichlofos.gta.model.character.car;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import ru.fivestarter.dichlofos.gta.model.World;
