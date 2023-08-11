@@ -1,11 +1,11 @@
 package ru.fivestarter.dichlofos.gta.model;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
-import ru.fivestarter.dichlofos.gta.model.character.Car;
 import ru.fivestarter.dichlofos.gta.model.character.Mercedes;
 import ru.fivestarter.dichlofos.gta.model.map.Map;
 
@@ -13,12 +13,12 @@ import static ru.fivestarter.dichlofos.gta.model.character.Mercedes.SPRITE_NAME;
 
 public class World {
     private final Map map;
-    private final Car car;
+    private final Sprite mainHero;
     private final Runnable portalConsumer;
 
     public World(TextureAtlas textureAtlas, Runnable portalConsumer) {
         this.map = new Map();
-        this.car = new Mercedes(textureAtlas.findRegion(SPRITE_NAME), this, 40, 49);
+        this.mainHero = new Mercedes(textureAtlas.findRegion(SPRITE_NAME), this, 40, 49);
         this.portalConsumer = portalConsumer;
     }
 
@@ -27,9 +27,9 @@ public class World {
     }
 
     public void draw(Batch batch) {
-        car.draw(batch);
+        mainHero.draw(batch);
         map.drawTopZIndexTileLayer(batch);
-        handlePortal(car.getBoundingRectangle());
+        handlePortal(mainHero.getBoundingRectangle());
     }
 
     private void handlePortal(Rectangle rectangle) {
@@ -44,11 +44,11 @@ public class World {
     }
 
     public float getCameraPositionX() {
-        return car.getX();
+        return mainHero.getX();
     }
 
     public float getCameraPositionY() {
-        return car.getY();
+        return mainHero.getY();
     }
 
     public void dispose() {
