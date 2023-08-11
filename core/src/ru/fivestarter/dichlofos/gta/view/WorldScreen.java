@@ -2,11 +2,11 @@ package ru.fivestarter.dichlofos.gta.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import ru.fivestarter.dichlofos.ScreenChanger;
 import ru.fivestarter.dichlofos.gta.model.World;
@@ -17,21 +17,21 @@ public class WorldScreen implements Screen {
 
     private final ScreenChanger screenChanger;
 
-    private final TextureAtlas textureAtlas;
+    private final AssetManager assetManager;
     private Batch batch;
     private World world;
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer renderer;
 
-    public WorldScreen(ScreenChanger screenChanger, TextureAtlas textureAtlas) {
+    public WorldScreen(ScreenChanger screenChanger, AssetManager assetManager) {
         this.screenChanger = screenChanger;
-        this.textureAtlas = textureAtlas;
+        this.assetManager = assetManager;
     }
 
     @Override
     public void show() {
         batch = new SpriteBatch();
-        world = new World(textureAtlas, screenChanger::changeOnBattleScreen);
+        world = new World(assetManager, screenChanger::changeOnBattleScreen);
         renderer = new OrthogonalTiledMapRenderer(world.getTiledMap(), UNIT_SCALE);
     }
 
@@ -59,11 +59,18 @@ public class WorldScreen implements Screen {
         renderer.render();
     }
 
-    @Override
+/*    @Override
     public void resize(int width, int height) {
         float aspectRatio = (float) height / width;
         camera = new OrthographicCamera(20f, 20f * aspectRatio);
         camera.setToOrtho(false, 40, 24);
+    }*/
+
+    @Override
+    public void resize(int width, int height) {
+        float aspectRatio = (float) height / width;
+        camera = new OrthographicCamera(20f, 20f * aspectRatio);
+        camera.setToOrtho(false, 10, 6);
     }
 
     @Override

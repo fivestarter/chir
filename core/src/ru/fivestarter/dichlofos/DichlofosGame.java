@@ -39,7 +39,7 @@ public class DichlofosGame extends Game implements ScreenChanger {
 
     @Override
     public void changeOnWorldScreen() {
-        gameScreen = new WorldScreen(this, getTextureAtlas());
+        gameScreen = new WorldScreen(this, assets.getManager());
         setScreen(gameScreen);
     }
 }

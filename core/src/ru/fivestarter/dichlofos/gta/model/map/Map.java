@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import org.apache.commons.lang3.StringUtils;
@@ -67,6 +68,15 @@ public class Map {
                 .anyMatch(mapObject -> {
                     Rectangle borederRectangle = ((RectangleMapObject) mapObject).getRectangle();
                     return IntersectorUtil.overlapConvexPolygons(polygon, borederRectangle);
+                });
+    }
+
+    public boolean isBorderOverlapped(Rectangle rectangle) {
+        unscaleCoordinates(rectangle);
+        return StreamSupport.stream(tiledMap.getLayers().get(OBJECT_LAYER_1).getObjects().spliterator(), true)
+                .anyMatch(mapObject -> {
+                    Rectangle borederRectangle = ((RectangleMapObject) mapObject).getRectangle();
+                    return Intersector.overlaps(rectangle, borederRectangle);
                 });
     }
 

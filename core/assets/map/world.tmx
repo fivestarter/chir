@@ -6,7 +6,7 @@
  </objectgroup>
  <objectgroup id="3" name="Слой объектов 1" locked="1">
   <object id="1" x="254.77" y="1.1029" width="639.682" height="188.596"/>
-  <object id="2" x="255.873" y="290.614" width="639.682" height="252.564"/>
+  <object id="2" x="255.873" y="284.452" width="639.682" height="258.726"/>
   <object id="3" x="255.873" y="609.353" width="639.682" height="188.596"/>
   <object id="4" x="513.952" y="833.241" width="380.5" height="158.818"/>
   <object id="5" x="0" y="-1.1029" width="159.921" height="191.905"/>
