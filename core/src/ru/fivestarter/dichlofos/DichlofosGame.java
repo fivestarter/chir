@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import ru.fivestarter.dichlofos.gta.view.WorldScreen;
 import ru.fivestarter.dichlofos.jrpg.view.BattleScreen;
+import ru.fivestarter.dichlofos.menu.view.MenuScreen;
 import ru.fivestarter.dichlofos.utils.Assets;
 
 public class DichlofosGame extends Game implements ScreenChanger {
@@ -15,9 +16,7 @@ public class DichlofosGame extends Game implements ScreenChanger {
     @Override
     public void create() {
         assets = new Assets();
-        gameScreen = new WorldScreen(this, getTextureAtlas());
-        setScreen(gameScreen);
-        //setScreen(new BattleScreen(getTextureAtlas()));
+        setScreen(new MenuScreen(this));
     }
 
     @Override
@@ -34,5 +33,11 @@ public class DichlofosGame extends Game implements ScreenChanger {
     @Override
     public void changeOnBattleScreen() {
         setScreen(new BattleScreen(getTextureAtlas()));
+    }
+
+    @Override
+    public void changeOnWorldScreen() {
+        gameScreen = new WorldScreen(this, getTextureAtlas());
+        setScreen(gameScreen);
     }
 }
