@@ -3,8 +3,8 @@ package ru.fivestarter.dichlofos;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import ru.fivestarter.dichlofos.gta.view.WorldScreen;
-import ru.fivestarter.dichlofos.jrpg.view.BattleScreen;
+import ru.fivestarter.dichlofos.game.gta.view.WorldScreen;
+import ru.fivestarter.dichlofos.game.jrpg.view.BattleScreen;
 import ru.fivestarter.dichlofos.menu.view.MenuScreen;
 import ru.fivestarter.dichlofos.utils.Assets;
 
