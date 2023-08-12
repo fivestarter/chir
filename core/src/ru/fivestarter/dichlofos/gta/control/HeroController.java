@@ -54,13 +54,13 @@ public class HeroController {
     }
 
     private void handleObstacleByX(float previousX) {
-        if (world.isObstacle(hero.getPolygon())) {
+        if (world.isObstacle(hero.getFootRectangle())) {
             hero.setX(previousX);
         }
     }
 
     private void handleObstacleByY(float previousY) {
-        if (world.isObstacle(hero.getPolygon())) {
+        if (world.isObstacle(hero.getFootRectangle())) {
             hero.setY(previousY);
         }
     }
