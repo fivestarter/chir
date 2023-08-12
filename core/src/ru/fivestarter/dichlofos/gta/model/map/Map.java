@@ -1,7 +1,6 @@
 package ru.fivestarter.dichlofos.gta.model.map;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -21,28 +20,40 @@ import static ru.fivestarter.dichlofos.gta.view.WorldScreen.UNIT_SCALE;
 
 public class Map {
     private static final String Z_INDEX_LAYER_PREFIX = "Layer z-index";
+    private static final String Z_INDEX_LAYER_MONOLITH_SUFFIX = "monolith";
     public static final String PORTAL_LAYER = "Порталы";
     public static final String GARAGE_LAYER = "Гараж";
     public static final String OBJECT_LAYER_1 = "Слой объектов 1";
     public static final String WORLD_MAP_FILE_NAME = "map/world.tmx";
     private final TiledMap tiledMap;
-    private final List<List<Sprite>> zIndexSpriteLayers;
+    private final List<List<TailSprite>> zIndexSpriteLayers;
 
     public Map() {
         this.tiledMap = new TmxMapLoader().load(WORLD_MAP_FILE_NAME);
         zIndexSpriteLayers = getSpritesFromZIndexedLayers(tiledMap);
     }
 
-    private List<List<Sprite>> getSpritesFromZIndexedLayers(TiledMap tiledMap) {
+    private List<List<TailSprite>> getSpritesFromZIndexedLayers(TiledMap tiledMap) {
         return Arrays.stream(tiledMap.getLayers().getByType(TiledMapTileLayer.class).toArray(TiledMapTileLayer.class))
                 .filter(layer -> StringUtils.startsWith(layer.getName(), Z_INDEX_LAYER_PREFIX))
                 .sorted(Comparator.comparing(MapLayer::getName))
-                .map(this::getSprites)
+                .map(this::getGroupedSprites)
                 .toList();
     }
 
-    private List<Sprite> getSprites(TiledMapTileLayer tiledMapTileLayer) {
-        List<Sprite> sprites = new ArrayList<>();
+    private List<TailSprite> getGroupedSprites(TiledMapTileLayer tiledMapTileLayer) {
+        List<TailSprite> sprites = getSprites(tiledMapTileLayer);
+        if (StringUtils.endsWith(tiledMapTileLayer.getName(), Z_INDEX_LAYER_MONOLITH_SUFFIX)) {
+            sprites.stream()
+                    .min(Comparator.comparing(TailSprite::getY))
+                    .map(TailSprite::getY)
+                    .ifPresent(minY -> sprites.forEach(tailSprite -> tailSprite.setMinY(minY)));
+        }
+        return sprites;
+    }
+
+    private List<TailSprite> getSprites(TiledMapTileLayer tiledMapTileLayer) {
+        List<TailSprite> sprites = new ArrayList<>();
         for (int x = 0; x < tiledMapTileLayer.getWidth(); x++) {
             for (int y = 0; y < tiledMapTileLayer.getHeight(); y++) {
                 int finalX = x;
@@ -50,7 +61,7 @@ public class Map {
                 Optional.ofNullable(tiledMapTileLayer.getCell(x, y))
                         .ifPresent(cell -> {
                             TextureRegion textureRegion = cell.getTile().getTextureRegion();
-                            Sprite sprite = new TailSprite(textureRegion, finalX, finalY);
+                            TailSprite sprite = new TailSprite(textureRegion, finalX, finalY);
                             sprites.add(sprite);
                         });
             }
@@ -61,7 +72,7 @@ public class Map {
     public void drawTopZIndexTileLayer(Batch batch, float heroY) {
         zIndexSpriteLayers.stream()
                 .flatMap(List::stream)
-                .filter(sprite -> sprite.getY() < heroY)
+                .filter(sprite -> sprite.getMinY() < heroY)
                 .forEach(sprite -> sprite.draw(batch));
     }
 
