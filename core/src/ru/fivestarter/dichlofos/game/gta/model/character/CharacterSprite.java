@@ -8,11 +8,16 @@ import static com.badlogic.gdx.graphics.g2d.Batch.*;
 import static ru.fivestarter.dichlofos.game.gta.view.WorldScreen.UNIT_SCALE;
 
 public class CharacterSprite extends Sprite {
-    public CharacterSprite(TextureRegion textureRegion, float x, float y, float with, float height) {
-        super(textureRegion);
+
+    public CharacterSprite(float x, float y, float with, float height) {
         setSize(with, height);
         setOrigin(with / 2, height / 2);
         setPosition(x, y);
+    }
+
+    public CharacterSprite(TextureRegion textureRegion, float x, float y, float with, float height) {
+        this(x, y, with, height);
+        setRegion(textureRegion);
     }
 
     public Polygon getPolygon() {

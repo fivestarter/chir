@@ -19,12 +19,10 @@ public class HeroController implements CharacterController<Sprite> {
     private final Hero hero;
     private final World world;
 
-    private final float speed = 4f;
+    private final float speed = 2f;
 
     public HeroController(AssetManager assetManager, World world) {
-        TextureAtlas.AtlasRegion region = assetManager.get(GTA_HERO_ATLAS_FILE_NAME, TextureAtlas.class)
-                .findRegion(Hero.SPRITE_NAME);
-        this.hero = new Hero(region, X, Y);
+        this.hero = new Hero(assetManager.get(GTA_HERO_ATLAS_FILE_NAME, TextureAtlas.class), X, Y);
         this.world = world;
     }
 
@@ -40,38 +38,40 @@ public class HeroController implements CharacterController<Sprite> {
     }
 
     private void handle() {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             moveLeft();
-        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             moveRight();
-        } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             moveUp();
-        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             moveDown();
+        } else {
+            stop();
         }
     }
 
     private void moveDown() {
         float previousY = hero.getY();
-        hero.setY(previousY - speed * WorldScreen.DELTA_CFF);
+        hero.moveDown(previousY - speed * WorldScreen.DELTA_CFF);
         handleObstacleByY(previousY);
     }
 
     private void moveUp() {
         float previousY = hero.getY();
-        hero.setY(previousY + speed * WorldScreen.DELTA_CFF);
+        hero.moveUp(previousY + speed * WorldScreen.DELTA_CFF);
         handleObstacleByY(previousY);
     }
 
     private void moveRight() {
         float previousX = hero.getX();
-        hero.setX(previousX + speed * WorldScreen.DELTA_CFF);
+        hero.moveRight(previousX + speed * WorldScreen.DELTA_CFF);
         handleObstacleByX(previousX);
     }
 
     private void moveLeft() {
         float previousX = hero.getX();
-        hero.setX(previousX - speed * WorldScreen.DELTA_CFF);
+        hero.moveLeft(previousX - speed * WorldScreen.DELTA_CFF);
         handleObstacleByX(previousX);
     }
 
@@ -85,6 +85,10 @@ public class HeroController implements CharacterController<Sprite> {
         if (world.isObstacle(hero.getFootRectangle())) {
             hero.setY(previousY);
         }
+    }
+
+    private void stop() {
+        hero.stop();
     }
 
 }
