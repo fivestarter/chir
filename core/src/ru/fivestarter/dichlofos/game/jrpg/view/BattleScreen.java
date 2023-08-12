@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import ru.fivestarter.dichlofos.game.jrpg.model.guile.Guile;
+import ru.fivestarter.dichlofos.game.common.CharacterController;
+import ru.fivestarter.dichlofos.game.jrpg.control.GuileController;
+import ru.fivestarter.dichlofos.game.jrpg.model.Character;
 import ru.fivestarter.dichlofos.game.jrpg.model.honda.Honda;
 
 public class BattleScreen implements Screen {
@@ -16,7 +18,7 @@ public class BattleScreen implements Screen {
     private SpriteBatch batch;
     private BitmapFont font;
     private TextureRegion background;
-    private Guile mainHero;
+    private CharacterController<Character> mainHeroController;
     private Honda enemy;
 
     public BattleScreen(TextureAtlas textureAtlas) {
@@ -28,7 +30,7 @@ public class BattleScreen implements Screen {
         batch = new SpriteBatch();
         font = new BitmapFont();
         background = textureAtlas.findRegion("pun");
-        mainHero = new Guile(textureAtlas, 130, 60, 430 - 160);
+        mainHeroController = new GuileController(textureAtlas);
         enemy = new Honda(textureAtlas, 430, 60);
     }
 
@@ -38,7 +40,7 @@ public class BattleScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        mainHero.draw(batch);
+        mainHeroController.draw(batch);
         enemy.draw(batch);
         batch.end();
     }

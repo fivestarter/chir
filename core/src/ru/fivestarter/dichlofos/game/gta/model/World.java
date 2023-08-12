@@ -2,18 +2,19 @@ package ru.fivestarter.dichlofos.game.gta.model;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
-import ru.fivestarter.dichlofos.game.gta.control.CarController;
 import ru.fivestarter.dichlofos.game.common.CharacterController;
+import ru.fivestarter.dichlofos.game.gta.control.CarController;
 import ru.fivestarter.dichlofos.game.gta.control.HeroController;
 import ru.fivestarter.dichlofos.game.gta.model.map.Map;
 import ru.fivestarter.dichlofos.game.gta.view.Operator;
 
 public class World {
     private final Map map;
-    private CharacterController mainHeroController;
+    private CharacterController<Sprite> mainHeroController;
     private final Runnable portalConsumer;
     private final AssetManager assetManager;
     private final Operator operator;

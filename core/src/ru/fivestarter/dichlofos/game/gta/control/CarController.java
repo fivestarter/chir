@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import ru.fivestarter.dichlofos.game.common.CharacterController;
@@ -14,7 +15,7 @@ import ru.fivestarter.dichlofos.game.gta.view.WorldScreen;
 import static ru.fivestarter.dichlofos.game.gta.model.character.car.Car.SPRITE_NAME;
 import static ru.fivestarter.dichlofos.utils.Assets.COMMON_ATLAS_FILE_NAME;
 
-public class CarController implements CharacterController {
+public class CarController implements CharacterController<Sprite> {
     private static final int X = 40;
     private static final int Y = 49;
 

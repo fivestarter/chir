@@ -1,16 +1,15 @@
 package ru.fivestarter.dichlofos.game.jrpg.model.guile;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import ru.fivestarter.dichlofos.game.jrpg.animation.AnimationState;
 import ru.fivestarter.dichlofos.game.jrpg.animation.CharacterAnimation;
-import ru.fivestarter.dichlofos.game.jrpg.control.GuileController;
-import ru.fivestarter.dichlofos.game.jrpg.model.guile.animation.IdleAnimation;
-import ru.fivestarter.dichlofos.game.jrpg.model.guile.animation.WalkAnimation;
 import ru.fivestarter.dichlofos.game.jrpg.model.Character;
 import ru.fivestarter.dichlofos.game.jrpg.model.guile.animation.HighKickAnimation;
+import ru.fivestarter.dichlofos.game.jrpg.model.guile.animation.IdleAnimation;
 import ru.fivestarter.dichlofos.game.jrpg.model.guile.animation.PunchAnimation;
+import ru.fivestarter.dichlofos.game.jrpg.model.guile.animation.WalkAnimation;
 
 public class Guile implements Character, AnimationState {
 
@@ -23,7 +22,6 @@ public class Guile implements Character, AnimationState {
     private final WalkAnimation walkAnimation;
 
     private final Sprite sprite;
-    private final GuileController guileController;
 
     public Guile(TextureAtlas textureAtlas, int x, int y, int border) {
         this.idleAnimation = new IdleAnimation(this, textureAtlas, UNIT_SCALE);
@@ -33,11 +31,9 @@ public class Guile implements Character, AnimationState {
         currentAnimation = idleAnimation;
         this.sprite = new Sprite();
         this.sprite.setPosition(x, y);
-        this.guileController = new GuileController(this);
     }
 
-    public void draw(SpriteBatch batch) {
-        guileController.handle();
+    public void draw(Batch batch) {
         currentAnimation.animate(sprite);
         sprite.draw(batch);
     }
