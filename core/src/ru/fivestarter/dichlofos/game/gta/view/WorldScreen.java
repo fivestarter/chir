@@ -64,7 +64,7 @@ public class WorldScreen implements Screen, Operator {
         camera.translate(0.0f, 0.02f);
         camera.position.x = world.getCameraPositionX();
         camera.position.y = world.getCameraPositionY();
-        camera.update();
+        viewport.apply();
         renderer.setView(camera);
         renderer.render();
     }

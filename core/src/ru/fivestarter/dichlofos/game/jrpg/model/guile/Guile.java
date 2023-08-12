@@ -28,7 +28,7 @@ public class Guile implements Character, AnimationState {
         this.punchAnimation = new PunchAnimation(this, textureAtlas, UNIT_SCALE);
         this.highKickAnimation = new HighKickAnimation(this, textureAtlas, UNIT_SCALE);
         this.walkAnimation = new WalkAnimation(this, textureAtlas, UNIT_SCALE, border);
-        currentAnimation = idleAnimation;
+        this.currentAnimation = idleAnimation;
         this.sprite = new Sprite();
         this.sprite.setPosition(x, y);
     }
