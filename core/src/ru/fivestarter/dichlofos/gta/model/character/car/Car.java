@@ -1,24 +1,18 @@
 package ru.fivestarter.dichlofos.gta.model.character.car;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import ru.fivestarter.dichlofos.gta.control.CarController;
-import ru.fivestarter.dichlofos.gta.model.World;
 import ru.fivestarter.dichlofos.gta.model.character.CharacterSprite;
+
+import static ru.fivestarter.dichlofos.gta.view.WorldScreen.UNIT_SCALE;
 
 public class Car extends CharacterSprite {
 
-    private final CarController carController;
+    public static final String SPRITE_NAME = "car";
+    private static final float WITH = 20f * UNIT_SCALE;
+    private static final float HEIGHT = 20f * 1.77f * UNIT_SCALE;
 
-    public Car(TextureRegion textureRegion, World world, float x, float y, float with, float height) {
-        super(textureRegion, x, y, with, height);
-        carController = new CarController(this, world);
-    }
-
-    @Override
-    public void draw(Batch batch) {
-        super.draw(batch);
-        carController.handle();
+    public Car(TextureRegion textureRegion, float x, float y) {
+        super(textureRegion, x, y, WITH, HEIGHT);
     }
 
 }

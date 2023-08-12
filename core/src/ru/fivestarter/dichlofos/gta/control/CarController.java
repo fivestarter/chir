@@ -2,12 +2,20 @@ package ru.fivestarter.dichlofos.gta.control;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import ru.fivestarter.dichlofos.gta.model.World;
 import ru.fivestarter.dichlofos.gta.model.character.car.Car;
 import ru.fivestarter.dichlofos.gta.view.WorldScreen;
 
-public class CarController {
+import static ru.fivestarter.dichlofos.gta.model.character.car.Car.SPRITE_NAME;
+import static ru.fivestarter.dichlofos.utils.Assets.COMMON_ATLAS_FILE_NAME;
+
+public class CarController implements CharacterController {
+    private static final int X = 40;
+    private static final int Y = 49;
 
     private final Car car;
     private final World world;
@@ -16,12 +24,25 @@ public class CarController {
     final float speedVelocity = 5f;
     final float speedMax = 20f;
 
-    public CarController(Car car, World world) {
-        this.car = car;
+    public CarController(AssetManager assetManager, World world) {
+        TextureAtlas.AtlasRegion region = assetManager.get(COMMON_ATLAS_FILE_NAME, TextureAtlas.class)
+                .findRegion(SPRITE_NAME);
+        this.car = new Car(region, X, Y);
         this.world = world;
     }
 
-    public void handle() {
+    @Override
+    public Car getModel() {
+        return car;
+    }
+
+    @Override
+    public void draw(Batch batch) {
+        car.draw(batch);
+        handle();
+    }
+
+    private void handle() {
         handleSpeed();
         handleRotation();
         handlePosition();
@@ -75,4 +96,5 @@ public class CarController {
             car.rotate(-rotationSpeed * carSpeed * WorldScreen.DELTA_CFF);
         }
     }
+
 }

@@ -2,23 +2,18 @@ package ru.fivestarter.dichlofos.gta.model;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
-import ru.fivestarter.dichlofos.gta.model.character.car.Mercedes;
-import ru.fivestarter.dichlofos.gta.model.character.human.Hero;
+import ru.fivestarter.dichlofos.gta.control.CarController;
+import ru.fivestarter.dichlofos.gta.control.CharacterController;
+import ru.fivestarter.dichlofos.gta.control.HeroController;
 import ru.fivestarter.dichlofos.gta.model.map.Map;
 import ru.fivestarter.dichlofos.gta.view.Operator;
 
-import static ru.fivestarter.dichlofos.gta.model.character.car.Mercedes.SPRITE_NAME;
-import static ru.fivestarter.dichlofos.utils.Assets.COMMON_ATLAS_FILE_NAME;
-import static ru.fivestarter.dichlofos.utils.Assets.GTA_HERO_ATLAS_FILE_NAME;
-
 public class World {
     private final Map map;
-    private Sprite mainHero;
+    private CharacterController mainHeroController;
     private final Runnable portalConsumer;
     private final AssetManager assetManager;
     private final Operator operator;
@@ -27,10 +22,8 @@ public class World {
         this.operator = operator;
         this.map = new Map();
         this.assetManager = assetManager;
-        TextureAtlas.AtlasRegion region = this.assetManager.get(GTA_HERO_ATLAS_FILE_NAME, TextureAtlas.class)
-                .findRegion(Hero.SPRITE_NAME);
-        this.mainHero = new Hero(region, 40, 49, this);
         this.portalConsumer = portalConsumer;
+        this.mainHeroController = new HeroController(assetManager, this);
     }
 
     public boolean isObstacle(Polygon polygon) {
@@ -42,10 +35,10 @@ public class World {
     }
 
     public void draw(Batch batch) {
-        mainHero.draw(batch);
-        map.drawTopZIndexTileLayer(batch, mainHero.getY());
-        handlePortal(mainHero.getBoundingRectangle());
-        handleGarage(mainHero.getBoundingRectangle());
+        mainHeroController.draw(batch);
+        map.drawTopZIndexTileLayer(batch, mainHeroController.getModel().getY());
+        handlePortal(mainHeroController.getModel().getBoundingRectangle());
+        handleGarage(mainHeroController.getModel().getBoundingRectangle());
     }
 
     private void handlePortal(Rectangle rectangle) {
@@ -57,10 +50,8 @@ public class World {
 
     private void handleGarage(Rectangle rectangle) {
         if (map.isGarageOverlapped(rectangle)) {
-            TextureAtlas.AtlasRegion region = assetManager.get(COMMON_ATLAS_FILE_NAME, TextureAtlas.class)
-                    .findRegion(SPRITE_NAME);
             //убрать возможные зацикливания
-            this.mainHero = new Mercedes(region, this, 40, 49);
+            this.mainHeroController = new CarController(assetManager, this);
             operator.setBigCamera();
         }
     }
@@ -70,11 +61,11 @@ public class World {
     }
 
     public float getCameraPositionX() {
-        return mainHero.getX();
+        return mainHeroController.getModel().getX();
     }
 
     public float getCameraPositionY() {
-        return mainHero.getY();
+        return mainHeroController.getModel().getY();
     }
 
     public void dispose() {
