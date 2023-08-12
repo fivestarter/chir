@@ -8,12 +8,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import ru.fivestarter.dichlofos.ScreenChanger;
 import ru.fivestarter.dichlofos.gta.model.World;
 
-public class WorldScreen implements Screen {
+public class WorldScreen implements Screen, Operator {
     public static float DELTA_CFF;
     public static final float UNIT_SCALE = 1f / 16f;
+    private static final int VIEWPORT_SMALL_WIDTH = 10;
+    private static final int VIEWPORT_SMALL_HEIGHT = 6;
+    private static final int VIEWPORT_BIG_WIDTH = 40;
+    private static final int VIEWPORT_BIG_HEIGHT = 24;
 
     private final ScreenChanger screenChanger;
 
@@ -22,8 +28,8 @@ public class WorldScreen implements Screen {
     private World world;
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer renderer;
-    private int viewportWidth = 10;
-    private int viewportHeight = 6;
+
+    private Viewport viewport;
 
     public WorldScreen(ScreenChanger screenChanger, AssetManager assetManager) {
         this.screenChanger = screenChanger;
@@ -34,6 +40,8 @@ public class WorldScreen implements Screen {
     public void show() {
         batch = new SpriteBatch();
         world = new World(assetManager, screenChanger::changeOnBattleScreen, this);
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(VIEWPORT_SMALL_WIDTH, VIEWPORT_SMALL_HEIGHT, camera);
         renderer = new OrthogonalTiledMapRenderer(world.getTiledMap(), UNIT_SCALE);
     }
 
@@ -61,24 +69,15 @@ public class WorldScreen implements Screen {
         renderer.render();
     }
 
-/*    @Override
-    public void resize(int width, int height) {
-        float aspectRatio = (float) height / width;
-        camera = new OrthographicCamera(20f, 20f * aspectRatio);
-        camera.setToOrtho(false, 40, 24);
-    }*/
-
     @Override
     public void resize(int width, int height) {
-        float aspectRatio = (float) height / width;
-        camera = new OrthographicCamera(20f, 20f * aspectRatio);
-        camera.setToOrtho(false, viewportWidth, viewportHeight);
+        viewport.update(width, height);
     }
 
+    @Override
     public void setBigCamera() {
-        viewportWidth = 40;
-        viewportHeight = 24;
-        camera.setToOrtho(false, viewportWidth, viewportHeight);
+        viewport.setWorldSize(VIEWPORT_BIG_WIDTH, VIEWPORT_BIG_HEIGHT);
+        viewport.apply();
     }
 
     @Override
