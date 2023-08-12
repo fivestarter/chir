@@ -43,7 +43,7 @@ public class World {
 
     public void draw(Batch batch) {
         mainHero.draw(batch);
-        map.drawTopZIndexTileLayer(batch);
+        map.drawTopZIndexTileLayer(batch, mainHero.getY());
         handlePortal(mainHero.getBoundingRectangle());
         handleGarage(mainHero.getBoundingRectangle());
     }

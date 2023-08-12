@@ -34,6 +34,8 @@ public class Hero extends CharacterSprite {
     public Rectangle getFootRectangle() {
         Rectangle rectangle = getBoundingRectangle();
         rectangle.setHeight(DIMENSION / 4);
+        rectangle.setX(rectangle.getX() + DIMENSION / 8);
+        rectangle.setWidth(DIMENSION - DIMENSION / 4);
         return rectangle;
     }
 }

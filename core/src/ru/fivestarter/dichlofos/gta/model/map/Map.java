@@ -58,9 +58,10 @@ public class Map {
         return sprites;
     }
 
-    public void drawTopZIndexTileLayer(Batch batch) {
+    public void drawTopZIndexTileLayer(Batch batch, float heroY) {
         zIndexSpriteLayers.stream()
                 .flatMap(List::stream)
+                .filter(sprite -> sprite.getY() < heroY)
                 .forEach(sprite -> sprite.draw(batch));
     }
 
