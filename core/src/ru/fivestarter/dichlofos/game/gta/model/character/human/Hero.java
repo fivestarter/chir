@@ -1,12 +1,12 @@
 package ru.fivestarter.dichlofos.game.gta.model.character.human;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import ru.fivestarter.dichlofos.game.gta.animation.HeroAnimation;
 import ru.fivestarter.dichlofos.game.gta.model.character.CharacterSprite;
 import ru.fivestarter.dichlofos.game.gta.view.WorldScreen;
 
@@ -14,17 +14,22 @@ import static com.badlogic.gdx.graphics.g2d.Animation.PlayMode.LOOP;
 
 public class Hero extends CharacterSprite {
 
-    public static final String SPRITE_NAME = "mh_walk";
+    public static final String WALK_SPRITE_NAME = "mh_walk";
+    public static final String RUN_SPRITE_NAME = "mh_run";
     private static final float DIMENSION = 20f * WorldScreen.UNIT_SCALE;
 
     public static final float DURATION = 0.15f;
     public static final int FRAMES_IN_ROW = 3;
     private float animationTime = 0f;
-    private Animation<TextureRegion> leftAnimation;
-    private Animation<TextureRegion> rightAnimation;
-    private Animation<TextureRegion> downAnimation;
-    private Animation<TextureRegion> upAnimation;
-    private Animation<TextureRegion> currentAnimation;
+    private HeroAnimation moveLeftAnimation;
+    private HeroAnimation moveRightAnimation;
+    private HeroAnimation moveDownAnimation;
+    private HeroAnimation moveUpAnimation;
+    private HeroAnimation currentAnimation;
+    private HeroAnimation runLeftAnimation;
+    private HeroAnimation runRightAnimation;
+    private HeroAnimation runDownAnimation;
+    private HeroAnimation runUpAnimation;
 
     private boolean isMoving = false;
 
@@ -32,33 +37,46 @@ public class Hero extends CharacterSprite {
     public Hero(TextureAtlas textureAtlas, float x, float y) {
         super(x, y, DIMENSION, DIMENSION);
         createAnimations(textureAtlas);
-        currentAnimation = downAnimation;
+        createRunAnimations(textureAtlas);
+        currentAnimation = moveDownAnimation;
     }
 
     private void createAnimations(TextureAtlas textureAtlas) {
-        TextureAtlas.AtlasRegion idleRegion = textureAtlas.findRegion(SPRITE_NAME);
+        TextureAtlas.AtlasRegion idleRegion = textureAtlas.findRegion(WALK_SPRITE_NAME);
         TextureRegion[][] frames = idleRegion.split(idleRegion.getRegionWidth() / FRAMES_IN_ROW,
                 idleRegion.getRegionHeight() / 4);
-        upAnimation = createAnimation(frames[0]);
-        downAnimation = createAnimation(frames[1]);
-        leftAnimation = createAnimation(frames[2]);
-        rightAnimation = createAnimation(frames[3]);
+        moveUpAnimation = createAnimation(frames[0], frames[0][0]);
+        moveDownAnimation = createAnimation(frames[1], frames[1][0]);
+        moveLeftAnimation = createAnimation(frames[2], frames[2][0]);
+        moveRightAnimation = createAnimation(frames[3], frames[3][0]);
     }
 
-    private Animation<TextureRegion> createAnimation(TextureRegion[] frames) {
+    private void createRunAnimations(TextureAtlas textureAtlas) {
+        TextureAtlas.AtlasRegion idleRegion = textureAtlas.findRegion(RUN_SPRITE_NAME);
+        TextureRegion[][] frames = idleRegion.split(idleRegion.getRegionWidth() / FRAMES_IN_ROW,
+                idleRegion.getRegionHeight() / 4);
+        runUpAnimation = createAnimation(frames[0], moveUpAnimation.getCalmFrame());
+        runDownAnimation = createAnimation(frames[1], moveDownAnimation.getCalmFrame());
+        runLeftAnimation = createAnimation(frames[2], moveLeftAnimation.getCalmFrame());
+        runRightAnimation = createAnimation(frames[3], moveRightAnimation.getCalmFrame());
+    }
+
+    private HeroAnimation createAnimation(TextureRegion[] frames, TextureRegion calmFrame) {
         Array<TextureRegion> upTextureRegions = new Array<>();
         upTextureRegions.addAll(frames[2], frames[0], frames[1], frames[0]);
-        return new Animation<>(DURATION, upTextureRegions, LOOP);
+        return new HeroAnimation(DURATION, upTextureRegions, calmFrame, LOOP);
     }
 
     @Override
     public void draw(Batch batch) {
+        TextureRegion keyFrame;
         if (isMoving) {
             animationTime += Gdx.graphics.getDeltaTime();
+            keyFrame = currentAnimation.getKeyFrame(animationTime);
         } else {
-            animationTime = FRAMES_IN_ROW - 1;
+            animationTime = 0f;
+            keyFrame = currentAnimation.getCalmFrame();
         }
-        TextureRegion keyFrame = currentAnimation.getKeyFrame(animationTime);
         setRegion(keyFrame);
         super.draw(batch);
     }
@@ -72,27 +90,59 @@ public class Hero extends CharacterSprite {
     }
 
     public void moveLeft(float distance) {
+        left(distance, moveLeftAnimation);
+    }
+
+    public void runLeft(float distance) {
+        left(distance, runLeftAnimation);
+    }
+
+    private void left(float distance, HeroAnimation animation) {
         isMoving = true;
         setX(distance);
-        currentAnimation = leftAnimation;
+        currentAnimation = animation;
     }
 
     public void moveRight(float distance) {
+        right(distance, moveRightAnimation);
+    }
+
+    public void runRight(float distance) {
+        right(distance, runRightAnimation);
+    }
+
+    private void right(float distance, HeroAnimation animation) {
         isMoving = true;
         setX(distance);
-        currentAnimation = rightAnimation;
+        currentAnimation = animation;
     }
 
     public void moveUp(float distance) {
+        up(distance, moveUpAnimation);
+    }
+
+    public void runUp(float distance) {
+        up(distance, runUpAnimation);
+    }
+
+    private void up(float distance, HeroAnimation animation) {
         isMoving = true;
         setY(distance);
-        currentAnimation = upAnimation;
+        currentAnimation = animation;
     }
 
     public void moveDown(float distance) {
+        down(distance, moveDownAnimation);
+    }
+
+    public void runDown(float distance) {
+        down(distance, runDownAnimation);
+    }
+
+    private void down(float distance, HeroAnimation animation) {
         isMoving = true;
         setY(distance);
-        currentAnimation = downAnimation;
+        currentAnimation = animation;
     }
 
     public void stop() {

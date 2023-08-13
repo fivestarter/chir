@@ -1,12 +1,19 @@
 
 hero.png
-size: 128, 256
+size: 128, 512
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-mh_walk
+mh_run
   rotate: false
   xy: 2, 2
+  size: 96, 128
+  orig: 96, 128
+  offset: 0, 0
+  index: -1
+mh_walk
+  rotate: false
+  xy: 2, 132
   size: 96, 128
   orig: 96, 128
   offset: 0, 0
