@@ -1,5 +1,6 @@
 package ru.fivestarter.dichlofos.game.gta.animation.character;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
@@ -13,6 +14,8 @@ public class HeroAnimation {
     public static final String RUN_SPRITE_NAME = "mh_run";
     public static final float DURATION = 0.15f;
     public static final int FRAMES_IN_ROW = 3;
+    private float animationTime = 0f;
+    private boolean isMoving = false;
     private TextureAnimation moveLeftAnimation;
     private TextureAnimation moveRightAnimation;
     private TextureAnimation moveDownAnimation;
@@ -26,6 +29,7 @@ public class HeroAnimation {
     public HeroAnimation(TextureAtlas textureAtlas) {
         createMoveAnimations(textureAtlas);
         createRunAnimations(textureAtlas);
+        currentAnimation = moveDownAnimation;
     }
 
     private void createMoveAnimations(TextureAtlas textureAtlas) {
@@ -54,39 +58,59 @@ public class HeroAnimation {
         return new TextureAnimation(DURATION, upTextureRegions, calmFrame, LOOP);
     }
 
-    public TextureAnimation getMoveLeftAnimation() {
-        return moveLeftAnimation;
+    public TextureRegion getKeyFrame() {
+        TextureRegion keyFrame;
+        if (isMoving) {
+            animationTime += Gdx.graphics.getDeltaTime();
+            keyFrame = currentAnimation.getKeyFrame(animationTime);
+        } else {
+            animationTime = 0f;
+            keyFrame = currentAnimation.getCalmFrame();
+        }
+        return keyFrame;
     }
 
-    public TextureAnimation getMoveRightAnimation() {
-        return moveRightAnimation;
+    public void moveLeft() {
+        isMoving = true;
+        currentAnimation = moveLeftAnimation;
     }
 
-    public TextureAnimation getMoveDownAnimation() {
-        return moveDownAnimation;
+    public void runLeft() {
+        isMoving = true;
+        currentAnimation = runLeftAnimation;
     }
 
-    public TextureAnimation getMoveUpAnimation() {
-        return moveUpAnimation;
+    public void moveRight() {
+        isMoving = true;
+        currentAnimation = moveRightAnimation;
     }
 
-    public TextureAnimation getCurrentAnimation() {
-        return currentAnimation;
+    public void runRight() {
+        isMoving = true;
+        currentAnimation = runRightAnimation;
     }
 
-    public TextureAnimation getRunLeftAnimation() {
-        return runLeftAnimation;
+    public void moveUp() {
+        isMoving = true;
+        currentAnimation = moveUpAnimation;
     }
 
-    public TextureAnimation getRunRightAnimation() {
-        return runRightAnimation;
+    public void runUp() {
+        isMoving = true;
+        currentAnimation = runUpAnimation;
     }
 
-    public TextureAnimation getRunDownAnimation() {
-        return runDownAnimation;
+    public void moveDown() {
+        isMoving = true;
+        currentAnimation = moveDownAnimation;
     }
 
-    public TextureAnimation getRunUpAnimation() {
-        return runUpAnimation;
+    public void runDown() {
+        isMoving = true;
+        currentAnimation = runDownAnimation;
+    }
+
+    public void stop() {
+        isMoving = false;
     }
 }
