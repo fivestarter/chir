@@ -64,9 +64,9 @@ public class CarController implements CharacterController<Sprite> {
     }
 
     private void handleSpeed() {
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             carSpeed += speedVelocity * WorldScreen.DELTA_CFF;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             carSpeed -= speedVelocity * WorldScreen.DELTA_CFF;
         } else {
             downSpeed();
@@ -92,9 +92,9 @@ public class CarController implements CharacterController<Sprite> {
 
     private void handleRotation() {
         float rotationSpeed = 30f;
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             car.rotate(rotationSpeed * carSpeed * WorldScreen.DELTA_CFF);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             car.rotate(-rotationSpeed * carSpeed * WorldScreen.DELTA_CFF);
         }
     }
