@@ -14,7 +14,6 @@ import ru.fivestarter.dichlofos.ScreenChanger;
 import ru.fivestarter.dichlofos.game.gta.model.World;
 
 public class WorldScreen implements Screen, Operator {
-    public static float DELTA_CFF;
     public static final float UNIT_SCALE = 1f / 16f;
     private static final int VIEWPORT_SMALL_WIDTH = 10;
     private static final int VIEWPORT_SMALL_HEIGHT = 6;
@@ -50,13 +49,11 @@ public class WorldScreen implements Screen, Operator {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        DELTA_CFF = delta;
-
         renderCamera();
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        world.draw(batch);
+        world.draw(delta, batch);
         batch.end();
     }
 

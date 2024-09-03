@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import ru.fivestarter.dichlofos.game.common.CharacterController;
 import ru.fivestarter.dichlofos.game.gta.model.World;
 import ru.fivestarter.dichlofos.game.gta.model.character.human.Hero;
-import ru.fivestarter.dichlofos.game.gta.view.WorldScreen;
 
 import static ru.fivestarter.dichlofos.utils.Assets.GTA_HERO_ATLAS_FILE_NAME;
 
@@ -33,86 +32,86 @@ public class HeroController implements CharacterController<Sprite> {
     }
 
     @Override
-    public void draw(Batch batch) {
+    public void draw(float delta, Batch batch) {
         hero.draw(batch);
-        handle();
+        handle(delta);
     }
 
-    private void handle() {
+    private void handle(float delta) {
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             if (Gdx.input.isKeyPressed(Input.Keys.SEMICOLON)) {
-                runLeft();
+                runLeft(delta);
             } else {
-                moveLeft();
+                moveLeft(delta);
             }
         } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             if (Gdx.input.isKeyPressed(Input.Keys.SEMICOLON)) {
-                runRight();
+                runRight(delta);
             } else {
-                moveRight();
+                moveRight(delta);
             }
         } else if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             if (Gdx.input.isKeyPressed(Input.Keys.SEMICOLON)) {
-                runUp();
+                runUp(delta);
             } else {
-                moveUp();
+                moveUp(delta);
             }
         } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             if (Gdx.input.isKeyPressed(Input.Keys.SEMICOLON)) {
-                runDown();
+                runDown(delta);
             } else {
-                moveDown();
+                moveDown(delta);
             }
         } else {
             stop();
         }
     }
 
-    private void moveDown() {
+    private void moveDown(float delta) {
         float previousY = hero.getY();
-        hero.moveDown(previousY - moveSpeed * WorldScreen.DELTA_CFF);
+        hero.moveDown(previousY - moveSpeed * delta);
         handleObstacleByY(previousY);
     }
 
-    private void runDown() {
+    private void runDown(float delta) {
         float previousY = hero.getY();
-        hero.runDown(previousY - runSpeed * WorldScreen.DELTA_CFF);
+        hero.runDown(previousY - runSpeed * delta);
         handleObstacleByY(previousY);
     }
 
-    private void moveUp() {
+    private void moveUp(float delta) {
         float previousY = hero.getY();
-        hero.moveUp(previousY + moveSpeed * WorldScreen.DELTA_CFF);
+        hero.moveUp(previousY + moveSpeed * delta);
         handleObstacleByY(previousY);
     }
 
-    private void runUp() {
+    private void runUp(float delta) {
         float previousY = hero.getY();
-        hero.runUp(previousY + runSpeed * WorldScreen.DELTA_CFF);
+        hero.runUp(previousY + runSpeed * delta);
         handleObstacleByY(previousY);
     }
 
-    private void moveRight() {
+    private void moveRight(float delta) {
         float previousX = hero.getX();
-        hero.moveRight(previousX + moveSpeed * WorldScreen.DELTA_CFF);
+        hero.moveRight(previousX + moveSpeed * delta);
         handleObstacleByX(previousX);
     }
 
-    private void runRight() {
+    private void runRight(float delta) {
         float previousX = hero.getX();
-        hero.runRight(previousX + runSpeed * WorldScreen.DELTA_CFF);
+        hero.runRight(previousX + runSpeed * delta);
         handleObstacleByX(previousX);
     }
 
-    private void moveLeft() {
+    private void moveLeft(float delta) {
         float previousX = hero.getX();
-        hero.moveLeft(previousX - moveSpeed * WorldScreen.DELTA_CFF);
+        hero.moveLeft(previousX - moveSpeed * delta);
         handleObstacleByX(previousX);
     }
 
-    private void runLeft() {
+    private void runLeft(float delta) {
         float previousX = hero.getX();
-        hero.runLeft(previousX - runSpeed * WorldScreen.DELTA_CFF);
+        hero.runLeft(previousX - runSpeed * delta);
         handleObstacleByX(previousX);
     }
 

@@ -5,5 +5,5 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 public interface CharacterController<T> {
     T getModel();
 
-    void draw(Batch batch);
+    void draw(float delta, Batch batch);
 }

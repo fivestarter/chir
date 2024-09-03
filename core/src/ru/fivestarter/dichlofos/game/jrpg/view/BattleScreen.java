@@ -48,7 +48,7 @@ public class BattleScreen implements Screen {
 
         batch.begin();
         batch.draw(background, 0, 0);
-        mainHeroController.draw(batch);
+        mainHeroController.draw(delta, batch);
         enemy.draw(batch);
         batch.end();
     }
