@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.MathUtils;
 import ru.fivestarter.dichlofos.game.common.CharacterController;
 import ru.fivestarter.dichlofos.game.gta.model.World;
 import ru.fivestarter.dichlofos.game.gta.model.character.car.Car;
-import ru.fivestarter.dichlofos.game.gta.view.WorldScreen;
 
 import static ru.fivestarter.dichlofos.game.gta.model.character.car.Car.SPRITE_NAME;
 import static ru.fivestarter.dichlofos.utils.Assets.COMMON_ATLAS_FILE_NAME;
@@ -39,46 +38,46 @@ public class CarController implements CharacterController<Sprite> {
     }
 
     @Override
-    public void draw(Batch batch) {
+    public void draw(float delta, Batch batch) {
         car.draw(batch);
-        handle();
+        handle(delta);
     }
 
-    private void handle() {
-        handleSpeed();
-        handleRotation();
-        handlePosition();
+    private void handle(float delta) {
+        handleSpeed(delta);
+        handleRotation(delta);
+        handlePosition(delta);
     }
 
-    private void handlePosition() {
+    private void handlePosition(float delta) {
         float previousX = car.getX();
         float previousY = car.getY();
-        float x = car.getX() + MathUtils.cosDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF;
-        float y = car.getY() + MathUtils.sinDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF;
+        float x = car.getX() + MathUtils.cosDeg(car.getRotation() + 90) * carSpeed * delta;
+        float y = car.getY() + MathUtils.sinDeg(car.getRotation() + 90) * carSpeed * delta;
         car.setPosition(x, y);
         if (world.isObstacle(car.getPolygon())) {
-            car.setPosition(previousX - MathUtils.cosDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF,
-                    previousY - MathUtils.sinDeg(car.getRotation() + 90) * carSpeed * WorldScreen.DELTA_CFF);
+            car.setPosition(previousX - MathUtils.cosDeg(car.getRotation() + 90) * carSpeed * delta,
+                    previousY - MathUtils.sinDeg(car.getRotation() + 90) * carSpeed * delta);
             carSpeed /= -3;
         }
     }
 
-    private void handleSpeed() {
+    private void handleSpeed(float delta) {
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            carSpeed += speedVelocity * WorldScreen.DELTA_CFF;
+            carSpeed += speedVelocity * delta;
         } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            carSpeed -= speedVelocity * WorldScreen.DELTA_CFF;
+            carSpeed -= speedVelocity * delta;
         } else {
-            downSpeed();
+            downSpeed(delta);
         }
         carSpeed = sliceSpeed();
     }
 
-    private void downSpeed() {
-        if (carSpeed > speedVelocity * WorldScreen.DELTA_CFF)
-            carSpeed -= speedVelocity * WorldScreen.DELTA_CFF;
-        else if (carSpeed < -speedVelocity * WorldScreen.DELTA_CFF)
-            carSpeed += speedVelocity * WorldScreen.DELTA_CFF;
+    private void downSpeed(float delta) {
+        if (carSpeed > speedVelocity * delta)
+            carSpeed -= speedVelocity * delta;
+        else if (carSpeed < -speedVelocity * delta)
+            carSpeed += speedVelocity * delta;
         else
             carSpeed = 0f;
     }
@@ -90,12 +89,12 @@ public class CarController implements CharacterController<Sprite> {
         return Math.max(carSpeed, -speedMax);
     }
 
-    private void handleRotation() {
+    private void handleRotation(float delta) {
         float rotationSpeed = 30f;
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            car.rotate(rotationSpeed * carSpeed * WorldScreen.DELTA_CFF);
+            car.rotate(rotationSpeed * carSpeed * delta);
         } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            car.rotate(-rotationSpeed * carSpeed * WorldScreen.DELTA_CFF);
+            car.rotate(-rotationSpeed * carSpeed * delta);
         }
     }
 

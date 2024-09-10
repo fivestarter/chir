@@ -35,8 +35,8 @@ public class World {
         return map.isBorderOverlapped(rectangle);
     }
 
-    public void draw(Batch batch) {
-        mainHeroController.draw(batch);
+    public void draw(float delta, Batch batch) {
+        mainHeroController.draw(delta, batch);
         map.drawTopZIndexTileLayer(batch, mainHeroController.getModel().getY());
         handlePortal(mainHeroController.getModel().getBoundingRectangle());
         handleGarage(mainHeroController.getModel().getBoundingRectangle());

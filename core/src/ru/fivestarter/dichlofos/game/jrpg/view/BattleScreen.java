@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -20,7 +19,6 @@ public class BattleScreen implements Screen {
 
     private final TextureAtlas textureAtlas;
     private SpriteBatch batch;
-    private BitmapFont font;
     private TextureRegion background;
     private CharacterController<Character> mainHeroController;
     private Honda enemy;
@@ -34,7 +32,6 @@ public class BattleScreen implements Screen {
         OrthographicCamera camera = new OrthographicCamera();
         viewport = new FitViewport(40, 24, camera);
         batch = new SpriteBatch();
-        font = new BitmapFont();
         background = textureAtlas.findRegion("pun");
         mainHeroController = new GuileController(textureAtlas);
         enemy = new Honda(textureAtlas, 430, 60);
@@ -48,7 +45,7 @@ public class BattleScreen implements Screen {
 
         batch.begin();
         batch.draw(background, 0, 0);
-        mainHeroController.draw(batch);
+        mainHeroController.draw(delta, batch);
         enemy.draw(batch);
         batch.end();
     }
@@ -76,6 +73,5 @@ public class BattleScreen implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
-        font.dispose();
     }
 }

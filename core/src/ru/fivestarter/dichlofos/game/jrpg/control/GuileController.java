@@ -22,7 +22,7 @@ public class GuileController implements CharacterController<Character> {
     }
 
     @Override
-    public void draw(Batch batch) {
+    public void draw(float delta, Batch batch) {
         handle();
         guile.draw(batch);
     }
