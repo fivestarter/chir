@@ -2,16 +2,11 @@ package ru.fivestarter.dichlofos.game.gta.control;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import ru.fivestarter.dichlofos.game.gta.model.World;
 import ru.fivestarter.dichlofos.game.gta.model.character.car.Car;
-
-import static ru.fivestarter.dichlofos.game.gta.model.character.car.Car.SPRITE_NAME;
-import static ru.fivestarter.dichlofos.utils.Assets.COMMON_ATLAS_FILE_NAME;
 
 public class CarController implements CharacterController {
 
@@ -22,9 +17,7 @@ public class CarController implements CharacterController {
     final float speedVelocity = 5f;
     final float speedMax = 20f;
 
-    public CarController(AssetManager assetManager, World world, float x, float y) {
-        TextureAtlas.AtlasRegion region = assetManager.get(COMMON_ATLAS_FILE_NAME, TextureAtlas.class)
-                .findRegion(SPRITE_NAME);
+    public CarController(TextureRegion region, World world, float x, float y) {
         this.car = new Car(region, x, y);
         this.world = world;
     }

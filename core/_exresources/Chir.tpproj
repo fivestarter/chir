@@ -1,45 +1,3 @@
-name=atlas1
-filename=
-output=../assets/atlas/common
-
-alias=true
-alphaThreshold=0
-debug=false
-duplicatePadding=false
-edgePadding=true
-fast=false
-filterMag=Nearest
-filterMin=Nearest
-ignoreBlankImages=true
-maxHeight=2048
-maxWidth=2048
-minHeight=16
-minWidth=16
-paddingX=2
-paddingY=2
-pot=true
-mof=false
-rotation=false
-stripWhitespaceX=false
-stripWhitespaceY=false
-wrapX=ClampToEdge
-wrapY=ClampToEdge
-premultiplyAlpha=false
-grid=false
-square=false
-bleed=true
-limitMemory=true
-useIndexes=true
-prettyPrint=false
-legacyOutput=true
-
-scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:gta/car/car.png,type:Input,regionName:null},{path:jrpg/sprite/guile/guileHighKick.png,type:Input,regionName:null},{path:jrpg/sprite/guile/guilePunch.png,type:Input,regionName:null},{path:jrpg/sprite/guile/guileWalk.png,type:Input,regionName:null},{path:jrpg/sprite/guile/guileIdle.png,type:Input,regionName:null},{path:jrpg/sprite/honda/hondaIdle.png,type:Input,regionName:null},{path:jrpg/texture/pun.png,type:Input,regionName:null}]
-keepInputFileExtensions=false
-
-
----
-
 name=hero
 filename=
 output=../assets/atlas/gta/hero
@@ -76,7 +34,7 @@ prettyPrint=false
 legacyOutput=false
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:gta/hero/mh_run.png,type:Input,regionName:null},{path:gta/hero/mh_walk.png,type:Input,regionName:null}]
+inputFiles=[{path:gta/hero/mh_run.png,type:Input,regionName:null},{path:gta/hero/mh_walk.png,type:Input,regionName:null},{path:gta/car/car.png,type:Input,regionName:null}]
 keepInputFileExtensions=false
 
 

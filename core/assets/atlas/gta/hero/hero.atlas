@@ -1,7 +1,9 @@
 hero.png
-size:128,512
+size:512,1024
 repeat:none
+car
+bounds:2,132,453,800
 mh_run
-bounds:2,2,96,128
+bounds:100,2,96,128
 mh_walk
-bounds:2,132,96,128
+bounds:2,2,96,128
