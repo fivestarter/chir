@@ -27,25 +27,23 @@ public class HeroAnimation {
     private TextureAnimation runUpAnimation;
 
     public HeroAnimation(TextureAtlas textureAtlas) {
-        createMoveAnimations(textureAtlas);
-        createRunAnimations(textureAtlas);
+        createMoveAnimations(textureAtlas.findRegion(WALK_SPRITE_NAME));
+        createRunAnimations(textureAtlas.findRegion(RUN_SPRITE_NAME));
         currentAnimation = moveDownAnimation;
     }
 
-    private void createMoveAnimations(TextureAtlas textureAtlas) {
-        TextureAtlas.AtlasRegion idleRegion = textureAtlas.findRegion(WALK_SPRITE_NAME);
-        TextureRegion[][] frames = idleRegion.split(idleRegion.getRegionWidth() / FRAMES_IN_ROW,
-                idleRegion.getRegionHeight() / 4);
+    private void createMoveAnimations(TextureRegion region) {
+        TextureRegion[][] frames = region.split(region.getRegionWidth() / FRAMES_IN_ROW,
+                region.getRegionHeight() / 4);
         moveUpAnimation = createAnimation(frames[0], frames[0][0]);
         moveDownAnimation = createAnimation(frames[1], frames[1][0]);
         moveLeftAnimation = createAnimation(frames[2], frames[2][0]);
         moveRightAnimation = createAnimation(frames[3], frames[3][0]);
     }
 
-    private void createRunAnimations(TextureAtlas textureAtlas) {
-        TextureAtlas.AtlasRegion idleRegion = textureAtlas.findRegion(RUN_SPRITE_NAME);
-        TextureRegion[][] frames = idleRegion.split(idleRegion.getRegionWidth() / FRAMES_IN_ROW,
-                idleRegion.getRegionHeight() / 4);
+    private void createRunAnimations(TextureRegion region) {
+        TextureRegion[][] frames = region.split(region.getRegionWidth() / FRAMES_IN_ROW,
+                region.getRegionHeight() / 4);
         runUpAnimation = createAnimation(frames[0], moveUpAnimation.getCalmFrame());
         runDownAnimation = createAnimation(frames[1], moveDownAnimation.getCalmFrame());
         runLeftAnimation = createAnimation(frames[2], moveLeftAnimation.getCalmFrame());

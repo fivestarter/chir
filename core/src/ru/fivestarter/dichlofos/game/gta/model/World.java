@@ -1,34 +1,31 @@
 package ru.fivestarter.dichlofos.game.gta.model;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
-import ru.fivestarter.dichlofos.game.gta.control.CharacterController;
 import ru.fivestarter.dichlofos.game.gta.control.CarController;
+import ru.fivestarter.dichlofos.game.gta.control.CharacterController;
 import ru.fivestarter.dichlofos.game.gta.control.HeroController;
 import ru.fivestarter.dichlofos.game.gta.model.map.Map;
 import ru.fivestarter.dichlofos.game.gta.view.Operator;
 
 import static ru.fivestarter.dichlofos.game.gta.model.character.car.Car.SPRITE_NAME;
-import static ru.fivestarter.dichlofos.utils.Assets.GTA_HERO_ATLAS_FILE_NAME;
 
 public class World {
     private final Map map;
     private CharacterController mainHeroController;
     private final Runnable portalConsumer;
-    private final AssetManager assetManager;
+    private final TextureAtlas textureAtlas;
     private final Operator operator;
 
-    public World(AssetManager assetManager, Runnable portalConsumer, Operator operator) {
+    public World(TextureAtlas textureAtlas, Runnable portalConsumer, Operator operator) {
         this.operator = operator;
         this.map = new Map();
-        this.assetManager = assetManager;
+        this.textureAtlas = textureAtlas;
         this.portalConsumer = portalConsumer;
-        this.mainHeroController = new HeroController(assetManager, this);
+        this.mainHeroController = new HeroController(textureAtlas, this);
     }
 
     public boolean isObstacle(Polygon polygon) {
@@ -55,8 +52,10 @@ public class World {
     public void handleGarage(Rectangle rectangle) {
         if (map.isGarageOverlapped(rectangle)) {
             //убрать возможные зацикливания
-            this.mainHeroController = new CarController(assetManager.get(GTA_HERO_ATLAS_FILE_NAME, TextureAtlas.class)
-                    .findRegion(SPRITE_NAME), this, rectangle.getX(), rectangle.getY());
+            this.mainHeroController = new CarController(textureAtlas.findRegion(SPRITE_NAME),
+                    this,
+                    rectangle.getX(),
+                    rectangle.getY());
             operator.setBigCamera();
         }
     }

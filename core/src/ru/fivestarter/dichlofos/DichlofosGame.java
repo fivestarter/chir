@@ -9,6 +9,7 @@ import ru.fivestarter.dichlofos.menu.view.MenuScreen;
 import ru.fivestarter.dichlofos.utils.Assets;
 
 import static ru.fivestarter.dichlofos.utils.Assets.FIGHT_ATLAS_FILE_NAME;
+import static ru.fivestarter.dichlofos.utils.Assets.GTA_HERO_ATLAS_FILE_NAME;
 
 public class DichlofosGame extends Game implements ScreenChanger {
 
@@ -38,7 +39,7 @@ public class DichlofosGame extends Game implements ScreenChanger {
 
     @Override
     public void changeOnWorldScreen() {
-        gameScreen = new WorldScreen(this, assets.getManager());
+        gameScreen = new WorldScreen(this, assets.getManager().get(GTA_HERO_ATLAS_FILE_NAME, TextureAtlas.class));
         setScreen(gameScreen);
     }
 

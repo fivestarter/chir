@@ -2,11 +2,11 @@ package ru.fivestarter.dichlofos.game.gta.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -22,7 +22,7 @@ public class WorldScreen implements Screen, Operator {
 
     private final ScreenChanger screenChanger;
 
-    private final AssetManager assetManager;
+    private final TextureAtlas textureAtlas;
     private Batch batch;
     private World world;
     private OrthographicCamera camera;
@@ -30,15 +30,15 @@ public class WorldScreen implements Screen, Operator {
 
     private Viewport viewport;
 
-    public WorldScreen(ScreenChanger screenChanger, AssetManager assetManager) {
+    public WorldScreen(ScreenChanger screenChanger, TextureAtlas textureAtlas) {
         this.screenChanger = screenChanger;
-        this.assetManager = assetManager;
+        this.textureAtlas = textureAtlas;
     }
 
     @Override
     public void show() {
         batch = new SpriteBatch();
-        world = new World(assetManager, screenChanger::changeOnBattleScreen, this);
+        world = new World(textureAtlas, screenChanger::changeOnBattleScreen, this);
         camera = new OrthographicCamera();
         viewport = new FitViewport(VIEWPORT_SMALL_WIDTH, VIEWPORT_SMALL_HEIGHT, camera);
         renderer = new OrthogonalTiledMapRenderer(world.getTiledMap(), UNIT_SCALE);
