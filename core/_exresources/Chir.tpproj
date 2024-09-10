@@ -1,6 +1,6 @@
-name=hero
+name=gta
 filename=
-output=../assets/atlas/gta/hero
+output=../assets/atlas/gta
 
 alias=true
 alphaThreshold=0
