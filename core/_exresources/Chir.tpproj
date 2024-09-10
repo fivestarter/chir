@@ -34,7 +34,7 @@ prettyPrint=false
 legacyOutput=true
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:../../../../Documents/games/resources/car.png,type:Input,regionName:null},{path:../../../../Documents/games/scene/pun.png,type:Input,regionName:null},{path:../../../../Documents/games/sprites/guileIdle.png,type:Input,regionName:null},{path:../../../../Documents/games/sprites/guilePunch.png,type:Input,regionName:null},{path:../../../../Documents/games/sprites/guileHighKick.png,type:Input,regionName:null},{path:../../../../Documents/games/sprites/honda/hondaIdle.png,type:Input,regionName:null},{path:../../../../Documents/games/sprites/guileWalk.png,type:Input,regionName:null}]
+inputFiles=[{path:gta/car/car.png,type:Input,regionName:null},{path:jrpg/sprite/guile/guileHighKick.png,type:Input,regionName:null},{path:jrpg/sprite/guile/guilePunch.png,type:Input,regionName:null},{path:jrpg/sprite/guile/guileWalk.png,type:Input,regionName:null},{path:jrpg/sprite/guile/guileIdle.png,type:Input,regionName:null},{path:jrpg/sprite/honda/hondaIdle.png,type:Input,regionName:null},{path:jrpg/texture/pun.png,type:Input,regionName:null}]
 keepInputFileExtensions=false
 
 

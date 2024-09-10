@@ -44,7 +44,7 @@ public class BattleScreen implements Screen {
         viewport.apply();
 
         batch.begin();
-        batch.draw(background, 0, 0, viewport.getScreenWidth(), viewport.getScreenHeight());
+        batch.draw(background, 0, 0);
         mainHeroController.draw(delta, batch);
         enemy.draw(batch);
         batch.end();
