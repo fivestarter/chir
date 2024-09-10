@@ -11,7 +11,7 @@ public class Car extends CharacterSprite {
     private static final float HEIGHT = 20f * 1.77f * WorldScreen.UNIT_SCALE;
 
     public Car(TextureRegion textureRegion, float x, float y) {
-        super(textureRegion, x, y, WITH, HEIGHT);
+        super(textureRegion, x * WorldScreen.UNIT_SCALE, y * WorldScreen.UNIT_SCALE, WITH, HEIGHT);
     }
 
 }

@@ -2,7 +2,7 @@
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="25">
  <tileset firstgid="1" source="tiles/tileset-pokemon_dawn.tsx"/>
  <objectgroup id="8" name="Гараж" locked="1">
-  <object id="23" x="853.513" y="183.935" width="48.2996" height="107.185"/>
+  <object id="23" x="905.845" y="201.821" width="33.0638" height="56.1781"/>
  </objectgroup>
  <objectgroup id="5" name="Порталы" locked="1">
   <object id="17" x="264.463" y="800.964" width="59.9174" height="28.2369"/>

@@ -15,8 +15,6 @@ import static ru.fivestarter.dichlofos.game.gta.model.character.car.Car.SPRITE_N
 import static ru.fivestarter.dichlofos.utils.Assets.COMMON_ATLAS_FILE_NAME;
 
 public class CarController implements CharacterController<Sprite> {
-    private static final int X = 40;
-    private static final int Y = 49;
 
     private final Car car;
     private final World world;
@@ -25,10 +23,10 @@ public class CarController implements CharacterController<Sprite> {
     final float speedVelocity = 5f;
     final float speedMax = 20f;
 
-    public CarController(AssetManager assetManager, World world) {
+    public CarController(AssetManager assetManager, World world, float x, float y) {
         TextureAtlas.AtlasRegion region = assetManager.get(COMMON_ATLAS_FILE_NAME, TextureAtlas.class)
                 .findRegion(SPRITE_NAME);
-        this.car = new Car(region, X, Y);
+        this.car = new Car(region, x, y);
         this.world = world;
     }
 

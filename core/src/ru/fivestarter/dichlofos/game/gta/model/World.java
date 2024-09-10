@@ -39,7 +39,6 @@ public class World {
         mainHeroController.draw(delta, batch);
         map.drawTopZIndexTileLayer(batch, mainHeroController.getModel().getY());
         handlePortal(mainHeroController.getModel().getBoundingRectangle());
-        handleGarage(mainHeroController.getModel().getBoundingRectangle());
     }
 
     private void handlePortal(Rectangle rectangle) {
@@ -49,10 +48,10 @@ public class World {
         }
     }
 
-    private void handleGarage(Rectangle rectangle) {
+    public void handleGarage(Rectangle rectangle) {
         if (map.isGarageOverlapped(rectangle)) {
             //убрать возможные зацикливания
-            this.mainHeroController = new CarController(assetManager, this);
+            this.mainHeroController = new CarController(assetManager, this, rectangle.getX(), rectangle.getY());
             operator.setBigCamera();
         }
     }

@@ -65,6 +65,14 @@ public class HeroController implements CharacterController<Sprite> {
         } else {
             stop();
         }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.P)) {
+            enter();
+        }
+    }
+
+    private void enter() {
+        world.handleGarage(getModel().getBoundingRectangle());
     }
 
     private void moveDown(float delta) {
