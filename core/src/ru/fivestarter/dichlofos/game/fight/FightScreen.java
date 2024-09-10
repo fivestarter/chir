@@ -4,21 +4,36 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class FightScreen implements Screen {
+    private static final Rectangle ENEMY_FRAME = new Rectangle(500, 200, 122, 250);
+    private static final Rectangle HERO_FRAME = new Rectangle(130, 80, 228, 356);
+    private final TextureAtlas textureAtlas;
     private Viewport viewport;
 
     private SpriteBatch batch;
+    private Sprite enemy;
+    private Sprite hero;
+
+    public FightScreen(TextureAtlas textureAtlas) {
+        this.textureAtlas = textureAtlas;
+    }
 
     @Override
     public void show() {
         OrthographicCamera camera = new OrthographicCamera();
         viewport = new FitViewport(40, 24, camera);
         batch = new SpriteBatch();
-
+        enemy = new Sprite(textureAtlas.findRegion("enemy"));
+        enemy.setBounds(ENEMY_FRAME.getX(), ENEMY_FRAME.getY(), ENEMY_FRAME.getWidth(), ENEMY_FRAME.getHeight());
+        hero = new Sprite(textureAtlas.findRegion("hero"));
+        hero.setBounds(HERO_FRAME.getX(), HERO_FRAME.getY(), HERO_FRAME.getWidth(), HERO_FRAME.getHeight());
     }
 
     @Override
@@ -28,6 +43,8 @@ public class FightScreen implements Screen {
         viewport.apply();
 
         batch.begin();
+        enemy.draw(batch);
+        hero.draw(batch);
         batch.end();
     }
 

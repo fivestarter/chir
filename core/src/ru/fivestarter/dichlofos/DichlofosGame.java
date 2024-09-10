@@ -9,7 +9,7 @@ import ru.fivestarter.dichlofos.game.jrpg.view.BattleScreen;
 import ru.fivestarter.dichlofos.menu.view.MenuScreen;
 import ru.fivestarter.dichlofos.utils.Assets;
 
-import static ru.fivestarter.dichlofos.utils.Assets.COMMON_ATLAS_FILE_NAME;
+import static ru.fivestarter.dichlofos.utils.Assets.*;
 
 public class DichlofosGame extends Game implements ScreenChanger {
 
@@ -46,7 +46,7 @@ public class DichlofosGame extends Game implements ScreenChanger {
 
     @Override
     public void changeOnFightScreen() {
-        setScreen(new FightScreen());
+        setScreen(new FightScreen(assets.getManager().get(FIGHT_ATLAS_FILE_NAME, TextureAtlas.class)));
     }
 
 }
