@@ -37,6 +37,7 @@ public class MenuScreen implements Screen {
         batch.begin();
         textFont.draw(batch, "Press A-button to use the car", 300, 260);
         textFont.draw(batch, "Press S-button to use the human", 300, 230);
+        textFont.draw(batch, "Press D-button to use the human", 300, 200);
         menuController.handle();
         batch.end();
     }
