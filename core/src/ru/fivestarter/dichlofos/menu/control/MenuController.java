@@ -14,10 +14,8 @@ public class MenuController {
     public void handle() {
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             screenChanger.changeOnWorldScreen();
-        } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            screenChanger.changeOnWorldScreen();
         } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            screenChanger.changeOnFightScreen();
+            screenChanger.changeOnBattleScreen();
         }
     }
 }
