@@ -30,10 +30,8 @@ public class FightScreen implements Screen {
         OrthographicCamera camera = new OrthographicCamera();
         viewport = new FitViewport(40, 24, camera);
         batch = new SpriteBatch();
-        enemy = new Sprite(textureAtlas.findRegion("enemy"));
-        enemy.setBounds(ENEMY_FRAME.getX(), ENEMY_FRAME.getY(), ENEMY_FRAME.getWidth(), ENEMY_FRAME.getHeight());
-        hero = new Sprite(textureAtlas.findRegion("hero"));
-        hero.setBounds(HERO_FRAME.getX(), HERO_FRAME.getY(), HERO_FRAME.getWidth(), HERO_FRAME.getHeight());
+        enemy = new Fighter(textureAtlas.findRegion("enemy"), ENEMY_FRAME);
+        hero = new Fighter(textureAtlas.findRegion("hero"), HERO_FRAME);
     }
 
     @Override
