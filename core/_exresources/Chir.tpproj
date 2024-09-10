@@ -42,7 +42,7 @@ keepInputFileExtensions=false
 
 name=hero
 filename=
-output=
+output=../assets/atlas/gta/hero
 
 alias=true
 alphaThreshold=0
@@ -73,10 +73,10 @@ bleed=true
 limitMemory=true
 useIndexes=true
 prettyPrint=false
-legacyOutput=true
+legacyOutput=false
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:gta/hero/mh_walk.png,type:Input,regionName:null}]
+inputFiles=[{path:gta/hero/mh_run.png,type:Input,regionName:null},{path:gta/hero/mh_walk.png,type:Input,regionName:null}]
 keepInputFileExtensions=false
 
 
