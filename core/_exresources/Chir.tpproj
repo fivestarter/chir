@@ -1,6 +1,6 @@
 name=atlas1
 filename=
-output=../../../../Downloads/test/core/assets
+output=../assets/atlas/common
 
 alias=true
 alphaThreshold=0
@@ -82,7 +82,7 @@ keepInputFileExtensions=false
 
 -PROJ-
 
-version=4.11.0
+version=4.13.0
 fileTypeType=png
 fileTypeData={encoding:RGBA8888}
 previewBackgroundColor=ffffffff
