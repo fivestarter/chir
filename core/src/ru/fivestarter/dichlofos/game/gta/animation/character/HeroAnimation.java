@@ -1,17 +1,15 @@
 package ru.fivestarter.dichlofos.game.gta.animation.character;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import ru.fivestarter.dichlofos.game.gta.animation.TextureAnimation;
+import ru.fivestarter.dichlofos.utils.Assets;
 
 import static com.badlogic.gdx.graphics.g2d.Animation.PlayMode.LOOP;
 
 public class HeroAnimation {
 
-    public static final String WALK_SPRITE_NAME = "mh_walk";
-    public static final String RUN_SPRITE_NAME = "mh_run";
     public static final float DURATION = 0.15f;
     public static final int FRAMES_IN_ROW = 3;
     private float animationTime = 0f;
@@ -26,9 +24,9 @@ public class HeroAnimation {
     private TextureAnimation runDownAnimation;
     private TextureAnimation runUpAnimation;
 
-    public HeroAnimation(TextureAtlas textureAtlas) {
-        createMoveAnimations(textureAtlas.findRegion(WALK_SPRITE_NAME));
-        createRunAnimations(textureAtlas.findRegion(RUN_SPRITE_NAME));
+    public HeroAnimation(Assets assets) {
+        createMoveAnimations(assets.findMainHeroWalk());
+        createRunAnimations(assets.findMainHeroRun());
         currentAnimation = moveDownAnimation;
     }
 

@@ -1,7 +1,6 @@
 package ru.fivestarter.dichlofos.game.gta.model;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
@@ -10,22 +9,21 @@ import ru.fivestarter.dichlofos.game.gta.control.CharacterController;
 import ru.fivestarter.dichlofos.game.gta.control.HeroController;
 import ru.fivestarter.dichlofos.game.gta.model.map.Map;
 import ru.fivestarter.dichlofos.game.gta.view.Operator;
-
-import static ru.fivestarter.dichlofos.game.gta.model.character.car.Car.SPRITE_NAME;
+import ru.fivestarter.dichlofos.utils.Assets;
 
 public class World {
     private final Map map;
     private CharacterController mainHeroController;
     private final Runnable portalConsumer;
-    private final TextureAtlas textureAtlas;
+    private final Assets assets;
     private final Operator operator;
 
-    public World(TextureAtlas textureAtlas, Runnable portalConsumer, Operator operator) {
+    public World(Assets assets, Runnable portalConsumer, Operator operator) {
+        this.assets = assets;
         this.operator = operator;
         this.map = new Map();
-        this.textureAtlas = textureAtlas;
         this.portalConsumer = portalConsumer;
-        this.mainHeroController = new HeroController(textureAtlas, this);
+        this.mainHeroController = new HeroController(assets, this);
     }
 
     public boolean isObstacle(Polygon polygon) {
@@ -52,7 +50,7 @@ public class World {
     public void handleGarage(Rectangle rectangle) {
         if (map.isGarageOverlapped(rectangle)) {
             //убрать возможные зацикливания
-            this.mainHeroController = new CarController(textureAtlas.findRegion(SPRITE_NAME),
+            this.mainHeroController = new CarController(assets.findCar(),
                     this,
                     rectangle.getX(),
                     rectangle.getY());

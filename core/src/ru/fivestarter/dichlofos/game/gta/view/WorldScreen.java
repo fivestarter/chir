@@ -6,12 +6,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import ru.fivestarter.dichlofos.ScreenChanger;
 import ru.fivestarter.dichlofos.game.gta.model.World;
+import ru.fivestarter.dichlofos.utils.Assets;
 
 public class WorldScreen implements Screen, Operator {
     public static final float UNIT_SCALE = 1f / 16f;
@@ -21,8 +21,8 @@ public class WorldScreen implements Screen, Operator {
     private static final int VIEWPORT_BIG_HEIGHT = 24;
 
     private final ScreenChanger screenChanger;
+    private final Assets assets;
 
-    private final TextureAtlas textureAtlas;
     private Batch batch;
     private World world;
     private OrthographicCamera camera;
@@ -30,15 +30,15 @@ public class WorldScreen implements Screen, Operator {
 
     private Viewport viewport;
 
-    public WorldScreen(ScreenChanger screenChanger, TextureAtlas textureAtlas) {
+    public WorldScreen(ScreenChanger screenChanger, Assets assets) {
         this.screenChanger = screenChanger;
-        this.textureAtlas = textureAtlas;
+        this.assets = assets;
     }
 
     @Override
     public void show() {
         batch = new SpriteBatch();
-        world = new World(textureAtlas, screenChanger::changeOnBattleScreen, this);
+        world = new World(assets, screenChanger::changeOnBattleScreen, this);
         camera = new OrthographicCamera();
         viewport = new FitViewport(VIEWPORT_SMALL_WIDTH, VIEWPORT_SMALL_HEIGHT, camera);
         renderer = new OrthogonalTiledMapRenderer(world.getTiledMap(), UNIT_SCALE);

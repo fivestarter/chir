@@ -2,10 +2,16 @@ package ru.fivestarter.dichlofos.utils;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
     private static final String GTA_ATLAS_FILE_NAME = "atlas/gta/gta.atlas";
     private static final String FIGHT_ATLAS_FILE_NAME = "atlas/fight/fight.atlas";
+    public static final String ENEMY = "enemy";
+    public static final String HERO = "hero";
+    public static final String CAR = "car";
+    public static final String MH_WALK = "mh_walk";
+    public static final String MH_RUN = "mh_run";
     private final AssetManager manager;
 
     public Assets() {
@@ -15,12 +21,28 @@ public class Assets {
         manager.finishLoading();
     }
 
-    public TextureAtlas getGtaTextureAtlas() {
-        return manager.get(GTA_ATLAS_FILE_NAME, TextureAtlas.class);
+    public TextureRegion findEnemy() {
+        return getRegion(FIGHT_ATLAS_FILE_NAME, ENEMY);
     }
 
-    public TextureAtlas getFightTextureAtlas() {
-        return manager.get(FIGHT_ATLAS_FILE_NAME, TextureAtlas.class);
+    public TextureRegion findHero() {
+        return getRegion(FIGHT_ATLAS_FILE_NAME, HERO);
+    }
+
+    public TextureRegion findCar() {
+        return getRegion(GTA_ATLAS_FILE_NAME, CAR);
+    }
+
+    public TextureRegion findMainHeroWalk() {
+        return getRegion(GTA_ATLAS_FILE_NAME, MH_WALK);
+    }
+
+    public TextureRegion findMainHeroRun() {
+        return getRegion(GTA_ATLAS_FILE_NAME, MH_RUN);
+    }
+
+    private TextureAtlas.AtlasRegion getRegion(String atlasFileName, String regionName) {
+        return manager.get(atlasFileName, TextureAtlas.class).findRegion(regionName);
     }
 
     public void dispose() {

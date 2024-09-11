@@ -6,15 +6,16 @@ import com.badlogic.gdx.math.Rectangle;
 import ru.fivestarter.dichlofos.game.gta.animation.character.HeroAnimation;
 import ru.fivestarter.dichlofos.game.gta.model.character.CharacterSprite;
 import ru.fivestarter.dichlofos.game.gta.view.WorldScreen;
+import ru.fivestarter.dichlofos.utils.Assets;
 
 public class Hero extends CharacterSprite {
 
     private static final float DIMENSION = 20f * WorldScreen.UNIT_SCALE;
     private final HeroAnimation heroAnimation;
 
-    public Hero(TextureAtlas textureAtlas, float x, float y) {
+    public Hero(Assets assets, float x, float y) {
         super(x, y, DIMENSION, DIMENSION);
-        heroAnimation = new HeroAnimation(textureAtlas);
+        heroAnimation = new HeroAnimation(assets);
     }
 
     @Override

@@ -6,32 +6,33 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import ru.fivestarter.dichlofos.utils.Assets;
 
 public class FightScreen implements Screen {
     private static final Rectangle ENEMY_FRAME = new Rectangle(500, 200, 122, 250);
     private static final Rectangle HERO_FRAME = new Rectangle(130, 80, 228, 356);
-    private final TextureAtlas textureAtlas;
+    private final Assets assets;
     private Viewport viewport;
 
     private SpriteBatch batch;
     private Sprite enemy;
     private Sprite hero;
 
-    public FightScreen(TextureAtlas textureAtlas) {
-        this.textureAtlas = textureAtlas;
+    public FightScreen(Assets assets) {
+        this.assets = assets;
     }
+
 
     @Override
     public void show() {
         OrthographicCamera camera = new OrthographicCamera();
         viewport = new FitViewport(40, 24, camera);
         batch = new SpriteBatch();
-        enemy = new Fighter(textureAtlas.findRegion("enemy"), ENEMY_FRAME);
-        hero = new Fighter(textureAtlas.findRegion("hero"), HERO_FRAME);
+        enemy = new Fighter(assets.findEnemy(), ENEMY_FRAME);
+        hero = new Fighter(assets.findHero(), HERO_FRAME);
     }
 
     @Override

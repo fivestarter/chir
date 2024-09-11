@@ -29,13 +29,13 @@ public class DichlofosGame extends Game implements ScreenChanger {
 
     @Override
     public void changeOnBattleScreen() {
-        fightScreen = new FightScreen(assets.getFightTextureAtlas());
+        fightScreen = new FightScreen(assets);
         setScreen(fightScreen);
     }
 
     @Override
     public void changeOnWorldScreen() {
-        gameScreen = new WorldScreen(this, assets.getGtaTextureAtlas());
+        gameScreen = new WorldScreen(this, assets);
         setScreen(gameScreen);
     }
 

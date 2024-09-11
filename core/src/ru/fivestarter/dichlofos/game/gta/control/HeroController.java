@@ -3,9 +3,9 @@ package ru.fivestarter.dichlofos.game.gta.control;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import ru.fivestarter.dichlofos.game.gta.model.World;
 import ru.fivestarter.dichlofos.game.gta.model.character.human.Hero;
+import ru.fivestarter.dichlofos.utils.Assets;
 
 public class HeroController implements CharacterController {
     private static final int X = 40;
@@ -16,8 +16,8 @@ public class HeroController implements CharacterController {
     private final float moveSpeed = 2f;
     private final float runSpeed = 4f;
 
-    public HeroController(TextureAtlas textureAtlas, World world) {
-        this.hero = new Hero(textureAtlas, X, Y);
+    public HeroController(Assets assets, World world) {
+        this.hero = new Hero(assets, X, Y);
         this.world = world;
     }
 
