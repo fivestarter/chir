@@ -12,6 +12,7 @@ public class Assets {
     public static final String CAR = "car";
     public static final String MH_WALK = "mh_walk";
     public static final String MH_RUN = "mh_run";
+    public static final String FOOTPRINT = "footprint";
     private final AssetManager manager;
 
     public Assets() {
@@ -27,6 +28,10 @@ public class Assets {
 
     public TextureRegion findHero() {
         return getRegion(FIGHT_ATLAS_FILE_NAME, HERO);
+    }
+
+    public TextureRegion findFootPrint() {
+        return getRegion(FIGHT_ATLAS_FILE_NAME, FOOTPRINT);
     }
 
     public TextureRegion findCar() {

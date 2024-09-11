@@ -76,7 +76,7 @@ prettyPrint=false
 legacyOutput=false
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:fight/hero/hero.png,type:Input,regionName:null},{path:fight/enemy/enemy.png,type:Input,regionName:null}]
+inputFiles=[{path:fight/hero/hero.png,type:Input,regionName:null},{path:fight/enemy/enemy.png,type:Input,regionName:null},{path:fight/effect/footprint.png,type:Input,regionName:null}]
 keepInputFileExtensions=false
 
 

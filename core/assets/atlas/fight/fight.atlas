@@ -3,5 +3,7 @@ size:1024,1024
 repeat:none
 enemy
 bounds:642,498,244,500
+footprint
+bounds:642,270,102,226
 hero
 bounds:2,2,638,996

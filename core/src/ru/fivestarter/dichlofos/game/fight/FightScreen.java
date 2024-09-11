@@ -20,7 +20,7 @@ public class FightScreen implements Screen {
     private SpriteBatch batch;
     private Sprite enemy;
     private Sprite hero;
-
+    private FightController fightController;
     public FightScreen(Assets assets) {
         this.assets = assets;
     }
@@ -33,6 +33,7 @@ public class FightScreen implements Screen {
         batch = new SpriteBatch();
         enemy = new Fighter(assets.findEnemy(), ENEMY_FRAME);
         hero = new Fighter(assets.findHero(), HERO_FRAME);
+        fightController = new FightController(assets);
     }
 
     @Override
@@ -44,6 +45,7 @@ public class FightScreen implements Screen {
         batch.begin();
         enemy.draw(batch);
         hero.draw(batch);
+        fightController.draw(delta, batch);
         batch.end();
     }
 
