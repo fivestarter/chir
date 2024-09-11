@@ -31,8 +31,8 @@ public class FightScreen implements Screen {
         OrthographicCamera camera = new OrthographicCamera();
         viewport = new FitViewport(40, 24, camera);
         batch = new SpriteBatch();
-        enemy = new Fighter(assets.findEnemy(), ENEMY_FRAME);
-        hero = new Fighter(assets.findHero(), HERO_FRAME);
+        enemy = new FightSprite(assets.findEnemy(), ENEMY_FRAME);
+        hero = new FightSprite(assets.findHero(), HERO_FRAME);
         fightController = new FightController(assets);
     }
 
