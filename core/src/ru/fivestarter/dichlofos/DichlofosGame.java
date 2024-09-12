@@ -2,7 +2,7 @@ package ru.fivestarter.dichlofos;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
-import ru.fivestarter.dichlofos.game.fight.FightScreen;
+import ru.fivestarter.dichlofos.game.fight.view.FightScreen;
 import ru.fivestarter.dichlofos.game.gta.view.WorldScreen;
 import ru.fivestarter.dichlofos.menu.view.MenuScreen;
 import ru.fivestarter.dichlofos.utils.Assets;

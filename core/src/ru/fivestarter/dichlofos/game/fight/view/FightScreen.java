@@ -1,4 +1,4 @@
-package ru.fivestarter.dichlofos.game.fight;
+package ru.fivestarter.dichlofos.game.fight.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import ru.fivestarter.dichlofos.game.fight.control.FightController;
+import ru.fivestarter.dichlofos.game.fight.model.FightSprite;
 import ru.fivestarter.dichlofos.utils.Assets;
 
 public class FightScreen implements Screen {

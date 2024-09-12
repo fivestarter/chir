@@ -1,8 +1,9 @@
-package ru.fivestarter.dichlofos.game.fight;
+package ru.fivestarter.dichlofos.game.fight.control;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import ru.fivestarter.dichlofos.game.fight.model.FightSprite;
 import ru.fivestarter.dichlofos.utils.Assets;
 
 public class FightController {

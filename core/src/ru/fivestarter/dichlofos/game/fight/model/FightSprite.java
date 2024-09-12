@@ -1,4 +1,4 @@
-package ru.fivestarter.dichlofos.game.fight;
+package ru.fivestarter.dichlofos.game.fight.model;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
