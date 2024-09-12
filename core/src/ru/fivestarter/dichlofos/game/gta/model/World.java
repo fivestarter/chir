@@ -5,7 +5,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import ru.fivestarter.dichlofos.game.gta.control.CarController;
-import ru.fivestarter.dichlofos.game.gta.control.CharacterController;
+import ru.fivestarter.dichlofos.game.common.Controller;
 import ru.fivestarter.dichlofos.game.gta.control.HeroController;
 import ru.fivestarter.dichlofos.game.gta.model.map.Map;
 import ru.fivestarter.dichlofos.game.gta.view.Operator;
@@ -13,7 +13,7 @@ import ru.fivestarter.dichlofos.utils.Assets;
 
 public class World {
     private final Map map;
-    private CharacterController mainHeroController;
+    private Controller mainHeroController;
     private final Runnable portalConsumer;
     private final Assets assets;
     private final Operator operator;

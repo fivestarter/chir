@@ -5,10 +5,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import ru.fivestarter.dichlofos.game.common.Controller;
 import ru.fivestarter.dichlofos.game.gta.model.World;
 import ru.fivestarter.dichlofos.game.gta.model.character.car.Car;
 
-public class CarController implements CharacterController {
+public class CarController implements Controller {
 
     private final Car car;
     private final World world;

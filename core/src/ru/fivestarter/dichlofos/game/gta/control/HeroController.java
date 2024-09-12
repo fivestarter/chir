@@ -3,11 +3,12 @@ package ru.fivestarter.dichlofos.game.gta.control;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import ru.fivestarter.dichlofos.game.common.Controller;
 import ru.fivestarter.dichlofos.game.gta.model.World;
 import ru.fivestarter.dichlofos.game.gta.model.character.human.Hero;
 import ru.fivestarter.dichlofos.utils.Assets;
 
-public class HeroController implements CharacterController {
+public class HeroController implements Controller {
     private static final int X = 40;
     private static final int Y = 49;
     private final Hero hero;
