@@ -26,10 +26,10 @@ public class FightController {
 
     private void handle() {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT_BRACKET) && !rightHighKickController.isVisible()) {
-            rightHighKickController.start();
+            rightHighKickController.kick();
         }
         if (Gdx.input.isKeyPressed(Input.Keys.P) && !leftHighKickController.isVisible()) {
-            leftHighKickController.start();
+            leftHighKickController.kick();
         }
     }
 }
