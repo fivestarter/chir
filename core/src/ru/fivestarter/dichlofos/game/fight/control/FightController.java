@@ -11,16 +11,28 @@ import ru.fivestarter.dichlofos.utils.Assets;
 public class FightController {
 
     private final KickController rightHighKickController;
+    private final KickController rightMiddleKickController;
+    private final KickController rightLowKickController;
     private final KickController leftHighKickController;
+    private final KickController leftMiddleKickController;
+    private final KickController leftLowKickController;
 
     public FightController(Assets assets) {
-        this.rightHighKickController = new KickController(new RightHighKick(assets, new Rectangle(520, 380, 34, 75)));
-        this.leftHighKickController = new KickController(new LeftHighKick(assets, new Rectangle(530, 330, 34, 75)));
+        this.rightHighKickController = new KickController(new RightHighKick(assets, new Rectangle(535, 380, 34, 75)));
+        this.rightMiddleKickController = new KickController(new RightHighKick(assets, new Rectangle(535, 330, 34, 75)));
+        this.rightLowKickController = new KickController(new RightHighKick(assets, new Rectangle(535, 250, 34, 75)));
+        this.leftHighKickController = new KickController(new LeftHighKick(assets, new Rectangle(545, 330, 34, 75)));
+        this.leftMiddleKickController = new KickController(new LeftHighKick(assets, new Rectangle(545, 270, 34, 75)));
+        this.leftLowKickController = new KickController(new LeftHighKick(assets, new Rectangle(545, 200, 34, 75)));
     }
 
     public void draw(float delta, SpriteBatch batch) {
         rightHighKickController.draw(delta, batch);
+        rightMiddleKickController.draw(delta, batch);
+        rightLowKickController.draw(delta, batch);
         leftHighKickController.draw(delta, batch);
+        leftMiddleKickController.draw(delta, batch);
+        leftLowKickController.draw(delta, batch);
         handle();
     }
 
@@ -30,6 +42,18 @@ public class FightController {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.P) && !leftHighKickController.isVisible()) {
             leftHighKickController.kick();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.APOSTROPHE) && !rightMiddleKickController.isVisible()) {
+            rightMiddleKickController.kick();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.SEMICOLON) && !leftMiddleKickController.isVisible()) {
+            leftMiddleKickController.kick();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.SLASH) && !rightLowKickController.isVisible()) {
+            rightLowKickController.kick();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.PERIOD) && !leftLowKickController.isVisible()) {
+            leftLowKickController.kick();
         }
     }
 }
