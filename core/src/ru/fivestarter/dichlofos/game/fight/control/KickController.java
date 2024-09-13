@@ -38,6 +38,7 @@ public class KickController implements Controller {
     }
 
     public void start() {
+        fightSprite.scale(INIT_SCALE);
         scale = INIT_SCALE;
         ttl = 1;
     }
