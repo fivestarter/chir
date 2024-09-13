@@ -10,26 +10,26 @@ import ru.fivestarter.dichlofos.utils.Assets;
 
 public class FightController {
 
-    private final RightHighKick kick;
-    private final LeftHighKick leftHighKick;
+    private final KickController rightHighKickController;
+    private final KickController leftHighKickController;
 
     public FightController(Assets assets) {
-        this.kick = new RightHighKick(assets, new Rectangle(520, 380, 34, 75));
-        leftHighKick = new LeftHighKick(assets, new Rectangle(530, 330, 34, 75));
+        this.rightHighKickController = new KickController(new RightHighKick(assets, new Rectangle(520, 380, 34, 75)));
+        this.leftHighKickController = new KickController(new LeftHighKick(assets, new Rectangle(530, 330, 34, 75)));
     }
 
     public void draw(float delta, SpriteBatch batch) {
-        kick.draw(delta, batch);
-        leftHighKick.draw(delta, batch);
+        rightHighKickController.draw(delta, batch);
+        leftHighKickController.draw(delta, batch);
         handle();
     }
 
     private void handle() {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT_BRACKET) && !kick.isVisible()) {
-            kick.start();
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT_BRACKET) && !rightHighKickController.isVisible()) {
+            rightHighKickController.start();
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.P) && !leftHighKick.isVisible()) {
-            leftHighKick.start();
+        if (Gdx.input.isKeyPressed(Input.Keys.P) && !leftHighKickController.isVisible()) {
+            leftHighKickController.start();
         }
     }
 }
