@@ -9,29 +9,43 @@ import ru.fivestarter.dichlofos.utils.Assets;
 
 public class RightHighKick extends FightSprite implements Controller {
 
-    private float kickScale = 2;
+    public static final int INIT_SCALE = 2;
+    private float scale = INIT_SCALE;
+    private float ttl = 0;
 
     public RightHighKick(Assets assets, Rectangle rectangle) {
         super(assets.findFootPrint(), rectangle);
         rotate(40);
-        scale(kickScale);
+        scale(scale);
     }
 
     @Override
     public void draw(float delta, Batch batch) {
-        draw(batch);
-        handle(delta);
+        if (isVisible()) {
+            draw(batch);
+            handle(delta);
+        }
     }
 
     private void handle(float delta) {
-        if (kickScale > 1) {
-            kickScale -= 1.5f * delta;
+        if (scale > 1) {
+            scale -= 1.5f * delta;
         }
-        setScale(kickScale);
+        setScale(scale);
+        ttl -= delta;
     }
 
     @Override
     public Sprite getModel() {
-        return null;
+        return this;
+    }
+
+    public void start() {
+        scale = INIT_SCALE;
+        ttl = 1;
+    }
+
+    public boolean isVisible() {
+        return ttl > 0;
     }
 }

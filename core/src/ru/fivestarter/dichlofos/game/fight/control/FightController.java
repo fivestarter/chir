@@ -10,23 +10,20 @@ import ru.fivestarter.dichlofos.utils.Assets;
 public class FightController {
 
     private static final Rectangle KICK_FRAME = new Rectangle(520, 380, 34, 75);
-    private RightHighKick kick;
-    private final Assets assets;
-    private float rightHighKickTTL = 0;
+    private final RightHighKick kick;
 
     public FightController(Assets assets) {
         this.kick = new RightHighKick(assets, KICK_FRAME);
-        this.assets = assets;
     }
 
     public void draw(float delta, SpriteBatch batch) {
-        if (rightHighKickTTL > 0) {
-            kick.draw(delta, batch);
-            rightHighKickTTL -= delta;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT_BRACKET) && rightHighKickTTL <= 0) {
-            rightHighKickTTL = 1;
-            kick = new RightHighKick(assets, KICK_FRAME);
+        kick.draw(delta, batch);
+        handle();
+    }
+
+    private void handle() {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT_BRACKET) && !kick.isVisible()) {
+            kick.start();
         }
     }
 }
