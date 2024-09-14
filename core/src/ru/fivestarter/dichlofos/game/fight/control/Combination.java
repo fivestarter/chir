@@ -7,10 +7,10 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.List;
 import java.util.ListIterator;
 
-public class CombinationController {
+public class Combination {
     private final List<MutablePair<KickController, Boolean>> combinationList;
 
-    public CombinationController(List<KickController> controllers) {
+    public Combination(List<KickController> controllers) {
         combinationList = controllers.stream()
                 .map(kickController -> MutablePair.of(kickController, false))
                 .toList();

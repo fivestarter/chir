@@ -20,7 +20,7 @@ public class FightController {
     private final KickController leftLowKickController;
 
 
-    private final CombinationController combination;
+    private final Combination combination;
 
     public FightController(Assets assets) {
         this.rightHighKickController = new KickController(new RightHighKick(assets, new Rectangle(535, 380, 34, 75)));
@@ -30,7 +30,7 @@ public class FightController {
         this.leftMiddleKickController = new KickController(new LeftHighKick(assets, new Rectangle(545, 270, 34, 75)));
         this.leftLowKickController = new KickController(new LeftHighKick(assets, new Rectangle(545, 200, 34, 75)));
 
-        combination = new CombinationController(List.of(
+        combination = new Combination(List.of(
                 new KickController(new RightHighKick(assets, new Rectangle(535, 250, 34, 75))),
                 new KickController(new LeftHighKick(assets, new Rectangle(545, 330, 34, 75)))
         ));
