@@ -22,7 +22,7 @@ public class KickController implements Controller {
 
     @Override
     public void draw(float delta, Batch batch) {
-        if (isVisible()) {
+        if (isOn()) {
             sprite.draw(batch);
             handle(delta);
         }
@@ -40,7 +40,7 @@ public class KickController implements Controller {
         ttl = 1;
     }
 
-    public boolean isVisible() {
+    public boolean isOn() {
         return ttl > 0;
     }
 }

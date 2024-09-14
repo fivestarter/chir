@@ -48,26 +48,26 @@ public class FightController {
     }
 
     private void handle() {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT_BRACKET) && !rightHighKickController.isVisible()) {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT_BRACKET) && !rightHighKickController.isOn()) {
             rightHighKickController.kick();
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.P) && !leftHighKickController.isVisible()) {
+        if (Gdx.input.isKeyPressed(Input.Keys.P) && !leftHighKickController.isOn()) {
             leftHighKickController.kick();
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.APOSTROPHE) && !rightMiddleKickController.isVisible()) {
+        if (Gdx.input.isKeyPressed(Input.Keys.APOSTROPHE) && !rightMiddleKickController.isOn()) {
             rightMiddleKickController.kick();
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.SEMICOLON) && !leftMiddleKickController.isVisible()) {
+        if (Gdx.input.isKeyPressed(Input.Keys.SEMICOLON) && !leftMiddleKickController.isOn()) {
             leftMiddleKickController.kick();
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.SLASH) && !rightLowKickController.isVisible()) {
+        if (Gdx.input.isKeyPressed(Input.Keys.SLASH) && !rightLowKickController.isOn()) {
             rightLowKickController.kick();
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.PERIOD) && !leftLowKickController.isVisible()) {
+        if (Gdx.input.isKeyPressed(Input.Keys.PERIOD) && !leftLowKickController.isOn()) {
             leftLowKickController.kick();
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.T) && !combination.isVisible() && !combination.isReady()) {
-            combination.setReady();
+        if (Gdx.input.isKeyPressed(Input.Keys.T) && !combination.isActive()) {
+            combination.load();
         }
     }
 }

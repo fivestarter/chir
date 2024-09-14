@@ -19,7 +19,7 @@ public class CombinationController {
     public void draw(float delta, SpriteBatch batch) {
         combinationList.forEach(combination -> combination.getKey().draw(delta, batch));
 
-        if (isReady()) {
+        if (isLoaded()) {
             handle();
         }
     }
@@ -32,7 +32,7 @@ public class CombinationController {
                 if (combinationIterator.hasPrevious()) {
                     combinationIterator.previous();
                 }
-                if (!combinationIterator.hasPrevious() || !combinationIterator.previous().getKey().isVisible()) {
+                if (!combinationIterator.hasPrevious() || !combinationIterator.previous().getKey().isOn()) {
                     combination.getKey().kick();
                     combination.setValue(false);
                 }
@@ -41,15 +41,19 @@ public class CombinationController {
         }
     }
 
-    public boolean isVisible() {
-        return combinationList.stream().anyMatch(combination -> combination.getKey().isVisible());
+    public boolean isOn() {
+        return combinationList.stream().anyMatch(combination -> combination.getKey().isOn());
     }
 
-    public boolean isReady() {
+    public boolean isLoaded() {
         return combinationList.stream().anyMatch(Pair::getValue);
     }
 
-    public void setReady() {
+    public void load() {
         combinationList.forEach(kickControllerBooleanPair -> kickControllerBooleanPair.setValue(true));
+    }
+
+    public boolean isActive() {
+        return isOn() || isLoaded();
     }
 }
